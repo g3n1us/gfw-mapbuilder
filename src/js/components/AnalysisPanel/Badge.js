@@ -2,6 +2,10 @@ import React from 'react';
 import utils from 'utils/AppUtils';
 
 const Badge = ({ results, label, valueAttribute, color }) => {
+  console.log('results', results);
+  console.log('label', label);
+  console.log('valueAttribute', valueAttribute);
+  console.log('color', color);
   const value = valueAttribute.split('.').reduce((prevVal, currentVal) => {
     if (!prevVal.hasOwnProperty(currentVal)) {
       throw new Error(`response object does not contain property: '${currentVal}'. Check the 'valueAttribute' config`);
