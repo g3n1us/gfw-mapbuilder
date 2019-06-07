@@ -10,6 +10,7 @@
     "test": "jest --no-cache --runInBand --verbose; $(npm bin)/cypress run --browser chrome",
     "e2e": "$(npm bin)/cypress open",
     "build": "npm run clean:build; webpack --env production",
+    "deploy-alpha": "node ./s3-deploy.js",
     "clean:build": "rm -rf webpackBuild",
     "build-lib": "rm -rf libBuild; webpack --config webpack.lib.config.js --env production"
   },
