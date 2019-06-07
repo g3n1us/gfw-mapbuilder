@@ -728,7 +728,7 @@ export default {
           "url": "https://wri-tiles.s3.amazonaws.com/glad_prod/tiles/{z}/{x}/{y}.png",
           "technicalName": "umd_landsat_alerts",
           "legendLayer": [7],
-          "minDateValue": 15e3,
+          "minDateValue": 2458120,
           "maxDateValue": 999999,
           "confidence": [0,
             1

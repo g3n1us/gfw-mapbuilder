@@ -36,7 +36,7 @@ class MapStore {
     this.lossFromSelectIndex = 0; // Will get initialized when the data is fetched
     this.lossToSelectIndex = 16;
     this.resetSlider = false;
-    this.gladStartDate = new Date('2015', 0, 1);
+    this.gladStartDate = new Date('2018', 0, 1);
     this.gladEndDate = new Date();
     this.formaStartDate = new Date('2012', 0, 1);
     this.formaEndDate = new Date();
@@ -313,7 +313,7 @@ class MapStore {
     this.imazonEndYear = 0;
 
     //- GLAD
-    this.gladStartDate = new Date('2015', 0, 1);
+    this.gladStartDate = new Date('2018', 0, 1);
     this.gladEndDate = new Date();
 
     //- FORMA

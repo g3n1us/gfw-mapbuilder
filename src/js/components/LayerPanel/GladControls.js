@@ -17,7 +17,7 @@ export default class GladControls extends Component {
   constructor (props) {
     super(props);
     //- Defaults
-    this.min = moment(new Date('2015', 0, 1));
+    this.min = moment(new Date('2018', 0, 1));
     this.max = moment(new Date());
 
     this.state = {
