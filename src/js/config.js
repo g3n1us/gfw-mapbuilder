@@ -30,6 +30,9 @@ const config = {
     'tiles.globalforestwatch.org',
     'staging-api.globalforestwatch.org',
     'wri-01.carto.com',
+    'https://storage.googleapis.com/intactforests.appspot.com',
+    'storage.googleapis.com/intactforests.appspot.com',
+    'storage.googleapis.com',
 
   ],
 
