@@ -201,6 +201,12 @@ export default class LayerPanel extends Component {
           <DensityDisplay key='tcl_density-display' {...props} />
         ];
         break;
+
+      case 'fragmentation':
+        childComponent = [ //create this!
+          // <FragControls key='tcl_loss_control' layerId={layer.id} loaded={props.loaded} {...props} />
+        ];
+        break;
       case LayerKeys.RECENT_IMAGERY:
         editCallback = () => {
           const imageryMobile = window.innerWidth <= 600;
