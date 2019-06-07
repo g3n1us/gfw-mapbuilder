@@ -126,7 +126,7 @@ export default {
 		  ,
 
         {
-  			  "analysisId": "FRAGMENTATION",
+  			  "analysisId": "FRAGMENTATION_ANALYSIS",
   			  "label": {
   				  "en": "Habitat: Fragmentation Analysis",
   				  "fr": "Total perte/ gain en couvert arborÃƒÂ©",
@@ -730,21 +730,21 @@ export default {
 
       {
         "order": 1,
-        "id": "fragmentation",
+        "id": "FRAGMENTATION",
         "type": "webtiled",
         "url": "https://storage.googleapis.com/intactforests.appspot.com/intactforest_distance_04/${level}/${col}/${row}",
         "minYear": 7,
         "maxYear": 20,
-        "technicalName": "tree_cover_loss",
+        "technicalName": "fragmentation",
         "legendLayer": [0],
         "label": {
-          "en": "Fragmentation Layer?",
-          "fr": "Perte en couvert arboré",
-          "es": "Pérdida de la cobertura arbórea",
-          "pt": "Perda de cobertura arbórea",
-          "id": "Tree cover loss",
-          "zh": "森林覆盖损失",
-          "ka": "ხის ვარჯის კარგვა"
+          "en": "Fragmentation",
+          "fr": "",
+          "es": "",
+          "pt": "",
+          "id": "",
+          "zh": "",
+          "ka": ""
         },
         "sublabel": {
           "en": "(annual, 30m, global, Hansen/UMD/Google/USGS/NASA)",

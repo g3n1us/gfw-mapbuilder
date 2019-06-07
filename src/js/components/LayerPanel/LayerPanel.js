@@ -3,6 +3,7 @@ import TerraIControls from 'components/LayerPanel/TerraIControls';
 import LayerCheckbox from 'components/LayerPanel/LayerCheckbox';
 import FiresControls from 'components/LayerPanel/FiresControls';
 import LossControls from 'components/LayerPanel/LossControls';
+import FragControls from 'components/LayerPanel/FragControls';
 import GladControls from 'components/LayerPanel/GladControls';
 import FormaControls from 'components/LayerPanel/FormaControls';
 import SadControls from 'components/LayerPanel/SadControls';
@@ -202,9 +203,9 @@ export default class LayerPanel extends Component {
         ];
         break;
 
-      case 'fragmentation':
+      case 'FRAGMENTATION':
         childComponent = [ //create this!
-          // <FragControls key='tcl_loss_control' layerId={layer.id} loaded={props.loaded} {...props} />
+          <FragControls key='frag_control' layerId={layer.id} loaded={props.loaded} {...props} />
         ];
         break;
       case LayerKeys.RECENT_IMAGERY:
