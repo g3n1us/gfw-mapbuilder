@@ -732,9 +732,9 @@ export default {
         "order": 1,
         "id": "FRAGMENTATION",
         "type": "webtiled",
-        "url": "https://storage.googleapis.com/intactforests.appspot.com/intactforest_distance_04/${level}/${col}/${row}",
-        "minYear": 7,
-        "maxYear": 20,
+        "url": "https://storage.googleapis.com/intactforests.appspot.com/intactforest_distance_00/${level}/${col}/${row}",
+        "minYear": 0,
+        "maxYear": 17,
         "technicalName": "fragmentation",
         "legendLayer": [0],
         "label": {
