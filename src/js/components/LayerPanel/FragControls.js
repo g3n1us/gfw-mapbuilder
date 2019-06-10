@@ -103,6 +103,7 @@ export default class FragControls extends Component {
     // if (layer && layer.setDateRange) {
     //   //layer.setDateRange(fromYear, toYear);
     // }
+    console.log('layer url', layer.url);
     let yearValue = sliderValue.toString();
     if (yearValue.length === 1){
      yearValue = `0${yearValue}`;
@@ -119,79 +120,79 @@ export default class FragControls extends Component {
   }
 
   startVisualization = () => {
-    const { sliderValue, sliderMarks } = this.state;
-    const layer = this.context.map.getLayer(layerKeys.FRAGMENTATION);
-    const start = sliderValue;
-    let currentValue = start;
-    const stop = lossOptions[lossOptions.length - 1].value;
+  //   const { sliderValue, sliderMarks } = this.state;
+  //   const layer = this.context.map.getLayer(layerKeys.FRAGMENTATION);
+  //   const start = sliderValue;
+  //   let currentValue = start;
+  //   const stop = lossOptions[lossOptions.length - 1].value;
 
-    const visualizeLoss = () => {
-      if (currentValue === stop + 1) {
-        currentValue = start;
-      }
+  //   const visualizeLoss = () => {
+  //     if (currentValue === stop + 1) {
+  //       currentValue = start;
+  //     }
 
-      layer.setDateRange(start, currentValue);
-      // layerActions.updateLossTimeline({
-      //   fromSelectedIndex: start,
-      //   toSelectedIndex: currentValue
-      // });
-    //   // const nextMark = currentValue % 2 === 0 ? currentValue + 1 : currentValue + 2;
-    //   // const prevMark = currentValue % 2 === 0 ? currentValue - 1 : currentValue - 2;
-    //   // const shouldHideNextMark = nextMark <= lossOptions[lossOptions.length - 1].value;
-    //   // const shouldHidePrevMark = prevMark >= lossOptions[0].value;
+  //     layer.setDateRange(start, currentValue);
+  //     // layerActions.updateLossTimeline({
+  //     //   fromSelectedIndex: start,
+  //     //   toSelectedIndex: currentValue
+  //     // });
+  //   //   // const nextMark = currentValue % 2 === 0 ? currentValue + 1 : currentValue + 2;
+  //   //   // const prevMark = currentValue % 2 === 0 ? currentValue - 1 : currentValue - 2;
+  //   //   // const shouldHideNextMark = nextMark <= lossOptions[lossOptions.length - 1].value;
+  //   //   // const shouldHidePrevMark = prevMark >= lossOptions[0].value;
 
-      this.setState({
-        //sliderValue: currentValue,
-        sliderMarks: {
-          ...sliderMarks,
-          // ...(shouldHidePrevMark ? {[prevMark]: {
-          //   style: {
-          //     display: 'none'
-          //   }
-          // }} : {}),
-          [currentValue]: {
-            style: {
-              color: '#F0AB00'
-            },
-            label: <small>{lossOptions[currentValue - 1].label}</small>
-          },
-          // ...(shouldHideNextMark ? {[nextMark]: {
-          //   style: {
-          //     display: 'none'
-          //   }
-          // }} : {})
-        }
-      });
-      currentValue++;
-    };
+  //     this.setState({
+  //       //sliderValue: currentValue,
+  //       sliderMarks: {
+  //         ...sliderMarks,
+  //         // ...(shouldHidePrevMark ? {[prevMark]: {
+  //         //   style: {
+  //         //     display: 'none'
+  //         //   }
+  //         // }} : {}),
+  //         [currentValue]: {
+  //           style: {
+  //             color: '#F0AB00'
+  //           },
+  //           label: <small>{lossOptions[currentValue - 1].label}</small>
+  //         },
+  //         // ...(shouldHideNextMark ? {[nextMark]: {
+  //         //   style: {
+  //         //     display: 'none'
+  //         //   }
+  //         // }} : {})
+  //       }
+  //     });
+  //     currentValue++;
+  //   };
 
-    this.timer = setInterval(visualizeLoss, 1000);
+  //   this.timer = setInterval(visualizeLoss, 1000);
 
-    this.setState({
-      playing: true,
-      holdSliderValueWhenPlaying: sliderValue,
-      holdSliderMarksWhenPlaying: sliderMarks
-    });
+  //   this.setState({
+  //     playing: true,
+  //     holdSliderValueWhenPlaying: sliderValue,
+  //     holdSliderMarksWhenPlaying: sliderMarks
+  //   });
   }
 
   stopVisualization = () => {
-    const { holdSliderValueWhenPlaying, holdSliderMarksWhenPlaying } = this.state;
-    // const fromYear = holdSliderValueWhenPlaying[0] - 1;
-    // const toYear = holdSliderValueWhenPlaying[1] - 1;
+  //   const { holdSliderValueWhenPlaying, holdSliderMarksWhenPlaying } = this.state;
+  //   // const fromYear = holdSliderValueWhenPlaying[0] - 1;
+  //   // const toYear = holdSliderValueWhenPlaying[1] - 1;
 
-    //const layer = this.context.map.getLayer(layerKeys.FRAGMENTATION);
+  //   //const layer = this.context.map.getLayer(layerKeys.FRAGMENTATION);
 
-    clearInterval(this.timer);
-    // layer.setDateRange(fromYear, toYear);
-    // layerActions.updateLossTimeline({
-    //   fromSelectedIndex: fromYear,
-    //   toSelectedIndex: toYear
-    // });
-    this.setState({
-      playing: false,
-      sliderValue: holdSliderValueWhenPlaying,
-      sliderMarks: holdSliderMarksWhenPlaying
-    });
+  //   clearInterval(this.timer);
+  //   // layer.setDateRange(fromYear, toYear);
+  //   // layerActions.updateLossTimeline({
+  //   //   fromSelectedIndex: fromYear,
+  //   //   toSelectedIndex: toYear
+  //   // });
+  //   this.setState({
+  //     playing: false,
+  //     sliderValue: holdSliderValueWhenPlaying,
+  //     sliderMarks: holdSliderMarksWhenPlaying
+  //   });
   }
 
   handleSliderChange = sliderValue => {
