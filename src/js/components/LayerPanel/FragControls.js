@@ -10,7 +10,7 @@ const Range = createSliderWithTooltip(Slider.Range);
 
 const lossOptions = [];
 
-export default class LossControls extends Component {
+export default class FragControls extends Component {
   static contextTypes = {
     language: PropTypes.string.isRequired,
     map: PropTypes.object.isRequired,
@@ -33,8 +33,16 @@ export default class LossControls extends Component {
     const min = 1;
     const max = 17;
     for ( let i = min; i <= max; i++ ) {
-      lossOptions.push({ label: 2000 + i + '', value: i });
+      lossOptions.push({ label: i < 10 ? `0${i} ` : `${i} `, value: i });
     }
+    const sliderMarkLabels = lossOptions.map(lossOption => {
+        return lossOption.label;
+    });
+
+    const sliderMarksObj = {};
+    sliderMarkLabels.forEach((label, index) => {
+      sliderMarksObj[index + 1] = <small>{label}</small>;
+    });
 
     //- Update the defaults to be the last year
     layerActions.updateLossTimeline.defer({
@@ -45,17 +53,7 @@ export default class LossControls extends Component {
     layerActions.setLossOptions.defer(lossOptions);
     this.setState({
       sliderValue: [lossOptions[0].value, lossOptions[lossOptions.length - 1].value],
-      sliderMarks: {
-        1: <small>{lossOptions[0].label}</small>,
-        3: <small>{lossOptions[2].label}</small>,
-        5: <small>{lossOptions[4].label}</small>,
-        7: <small>{lossOptions[6].label}</small>,
-        9: <small>{lossOptions[8].label}</small>,
-        11: <small>{lossOptions[10].label}</small>,
-        13: <small>{lossOptions[12].label}</small>,
-        15: <small>{lossOptions[14].label}</small>,
-        17: <small>{lossOptions[16].label}</small>
-      }
+      sliderMarks: sliderMarksObj
     });
   }
 
@@ -63,7 +61,7 @@ export default class LossControls extends Component {
     const { map } = this.context;
 
     if (map.getLayer && prevState.sliderValue !== this.state.sliderValue) {
-      this.updateDates(map.getLayer(layerKeys.TREE_COVER_LOSS), this.state.sliderValue[0], this.state.sliderValue[1]);
+      this.updateDates(map.getLayer(layerKeys.FRAGMENTATION), this.state.sliderValue[0], this.state.sliderValue[1]);
     }
 
     if (this.props.lossFromSelectIndex !== this.state.sliderValue[0] - 1) {
@@ -83,11 +81,11 @@ export default class LossControls extends Component {
 
       if (this.props.lossOptions.length) {
         if (prevProps.canopyDensity !== canopyDensity) {
-          this.updateDensity(map.getLayer(layerKeys.TREE_COVER_LOSS), canopyDensity);
+          this.updateDensity(map.getLayer(layerKeys.FRAGMENTATION), canopyDensity);
         }
         if (resetSlider) {
           layerActions.shouldResetSlider(false);
-          this.updateDates(map.getLayer(layerKeys.TREE_COVER_LOSS), lossOptions[0].label, lossOptions[lossOptions.length - 1].label);
+          this.updateDates(map.getLayer(layerKeys.FRAGMENTATION), lossOptions[0].label, lossOptions[lossOptions.length - 1].label);
           this.setState({sliderValue: [lossOptions[0].value, lossOptions[lossOptions.length - 1].value]});
         }
 
@@ -121,13 +119,12 @@ export default class LossControls extends Component {
     baseUrl = baseUrl.split('tc')[0] + 'tc';
     baseUrl += density;
     baseUrl += '/{level}/{col}/{row}.png';
-
     layer.setUrl(baseUrl);
   }
 
   startVisualization = () => {
     const { sliderValue, sliderMarks } = this.state;
-    const layer = this.context.map.getLayer(layerKeys.TREE_COVER_LOSS);
+    const layer = this.context.map.getLayer(layerKeys.FRAGMENTATION);
     const start = sliderValue[0];
     let currentValue = start;
     const stop = sliderValue[1];
@@ -144,29 +141,29 @@ export default class LossControls extends Component {
       });
       const nextMark = currentValue % 2 === 0 ? currentValue + 1 : currentValue + 2;
       const prevMark = currentValue % 2 === 0 ? currentValue - 1 : currentValue - 2;
-      const shouldHideNextMark = nextMark <= lossOptions[lossOptions.length - 1].value;
-      const shouldHidePrevMark = prevMark >= lossOptions[0].value;
+      // const shouldHideNextMark = nextMark <= lossOptions[lossOptions.length - 1].value;
+      // const shouldHidePrevMark = prevMark >= lossOptions[0].value;
 
       this.setState({
         sliderValue: [start, currentValue],
         sliderMarks: {
           ...sliderMarks,
-          ...(shouldHidePrevMark ? {[prevMark]: {
-            style: {
-              display: 'none'
-            }
-          }} : {}),
+          // ...(shouldHidePrevMark ? {[prevMark]: {
+          //   style: {
+          //     display: 'none'
+          //   }
+          // }} : {}),
           [currentValue]: {
             style: {
               color: '#F0AB00'
             },
             label: <small>{lossOptions[currentValue - 1].label}</small>
           },
-          ...(shouldHideNextMark ? {[nextMark]: {
-            style: {
-              display: 'none'
-            }
-          }} : {})
+          // ...(shouldHideNextMark ? {[nextMark]: {
+          //   style: {
+          //     display: 'none'
+          //   }
+          // }} : {})
         }
       });
       currentValue++;
@@ -186,7 +183,7 @@ export default class LossControls extends Component {
     const fromYear = holdSliderValueWhenPlaying[0] - 1;
     const toYear = holdSliderValueWhenPlaying[1] - 1;
 
-    const layer = this.context.map.getLayer(layerKeys.TREE_COVER_LOSS);
+    const layer = this.context.map.getLayer(layerKeys.FRAGMENTATION);
 
     clearInterval(this.timer);
     layer.setDateRange(fromYear, toYear);
