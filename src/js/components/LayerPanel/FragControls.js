@@ -81,7 +81,7 @@ export default class FragControls extends Component {
 
       if (this.props.lossOptions.length) {
         if (prevProps.canopyDensity !== canopyDensity) {
-          this.updateDensity(map.getLayer(layerKeys.FRAGMENTATION), canopyDensity);
+          this.updateFragmentation(map.getLayer(layerKeys.FRAGMENTATION), sliderValue);
         }
         if (resetSlider) {
           layerActions.shouldResetSlider(false);
@@ -111,14 +111,16 @@ export default class FragControls extends Component {
     }
   }
 
-  updateDensity (layer, density) {
+  updateFragmentation (layer, sliderValue) {
     const { settings } = this.context;
     const layerGroups = settings.layerPanel;
     const layerConf = utils.getObject(layerGroups.GROUP_LCD.layers, 'id', this.props.layerId);
     let baseUrl = layerConf.url;
-    baseUrl = baseUrl.split('tc')[0] + 'tc';
-    baseUrl += density;
+    console.log('baseUrl', baseUrl);
+    baseUrl = baseUrl.split('distance')[0] + 'distance_';
+    baseUrl += sliderValue[1];
     baseUrl += '/{level}/{col}/{row}.png';
+    console.log('baseUrl', baseUrl);
     layer.setUrl(baseUrl);
   }
 
