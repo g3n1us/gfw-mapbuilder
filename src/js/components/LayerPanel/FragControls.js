@@ -5,6 +5,7 @@ import 'rc-slider/assets/index.css';
 import 'rc-tooltip/assets/bootstrap.css';
 import React, { Component, PropTypes } from 'react';
 import Slider, {createSliderWithTooltip} from 'rc-slider';
+import WebTiledLayer from 'esri/layers/WebTiledLayer';
 
 const lossOptions = [];
 
@@ -103,7 +104,7 @@ export default class FragControls extends Component {
     // if (layer && layer.setDateRange) {
     //   //layer.setDateRange(fromYear, toYear);
     // }
-    console.log('layer url', layer.url);
+    const {map} = this.context;
     let yearValue = sliderValue.toString();
     if (yearValue.length === 1){
      yearValue = `0${yearValue}`;
@@ -111,12 +112,19 @@ export default class FragControls extends Component {
     let baseUrl = layer.url;
     baseUrl = baseUrl.split('distance')[0] + 'distance_';
     baseUrl += yearValue;
-    baseUrl += '/{level}/{col}/{row}.png';
+    baseUrl += '/{level}/{col}/{row}';
     console.log('baseUrl', baseUrl);
     layer.url = baseUrl;
-    layer.refresh();
-    layer.hide();
-    layer.show();
+    const layerCopy = new WebTiledLayer(layer.url, {id: layer.id, visible: true});
+    map.removeLayer(layer);
+    map.addLayer(layerCopy);
+    // layerCopy.on('visibility-change', () => {
+    //   map.removeLayer(layer);
+    //   console.log('removed');
+    // });
+    // layer.refresh();
+    // layer.hide();
+    // layer.show();
   }
 
   startVisualization = () => {
