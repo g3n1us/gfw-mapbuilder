@@ -6,6 +6,9 @@ webpackBuild
 libBuild
 .env
 
+# Ignore any build middleware
+resourcesJSON.json
+
 # Ignore these, just do it
 arcgis-modules.txt
 node_modules
