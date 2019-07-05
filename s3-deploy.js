@@ -1,6 +1,6 @@
 /*
   What is this:
-  This script is intended to help with sharing deployed test versions with those who need it (PMs). It does 3 things: 1) Runs build command 2) Grabs your branch name 3) Deploys the app to the S3 bucket with your branch as testing folder (e.g. https://alpha.blueraster.io/hl/hljs/test/branchname/ )
+  This script is intended to help with sharing deployed test versions with those who need it (PMs). It does 3 things: 1) Runs build command 2) Grabs your branch name 3) Deploys the app to the S3 bucket with your branch as testing folder (e.g. https://alpha.blueraster.io/gfw-mapbuilder/branchname/ )
 
   Caveats:
     * Make sure you are running this script in the intended directory on the intended branch
