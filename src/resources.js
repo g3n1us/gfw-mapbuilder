@@ -557,7 +557,7 @@
          ka: 'მიწის საფარის მონაცემები 2015 წლის შემდეგაა და მოწოდებულია ევროპული კოსმოსური სააგენტოს (ESA)  და ლუვენის კათოლიკური უნივერსიტეტის (UCLouvain) მიერ.'
        },
        useGfwWidget: true,
-       widgetId: '1b84364d-0efd-4d60-81ef-870f7d13ee7b',
+       widgetId: '9f37ac20-772f-42a9-a118-91f433194d55',
        uiParams: 'none',
        params: [{
          name: 'layer',
