@@ -7,7 +7,7 @@ import React, { Component, PropTypes } from 'react';
 import Slider, {createSliderWithTooltip} from 'rc-slider';
 import WebTiledLayer from 'esri/layers/WebTiledLayer';
 
-const lossOptions = [];
+const fragOptions = [];
 
 export default class FragControls extends Component {
   static contextTypes = {
@@ -30,11 +30,11 @@ export default class FragControls extends Component {
 
   componentDidMount () {
     const min = 0;
-    const max = 18;
+    const max = 17;
     for ( let i = min; i <= max; i++ ) {
-      lossOptions.push({ label: i < 10 ? `0${i} ` : `${i} `, value: i });
+      fragOptions.push({ label: i < 10 ? `0${i} ` : `${i} `, value: i });
     }
-    const sliderMarkLabels = lossOptions.map(fragOption => {
+    const sliderMarkLabels = fragOptions.map(fragOption => {
         return fragOption.label;
     });
 
@@ -50,10 +50,10 @@ export default class FragControls extends Component {
     // });
     
     //- Set the options in the store so others can use it
-    //layerActions.setlossOptions.defer(lossOptions);
+    //layerActions.setfragOptions.defer(fragOptions);
     
     this.setState({
-      sliderValue: lossOptions[0].value,
+      sliderValue: fragOptions[0].value,
       sliderMarks: sliderMarksObj
     });
   }
@@ -86,8 +86,8 @@ export default class FragControls extends Component {
       if (this.props.lossOptions.length) {
         // if (resetSlider) {
         //   layerActions.shouldResetSlider(false);
-        //   this.updateDates(map.getLayer(layerKeys.FRAGMENTATION), lossOptions[0].label, lossOptions[lossOptions.length - 1].label);
-        //   this.setState({sliderValue: [lossOptions[0].value, lossOptions[lossOptions.length - 1].value]});
+        //   this.updateDates(map.getLayer(layerKeys.FRAGMENTATION), fragOptions[0].label, fragOptions[fragOptions.length - 1].label);
+        //   this.setState({sliderValue: [fragOptions[0].value, fragOptions[fragOptions.length - 1].value]});
         // }
 
         if (prevContext.map !== map && Object.keys(prevContext.map).length !== 0) {
@@ -138,7 +138,7 @@ export default class FragControls extends Component {
   //   const layer = this.context.map.getLayer(layerKeys.FRAGMENTATION);
   //   const start = sliderValue;
   //   let currentValue = start;
-  //   const stop = lossOptions[lossOptions.length - 1].value;
+  //   const stop = fragOptions[fragOptions.length - 1].value;
 
   //   const visualizeLoss = () => {
   //     if (currentValue === stop + 1) {
@@ -152,8 +152,8 @@ export default class FragControls extends Component {
   //     // });
   //   //   // const nextMark = currentValue % 2 === 0 ? currentValue + 1 : currentValue + 2;
   //   //   // const prevMark = currentValue % 2 === 0 ? currentValue - 1 : currentValue - 2;
-  //   //   // const shouldHideNextMark = nextMark <= lossOptions[lossOptions.length - 1].value;
-  //   //   // const shouldHidePrevMark = prevMark >= lossOptions[0].value;
+  //   //   // const shouldHideNextMark = nextMark <= fragOptions[fragOptions.length - 1].value;
+  //   //   // const shouldHidePrevMark = prevMark >= fragOptions[0].value;
 
   //     this.setState({
   //       //sliderValue: currentValue,
@@ -168,7 +168,7 @@ export default class FragControls extends Component {
   //           style: {
   //             color: '#F0AB00'
   //           },
-  //           label: <small>{lossOptions[currentValue - 1].label}</small>
+  //           label: <small>{fragOptions[currentValue - 1].label}</small>
   //         },
   //         // ...(shouldHideNextMark ? {[nextMark]: {
   //         //   style: {
@@ -225,15 +225,15 @@ export default class FragControls extends Component {
       cursor: 'default'
     };
 
-    if (lossOptions.length === 0) {
+    if (fragOptions.length === 0) {
       return <div className='timeline-container loss flex'>loading...</div>;
     }
     console.log('slider value', sliderValue);
     return (
       <div className='timeline-container loss'>
         <Slider
-          min={lossOptions[0].value}
-          max={lossOptions[lossOptions.length - 1].value}
+          min={fragOptions[0].value}
+          max={fragOptions[fragOptions.length - 1].value}
           value={sliderValue}
           disabled={playing}
           allowCross={false}
