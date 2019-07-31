@@ -71,13 +71,9 @@ export default class FragControls extends Component {
     if (this.props.fragIndex !== this.state.sliderValue) {
       this.setState({sliderValue: this.props.fragIndex});
     }
-
-    console.log('frag index', this.props.fragIndex);
-
-
+    
     //const {resetSlider} = this.props;
   
-
     if (map.loaded) {
 
       if (this.props.lossOptions.length) {
@@ -104,9 +100,6 @@ export default class FragControls extends Component {
   }
 
   updateDates (layer, sliderValue) {
-    // if (layer && layer.setDateRange) {
-    //   //layer.setDateRange(fromYear, toYear);
-    // }
     const {map} = this.context;
     let yearValue = sliderValue.toString();
     if (yearValue.length === 1){
@@ -142,7 +135,7 @@ export default class FragControls extends Component {
         currentValue = start;
       }
 
-       this.updateDates(layer, currentValue);
+      this.updateDates(layer, currentValue);
       layerActions.updateFragTimeline({
         fragIndex: currentValue
       });
@@ -218,11 +211,9 @@ export default class FragControls extends Component {
       color: '#aaa',
       cursor: 'default'
     };
-
     if (fragOptions.length === 0) {
       return <div className='timeline-container loss flex'>loading...</div>;
     }
-    console.log('slider value', sliderValue);
     return (
       <div className='timeline-container loss'>
         <Slider
