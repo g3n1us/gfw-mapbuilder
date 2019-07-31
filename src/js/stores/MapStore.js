@@ -488,7 +488,6 @@ class MapStore {
   }
   
   updateFragTimeline (payload) {
-    console.log('payload for updating frag timeline', payload);
     this.fragIndex = payload.current;
   }
 
