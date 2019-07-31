@@ -74,9 +74,6 @@ export default class FragControls extends Component {
 
     console.log('frag index', this.props.fragIndex);
 
-    // if (this.props.lossToSelectIndex !== this.state.sliderValue[1] - 1) {
-    //   this.setState({sliderValue: [this.props.lossFromSelectIndex + 1, this.props.lossToSelectIndex + 1]});
-    // }
 
     //const {resetSlider} = this.props;
   
@@ -87,7 +84,7 @@ export default class FragControls extends Component {
         // if (resetSlider) {
         //   layerActions.shouldResetSlider(false);
         //   this.updateDates(map.getLayer(layerKeys.FRAGMENTATION), fragOptions[0].label, fragOptions[fragOptions.length - 1].label);
-        //   this.setState({sliderValue: [fragOptions[0].value, fragOptions[fragOptions.length - 1].value]});
+        //   this.setState({sliderValue: 0});
         // }
 
         if (prevContext.map !== map && Object.keys(prevContext.map).length !== 0) {
@@ -134,79 +131,76 @@ export default class FragControls extends Component {
   }
 
   startVisualization = () => {
-  //   const { sliderValue, sliderMarks } = this.state;
-  //   const layer = this.context.map.getLayer(layerKeys.FRAGMENTATION);
-  //   const start = sliderValue;
-  //   let currentValue = start;
-  //   const stop = fragOptions[fragOptions.length - 1].value;
+    const { sliderValue, sliderMarks } = this.state;
+    const layer = this.context.map.getLayer(layerKeys.FRAGMENTATION);
+    const start = sliderValue;
+    let currentValue = start;
+    const stop = fragOptions[fragOptions.length - 1].value;
 
-  //   const visualizeLoss = () => {
-  //     if (currentValue === stop + 1) {
-  //       currentValue = start;
-  //     }
+    const visualizeLoss = () => {
+      if (currentValue === stop + 1) {
+        currentValue = start;
+      }
 
-  //     layer.setDateRange(start, currentValue);
-  //     // layerActions.updateLossTimeline({
-  //     //   fromSelectedIndex: start,
-  //     //   toSelectedIndex: currentValue
-  //     // });
-  //   //   // const nextMark = currentValue % 2 === 0 ? currentValue + 1 : currentValue + 2;
-  //   //   // const prevMark = currentValue % 2 === 0 ? currentValue - 1 : currentValue - 2;
-  //   //   // const shouldHideNextMark = nextMark <= fragOptions[fragOptions.length - 1].value;
-  //   //   // const shouldHidePrevMark = prevMark >= fragOptions[0].value;
+       this.updateDates(layer, currentValue);
+      layerActions.updateFragTimeline({
+        fragIndex: currentValue
+      });
+    //   // const nextMark = currentValue % 2 === 0 ? currentValue + 1 : currentValue + 2;
+    //   // const prevMark = currentValue % 2 === 0 ? currentValue - 1 : currentValue - 2;
+    //   // const shouldHideNextMark = nextMark <= fragOptions[fragOptions.length - 1].value;
+    //   // const shouldHidePrevMark = prevMark >= fragOptions[0].value;
 
-  //     this.setState({
-  //       //sliderValue: currentValue,
-  //       sliderMarks: {
-  //         ...sliderMarks,
-  //         // ...(shouldHidePrevMark ? {[prevMark]: {
-  //         //   style: {
-  //         //     display: 'none'
-  //         //   }
-  //         // }} : {}),
-  //         [currentValue]: {
-  //           style: {
-  //             color: '#F0AB00'
-  //           },
-  //           label: <small>{fragOptions[currentValue - 1].label}</small>
-  //         },
-  //         // ...(shouldHideNextMark ? {[nextMark]: {
-  //         //   style: {
-  //         //     display: 'none'
-  //         //   }
-  //         // }} : {})
-  //       }
-  //     });
-  //     currentValue++;
-  //   };
+      this.setState({
+        sliderValue: currentValue,
+        // sliderMarks: {
+        //   ...sliderMarks,
+        //   // ...(shouldHidePrevMark ? {[prevMark]: {
+        //   //   style: {
+        //   //     display: 'none'
+        //   //   }
+        //   // }} : {}),
+        //   [currentValue]: {
+        //     style: {
+        //       color: '#F0AB00'
+        //     },
+        //     label: <small>{fragOptions[currentValue - 1].label}</small>
+        //   },
+          // ...(shouldHideNextMark ? {[nextMark]: {
+          //   style: {
+          //     display: 'none'
+          //   }
+          // }} : {})
+        //}
+      });
+      currentValue++;
+    };
 
-  //   this.timer = setInterval(visualizeLoss, 1000);
+    this.timer = setInterval(visualizeLoss, 1000);
 
-  //   this.setState({
-  //     playing: true,
-  //     holdSliderValueWhenPlaying: sliderValue,
-  //     holdSliderMarksWhenPlaying: sliderMarks
-  //   });
+    this.setState({
+      playing: true,
+      holdSliderValueWhenPlaying: sliderValue,
+      holdSliderMarksWhenPlaying: sliderMarks
+    });
+    console.log('playing state', this.state.playing);
   }
 
   stopVisualization = () => {
-  //   const { holdSliderValueWhenPlaying, holdSliderMarksWhenPlaying } = this.state;
-  //   // const fromYear = holdSliderValueWhenPlaying[0] - 1;
-  //   // const toYear = holdSliderValueWhenPlaying[1] - 1;
+    const { holdSliderValueWhenPlaying, holdSliderMarksWhenPlaying } = this.state;
+    const currentYear = holdSliderValueWhenPlaying;
+    const layer = this.context.map.getLayer(layerKeys.FRAGMENTATION);
 
-  //   //const layer = this.context.map.getLayer(layerKeys.FRAGMENTATION);
-
-  //   clearInterval(this.timer);
-  //   // layer.setDateRange(fromYear, toYear);
-  //   // layerActions.updateLossTimeline({
-  //   //   fromSelectedIndex: fromYear,
-  //   //   toSelectedIndex: toYear
-  //   // });
-  //   this.setState({
-  //     playing: false,
-  //     sliderValue: holdSliderValueWhenPlaying,
-  //     sliderMarks: holdSliderMarksWhenPlaying
-  //   });
+    clearInterval(this.timer);
+    this.updateDates(layer, currentYear);
+    layerActions.updateFragTimeline({
+      fragIndex: currentYear
+    });
+    this.setState({
+      playing: false,
+      sliderValue: holdSliderValueWhenPlaying,
+      sliderMarks: holdSliderMarksWhenPlaying
+    });
   }
 
   handleSliderChange = sliderValue => {
