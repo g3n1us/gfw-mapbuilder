@@ -47,6 +47,12 @@ class LayerActions {
       to: data.toSelectedIndex
     };
   }
+  
+  updateFragTimeline (data) {
+    return {
+      current: data.fragIndex
+    };
+  }
 
   shouldResetSlider(bool) {
     return bool;

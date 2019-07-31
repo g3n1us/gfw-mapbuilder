@@ -30,7 +30,7 @@ export default class FragControls extends Component {
 
   componentDidMount () {
     const min = 0;
-    const max = 17;
+    const max = 18;
     for ( let i = min; i <= max; i++ ) {
       lossOptions.push({ label: i < 10 ? `0${i} ` : `${i} `, value: i });
     }
@@ -48,8 +48,10 @@ export default class FragControls extends Component {
     //   fromSelectedIndex: 0,
     //   toSelectedIndex: 16
     // });
+    
     //- Set the options in the store so others can use it
     //layerActions.setlossOptions.defer(lossOptions);
+    
     this.setState({
       sliderValue: lossOptions[0].value,
       sliderMarks: sliderMarksObj
@@ -61,12 +63,16 @@ export default class FragControls extends Component {
     const {sliderValue} = this.state;
 
     if (map.getLayer && prevState.sliderValue !== sliderValue) {
-      this.updateDates(map.getLayer(layerKeys.FRAGMENTATION), sliderValue);
+      if (map.getLayer(layerKeys.FRAGMENTATION)){
+        this.updateDates(map.getLayer(layerKeys.FRAGMENTATION), sliderValue);
+      }
     }
 
-    // if (this.props.lossFromSelectIndex !== this.state.sliderValue[0] - 1) {
-    //   this.setState({sliderValue: [this.props.lossFromSelectIndex + 1, this.props.lossToSelectIndex + 1]});
-    // }
+    if (this.props.fragIndex !== this.state.sliderValue) {
+      this.setState({sliderValue: this.props.fragIndex});
+    }
+
+    console.log('frag index', this.props.fragIndex);
 
     // if (this.props.lossToSelectIndex !== this.state.sliderValue[1] - 1) {
     //   this.setState({sliderValue: [this.props.lossFromSelectIndex + 1, this.props.lossToSelectIndex + 1]});
@@ -205,10 +211,9 @@ export default class FragControls extends Component {
 
   handleSliderChange = sliderValue => {
     this.setState({sliderValue});
-    // layerActions.updateLossTimeline({
-    //   fromSelectedIndex: sliderValue[0] - 1,
-    //   toSelectedIndex: sliderValue[1] - 1
-    // });
+    layerActions.updateFragTimeline({
+      fragIndex: sliderValue
+    });
   }
 
   render () {

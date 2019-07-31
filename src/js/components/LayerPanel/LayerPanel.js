@@ -330,6 +330,7 @@ export default class LayerPanel extends Component {
     //- Create the layerGroup components
     const layerGroups = settings.layerPanel || {};
     const groups = this.renderLayerGroups(layerGroups, language);
+    console.log('props', this.props);
 
     return (
       <div className={`layer-panel custom-scroll`}>

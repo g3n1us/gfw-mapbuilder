@@ -35,6 +35,7 @@ class MapStore {
     this.cartoSymbol = {};
     this.lossFromSelectIndex = 0; // Will get initialized when the data is fetched
     this.lossToSelectIndex = 16;
+    this.fragIndex = 0;
     this.resetSlider = false;
     this.gladStartDate = new Date('2015', 0, 1);
     this.gladEndDate = new Date();
@@ -125,6 +126,7 @@ class MapStore {
       setLossOptions: layerActions.setLossOptions,
       shouldResetSlider: layerActions.shouldResetSlider,
       updateLossTimeline: layerActions.updateLossTimeline,
+      updateFragTimeline: layerActions.updateFragTimeline,
       updateGladStartDate: layerActions.updateGladStartDate,
       updateGladEndDate: layerActions.updateGladEndDate,
       updateFormaStartDate: layerActions.updateFormaStartDate,
@@ -483,6 +485,11 @@ class MapStore {
   updateLossTimeline (payload) {
     this.lossFromSelectIndex = payload.from;
     this.lossToSelectIndex = payload.to;
+  }
+  
+  updateFragTimeline (payload) {
+    console.log('payload for updating frag timeline', payload);
+    this.fragIndex = payload.current;
   }
 
   updateGladStartDate (startDate) {
