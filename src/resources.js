@@ -1,11 +1,11 @@
 export default {
-  "webmap": "fd99107f138d43dbbe0b13c7fc101b33",
-  "title": "Natures Strongholds Impact Platform - Sample Demonstration Data",
+  "webmap": "7b64776e2f8b4280a806b7b46ccddc78",
+  "title": "Natures Strongholds Impact Platform",
   "subtitle": "Demonstrating Our Global Impact",
-  "logoUrl": "https://measures.wcs.org/Portals/_default/Skins/WCS_2016/images/wcsPeru_logo.png",
+  "logoUrl": "https://programs.wcs.org/Desktopmodules/WCSMapBuilder/wcslogo.png",
   "logoLinkUrl": "https://www.wcs.org",
   "aboutLinkUrl": "",
-  "downloadLinkUrl": "https://measures.wcs.org/beta/NSIPdownloadlinks",
+  "downloadLinkUrl": "",
   "printServiceUrl": "https://gis.forest-atlas.org/server/rest/services/print/ExportWebMap/GPServer/Export Web Map",
   "maskServiceUrl": "",
   "mapThemeIds": "",
@@ -17,9 +17,9 @@ export default {
   "hideHeader": false,
   "hideFooter": false,
   "language": "en",
-  "useAlternativeLanguage": true,
+  "useAlternativeLanguage": false,
   "alternativeWebmap": "",
-  "alternativeLanguage": "fr",
+  "alternativeLanguage": "",
   "alternativeLanguageTitle": "",
   "alternativeLanguageSubtitle": "",
   "alternativeMapThemes": "",
@@ -31,9 +31,9 @@ export default {
   "iso": "",
   "activeFires": false,
   "initialExtent": {
-    "x": "7.52",
-    "y": "4.74",
-    "z": "3"
+    "x": "",
+    "y": "",
+    "z": ""
   },
   "viirsFires": true,
   "modisFires": true,
@@ -76,7 +76,7 @@ export default {
     "useGfwWidget": true,
     "widgetId": "53a2ad48-46c2-41b0-9a72-8d6ef34131c9",
     "uiParams": "none",
-    "featureDataFieldsToPass": ["polygonname", "analysisId"],
+    "featureDataFieldsToPass": ["polygonname"],
     "fieldToSubstitute": "AnnualPopulationTrend"
   }, {
     "analysisId": "FRAGMENTATION",
@@ -109,15 +109,6 @@ export default {
     },
     "chartType": "badge",
     "valueAttribute": "data",
-    "badgeLabel": {
-      "en": "Active Fires",
-      "fr": "Feux actifs",
-      "es": "Incendios activos",
-      "pt": "IncÃªndios ativos",
-      "id": "Active fires",
-      "zh": "æ´»è·ƒç«ç‚¹",
-      "ka": "áƒáƒ¥áƒ¢áƒ˜áƒ£áƒ áƒ˜ áƒ®áƒáƒœáƒ«áƒ áƒ”áƒ‘áƒ˜"
-    },
     "analysisUrl": "https://us-central1-ambell-166721.cloudfunctions.net/wcs-ee-deforestation-debug",
     "uiParams": [{
       "inputType": "rangeSlider",
@@ -136,258 +127,6 @@ export default {
         "ka": "Select range for analysis"
       }
     }]
-  }, {
-    "analysisId": "WCS_LEMEffectivenessPatrolTeams_WCSBarChart1DropDown_[TabID]_[PortalID]_[Locale]___",
-    "label": {
-      "en": "LEM: Effectiveness Patrol Teams"
-    },
-    "title": {
-      "en": "LEM: Effectiveness Patrol Teams"
-    },
-    "description": {
-      "en": "Click below to run the analysis for Law Enforcement Monitoring - Effectiveness Patrol Teams"
-    },
-    "useGfwWidget": true,
-    "widgetId": "00629c5f-8d51-4373-86da-53222d36bac0",
-    "uiParams": "none"
-  }, {
-    "analysisId": "WCS_LEMEffectivenessPatrolsYear_WCSBarChart1DropDown_[TabID]_[PortalID]_[Locale]___",
-    "label": {
-      "en": "LEM: Effectiveness Patrols/Year"
-    },
-    "title": {
-      "en": "LEM: Effectiveness Patrols/Year"
-    },
-    "description": {
-      "en": "Click below to run the analysis for Law Enforcement Monitoring - Effectiveness Patrols/Year"
-    },
-    "useGfwWidget": true,
-    "widgetId": "6a6158bd-02a8-4053-9e4e-b8fb10777ea0",
-    "uiParams": "none"
-  }, {
-    "analysisId": "WCS_LEMEffectivenessAverageDistancePerPatrol_WCSBarChart1DropDown_[TabID]_[PortalID]_[Locale]___",
-    "label": {
-      "en": "LEM: Effectiveness Average Distance Per Patrol"
-    },
-    "title": {
-      "en": "LEM: Effectiveness Average Distance Per Patrol"
-    },
-    "description": {
-      "en": "Click below to run the analysis for Law Enforcement Monitoring - Effectiveness Average Distance Per Patrol"
-    },
-    "useGfwWidget": true,
-    "widgetId": "c682ae57-8918-48e6-8f43-164c43c07811",
-    "uiParams": "none"
-  }, {
-    "analysisId": "WCS_LEMPresenceDaysPerMonth_WCSBarChart1DropDown_[TabID]_[PortalID]_[Locale]___",
-    "label": {
-      "en": "LEM: Presence Days Per Month"
-    },
-    "title": {
-      "en": "LEM: Presence Days Per Month"
-    },
-    "description": {
-      "en": "Click below to run the analysis for Law Enforcement Monitoring - Presence Days Per Month"
-    },
-    "useGfwWidget": true,
-    "widgetId": "c746e150-892a-4b27-bc2c-dd49c7a1ad40",
-    "uiParams": "none"
-  }, {
-    "analysisId": "WCS_LEMIllegalIncidents_WCSBarChart1DropDown_[TabID]_[PortalID]_[Locale]___",
-    "label": {
-      "en": "LEM: IllegalIncidents"
-    },
-    "title": {
-      "en": "LEM: IllegalIncidents"
-    },
-    "description": {
-      "en": "Click below to run the analysis for Law Enforcement Monitoring - IllegalIncidents"
-    },
-    "useGfwWidget": true,
-    "widgetId": "91292286-6dbf-48a8-a600-56e2b4513a72",
-    "uiParams": "none"
-  }, {
-    "analysisId": "WCS_LEMArrestsPer100kmPatrol_WCSBarChart1DropDown_[TabID]_[PortalID]_[Locale]___",
-    "label": {
-      "en": "LEM: Arrests Per 100km Patrol"
-    },
-    "title": {
-      "en": "LEM: Arrests Per 100km Patrol"
-    },
-    "description": {
-      "en": "Click below to run the analysis for Law Enforcement Monitoring - Arrests Per 100km Patrol"
-    },
-    "useGfwWidget": true,
-    "widgetId": "684e5f08-d657-41c8-aa1d-0b87f3bec079",
-    "uiParams": "none"
-  }, {
-    "analysisId": "WCS_LivelihoodsBNSAverageNoActivities_WCSBarChart1DropDown_[TabID]_[PortalID]_[Locale]___",
-    "label": {
-      "en": "Livelihoods: BNS Average Number of Livelihoods Activities"
-    },
-    "title": {
-      "en": "Livelihoods: BNS Average Number of Livelihoods Activities"
-    },
-    "description": {
-      "en": "Click below to run the analysis for Livelihoods: BNS Average Number of Livelihoods Activities"
-    },
-    "useGfwWidget": true,
-    "widgetId": "47b78588-9dc7-4591-bd0d-72839532eadb",
-    "uiParams": "none"
-  }, {
-    "analysisId": "WCS_GovernanceLegitimacy_WCSBarChart1DropDown_[TabID]_[PortalID]_[Locale]___",
-    "label": {
-      "en": "Governance: Legitimacy"
-    },
-    "title": {
-      "en": "Governance: Legitimacy"
-    },
-    "description": {
-      "en": "Click below to run the analysis for Governance: Legitimacy"
-    },
-    "useGfwWidget": true,
-    "widgetId": "5bb4844d-4c98-4dbc-a156-0150f6645ed4",
-    "uiParams": "none"
-  }, {
-    "analysisId": "WCS_GovernanceAccountability_WCSBarChart1DropDown_[TabID]_[PortalID]_[Locale]___",
-    "label": {
-      "en": "Governance: Accountability"
-    },
-    "title": {
-      "en": "Governance: Accountability"
-    },
-    "description": {
-      "en": "Click below to run the analysis for Governance: Accountability"
-    },
-    "useGfwWidget": true,
-    "widgetId": "7e562354-1a35-4ea6-9a72-410a837d75f1",
-    "uiParams": "none"
-  }, {
-    "analysisId": "WCS_GovernanceTransparency_WCSBarChart1DropDown_[TabID]_[PortalID]_[Locale]___",
-    "label": {
-      "en": "Governance: Transparency"
-    },
-    "title": {
-      "en": "Governance: Transparency"
-    },
-    "description": {
-      "en": "Click below to run the analysis for Governance: Transparency"
-    },
-    "useGfwWidget": true,
-    "widgetId": "180fd1cb-73be-4637-aaa4-07a2683830a1",
-    "uiParams": "none"
-  }, {
-    "analysisId": "WCS_GovernanceParticipation_WCSBarChart1DropDown_[TabID]_[PortalID]_[Locale]___",
-    "label": {
-      "en": "Governance: Participation"
-    },
-    "title": {
-      "en": "Governance: Participation"
-    },
-    "description": {
-      "en": "Click below to run the analysis for Governance: Participation"
-    },
-    "useGfwWidget": true,
-    "widgetId": "7c9ba495-5bc6-4a31-87b4-0eff67e25ef8",
-    "uiParams": "none"
-  }, {
-    "analysisId": "WCS_GovernanceFairness_WCSBarChart1DropDown_[TabID]_[PortalID]_[Locale]___",
-    "label": {
-      "en": "Governance: Fairness"
-    },
-    "title": {
-      "en": "Governance: Fairness"
-    },
-    "description": {
-      "en": "Click below to run the analysis for Governance: Fairness"
-    },
-    "useGfwWidget": true,
-    "widgetId": "90c1c1be-e8e2-494f-834b-e05a7fc19fc0",
-    "uiParams": "none"
-  }, {
-    "analysisId": "WCS_GovernanceMotivation_WCSBarChart1DropDown_[TabID]_[PortalID]_[Locale]___",
-    "label": {
-      "en": "Governance: Motivation"
-    },
-    "title": {
-      "en": "Governance: Motivation"
-    },
-    "description": {
-      "en": "Click below to run the analysis for Governance: Motivation"
-    },
-    "useGfwWidget": true,
-    "widgetId": "b83916c5-17d8-4ed5-a0a5-79e447d6b8df",
-    "uiParams": "none"
-  }, {
-    "analysisId": "WCS_GovernanceKnowledgeSkills_WCSBarChart1DropDown_[TabID]_[PortalID]_[Locale]___",
-    "label": {
-      "en": "Governance: Knowledge Skills"
-    },
-    "title": {
-      "en": "Governance: Knowledge Skills"
-    },
-    "description": {
-      "en": "Click below to run the analysis for Governance: Knowledge Skills"
-    },
-    "useGfwWidget": true,
-    "widgetId": "eaa88911-882e-4796-9cc6-35a62bc3651b",
-    "uiParams": "none"
-  }, {
-    "analysisId": "WCS_GovernanceResources_WCSBarChart1DropDown_[TabID]_[PortalID]_[Locale]___",
-    "label": {
-      "en": "Governance: Resources"
-    },
-    "title": {
-      "en": "Governance: Resources"
-    },
-    "description": {
-      "en": "Click below to run the analysis for Governance: Resources"
-    },
-    "useGfwWidget": true,
-    "widgetId": "cf2aeaef-d842-4471-875f-21b463f0e787",
-    "uiParams": "none"
-  }, {
-    "analysisId": "WCS_GovernanceHeldAccountable_WCSBarChart1DropDown_[TabID]_[PortalID]_[Locale]___",
-    "label": {
-      "en": "Governance: Held Accountable"
-    },
-    "title": {
-      "en": "Governance: Held Accountable"
-    },
-    "description": {
-      "en": "Click below to run the analysis for Governance: Held Accountable"
-    },
-    "useGfwWidget": true,
-    "widgetId": "e58f9cdf-4da4-4a5b-ba82-8ad1e7d4a1c1",
-    "uiParams": "none"
-  }, {
-    "analysisId": "WCS_GovernanceEnactDecision_WCSBarChart1DropDown_[TabID]_[PortalID]_[Locale]___",
-    "label": {
-      "en": "Governance: Enact Decision"
-    },
-    "title": {
-      "en": "Governance: Enact Decision"
-    },
-    "description": {
-      "en": "Click below to run the analysis for Governance: Enact Decision"
-    },
-    "useGfwWidget": true,
-    "widgetId": "026a09c6-5527-4fe3-a8bc-a007a96f97f6",
-    "uiParams": "none"
-  }, {
-    "analysisId": "WCS_GovernanceDiversity_WCSBarChart1DropDown_[TabID]_[PortalID]_[Locale]___",
-    "label": {
-      "en": "Governance: Diversity"
-    },
-    "title": {
-      "en": "Governance: Diversity"
-    },
-    "description": {
-      "en": "Click below to run the analysis for Governance: Diversity"
-    },
-    "useGfwWidget": true,
-    "widgetId": "84db730b-28c0-4395-a00f-f88780e5a508",
-    "uiParams": "none"
   }, {
     "analysisId": "TC_LOSS_GAIN",
     "label": {
@@ -817,12 +556,11 @@ export default {
       },
       "layers": [{
         "order": 1,
-        "id": "TREE_COVER_LOSS 2",
+        "id": "TREE_COVER_LOSS",
         "type": "loss",
         "url": "https://storage.googleapis.com/wri-public/Hansen_16/tiles/hansen_world/v1/tc30/{z}/{x}/{y}.png",
         "technicalName": "tree_cover_loss",
         "legendLayer": [0],
-        "layerIds": [3],
         "label": {
           "en": "Tree Cover Loss",
           "fr": "Perte en couvert arbor?",
@@ -1085,7 +823,7 @@ export default {
         "ka": "????? ??????"
       },
       "layers": [{
-        "order": 2,
+        "order": 1,
         "id": "INTACTFORESTS_FRAGMENTATION17",
         "type": "webtiled",
         "url": "https://storage.googleapis.com/intactforest_fragmentation/intactforest_fragmentation_17/{level}/{col}/{row}",
@@ -1100,34 +838,7 @@ export default {
         "minYear": 7,
         "maxYear": 20
       }, {
-        "order": 1,
-        "id": "FRAGMENTATION",
-        "type": "webtiled",
-        "url": "https://storage.googleapis.com/intactforests.appspot.com/intactforest_distance_00/${level}/${col}/${row}",
-        "technicalName": "fragmentation",
-        "legendLayer": [0],
-        "label": {
-          "en": "Fragmentation",
-          "fr": "",
-          "es": "",
-          "pt": "",
-          "id": "",
-          "zh": "",
-          "ka": ""
-        },
-        "sublabel": {
-          "en": "(annual, 30m, global, Hansen/UMD/Google/USGS/NASA)",
-          "fr": "(annuel, 30m, global, Hansen/UMD/Google/USGS/NASA)",
-          "es": "(anual, 30m, global, Hansen/UMD/Google/USGS/NASA)",
-          "pt": "(anual, 30m, global, Hansen/UMD/Google/USGS/NASA)",
-          "id": "(annual, 30m, global, Hansen/UMD/Google/USGS/NASA)",
-          "zh": "(每年更新, 30米, 全球覆盖, 汉森/马里兰大学/谷歌/美国地质测量局(USGS)/美国宇航局(NASA))",
-          "ka": "(წლიური, 30მ, გლობალური, Hansen/UMD/Google/USGS/NASA)"
-        },
-        "minYear": 0,
-        "maxYear": 17
-      }, {
-        "order": 3,
+        "order": 2,
         "id": "INTACTFORESTS_ANTHROTONE",
         "type": "webtiled",
         "url": "https://storage.googleapis.com/intactforest_fragmentation/intactforest_anthrotone/{level}/{col}/{row}",
@@ -1142,7 +853,7 @@ export default {
         "minYear": 7,
         "maxYear": 20
       }, {
-        "order": 4,
+        "order": 3,
         "id": "INTACTFORESTS_INTACTNESSINDEX",
         "type": "webtiled",
         "url": "https://storage.googleapis.com/intactforest_fragmentation/intactforest_intactnessindex/{level}/{col}/{row}",
@@ -1157,7 +868,7 @@ export default {
         "minYear": 7,
         "maxYear": 20
       }, {
-        "order": 5,
+        "order": 4,
         "id": "GLOB_MANGROVE",
         "type": "webtiled",
         "url": "https://{subDomain}.ashbu.cartocdn.com/wri-01/api/v1/map/209485bfcb3eafb435befa0c405242ae:1467735931596/0/{level}/{col}/{row}.png",
@@ -1174,7 +885,7 @@ export default {
         },
         "subDomains": [0, 1, 2, 3]
       }, {
-        "order": 6,
+        "order": 5,
         "id": "IFL",
         "type": "dynamic",
         "url": "https://gis-gfw.wri.org/arcgis/rest/services/forest_cover/MapServer",
@@ -1189,137 +900,10 @@ export default {
           "zh": "??????",
           "ka": "??????????? ???? ?????????"
         }
-      }, {
-        "order": 7,
-        "id": "AG_BIOMASS",
-        "type": "image",
-        "url": "https://gis-gfw.wri.org/arcgis/rest/services/image_services/whrc_carbon_tcd/ImageServer",
-        "technicalName": "aboveground_biomass",
-        "legendLayer": [8],
-        "label": {
-          "en": "Aboveground Live Woody Biomass Density",
-          "fr": "Densit? de la biomasse a?rienne vivante",
-          "es": "Densidad de la biomasa viva en la superficie del suelo",
-          "pt": "Densidade de biomassa viva acima do solo",
-          "id": "Aboveground Live Woody Biomass Density",
-          "zh": "Aboveground Live Woody Biomass Density",
-          "ka": "????????? ??????? ???? ???????? ???????"
-        }
-      }, {
-        "order": 8,
-        "id": "LAND_COVER",
-        "type": "webtiled",
-        "url": "https://wri-tiles.s3.amazonaws.com/global-landcover/{level}/{col}/{row}.png",
-        "technicalName": "global_landcover",
-        "legendLayer": [15],
-        "label": {
-          "en": "Land Cover",
-          "fr": "Couverture des sols",
-          "es": "Cobertura vegetal",
-          "pt": "Land cover",
-          "id": "Land cover",
-          "zh": "????",
-          "ka": "????? ??????"
-        },
-        "rasterId": "$568",
-        "bounds": "[            1,            16          ]",
-        "classes": {
-          "en": ["Land Cover", "Agriculture", "Forest", "Grassland", "Shrubland", "Sparse vegetation", "Wetland", "Settlement", "Bare", "Water", "Permanent snow and ice"],
-          "fr": ["Irrigated croplands", "Rainfed croplands", "Cropland forest mosaic", "Broadleaved evergreen or semi-deciduous forest", "Broadleaved deciduous forest", "Needleleaved evergreen or deciduous forest", "Mixed broadleaved and needleleaved forest", "Mosaic of forest, shrubland and grassland", "Shrubland", "Grassland", "Sparse vegetation", "Flooded broadleaved forest", "Flooded vegetation", "Artificial areas", "Bare areas", "Permanent snow and ice"],
-          "es": ["Irrigated croplands", "Rainfed croplands", "Cropland forest mosaic", "Broadleaved evergreen or semi-deciduous forest", "Broadleaved deciduous forest", "Needleleaved evergreen or deciduous forest", "Mixed broadleaved and needleleaved forest", "Mosaic of forest, shrubland and grassland", "Shrubland", "Grassland", "Sparse vegetation", "Flooded broadleaved forest", "Flooded vegetation", "Artificial areas", "Bare areas", "Permanent snow and ice"],
-          "pt": ["Culturas Irrigadas", "Rainfed croplands", "Mosaico de areas florestais e de cultivo", "Floresta verde ou semi-dec?dua", "Floresta dec?dua de folha larga", "Floresta verde de con?feras ou Floresta dec?dua", "Misto de floresta de conifera e de folha larga", "Mosaic of forest, shrubland and grassland", "Shrubland", "Grassland", "Sparse vegetation", "Flooded broadleaved forest", "Flooded vegetation", "Artificial areas", "Bare areas", "Permanent snow and ice"],
-          "id": ["Irrigated croplands", "Rainfed croplands", "Cropland forest mosaic", "Broadleaved evergreen or semi-deciduous forest", "Broadleaved deciduous forest", "Needleleaved evergreen or deciduous forest", "Mixed broadleaved and needleleaved forest", "Mosaic of forest, shrubland and grassland", "Shrubland", "Grassland", "Sparse vegetation", "Flooded broadleaved forest", "Flooded vegetation", "Artificial areas", "Bare areas", "Permanent snow and ice"],
-          "zh": ["Irrigated croplands", "Rainfed croplands", "Cropland forest mosaic", "Broadleaved evergreen or semi-deciduous forest", "Broadleaved deciduous forest", "Needleleaved evergreen or deciduous forest", "Mixed broadleaved and needleleaved forest", "Mosaic of forest, shrubland and grassland", "Shrubland", "Grassland", "Sparse vegetation", "Flooded broadleaved forest", "Flooded vegetation", "Artificial areas", "Bare areas", "Permanent snow and ice"],
-          "ka": ["????????? ?/? ?????????", "?????? ????????? ?????????", "?/? ?????????? ?? ???? ???????", "?????????????? ??????????? ?? ????????-??????????? ???", "?????????????? ??????????? ???", "????????? ??????????? ?? ??????????? ???", "??????? ?????????????? ?? ????????? ???", "????, ????????? ?? ???????? ???????", "????????", "???????", "??????? ????????????", "????????? ?????????????? ???", "????????? ????????????", "?????????? (?????????) ????????", "???????????? ????????", "??????? ????? ?? ??????"]
-        },
-        "colors": ["#D2A965", "#157764", "#CCDB98", "#596B2C", "#D5C998", "#2789D4", "#E9462B", "#F6F0EA", "#A3DCFF", "#FFFFFF"]
-      }, {
-        "order": 9,
-        "id": "TREE_COVER",
-        "type": "image",
-        "url": "https://gis-treecover.wri.org/arcgis/rest/services/TreeCover2000/ImageServer",
-        "technicalName": "tree_cover",
-        "legendLayer": [2],
-        "label": {
-          "en": "Tree cover density",
-          "fr": "Densit? du couvert arbor?",
-          "es": "Densidad de follaje",
-          "pt": "Tree cover density",
-          "id": "Tree cover density",
-          "zh": "??????",
-          "ka": "??? ?????? ???????"
-        },
-        "sublabel": {
-          "en": "(year 2000, 30m global, Hansen/UMD/Google/USGS/NASA)",
-          "fr": "(ann?e 2000, 30m global, Hansen/UMD/Google/USGS/NASA)",
-          "es": "(2000, 30m, global, Hansen/UMD/Google/USGS/NASA)",
-          "pt": "(year 2000, 30m global, Hansen/UMD/Google/USGS/NASA)",
-          "id": "(year 2000, 30m global, Hansen/UMD/Google/USGS/NASA)",
-          "zh": "(2000?, 30? ????, ??/?????/??/???????(USGS)/?????(NASA))",
-          "ka": "(2000 ?, 30? ?????????, Hansen/UMD/Google/USGS/NASA)"
-        },
-        "opacity": 0.80,
-        "colormap": [
-          [1, 0, 179, 0]
-        ],
-        "inputRange": [30, 101],
-        "outputRange": [1]
-      }]
-    },
-    "GROUP_Range": {
-      "order": 4,
-      "label": {
-        "en": "Species Ranges"
-      },
-      "layers": [{
-        "order": 1,
-        "id": "Elephant_Current",
-        "type": "feature",
-        "url": "https://services.arcgis.com/x494PplYsmeeZsYB/arcgis/rest/services/AfricanEle/FeatureServer/0",
-        "label": {
-          "en": "Elephant Current Range",
-          "fr": "Elephant Current Range"
-        }
-      }, {
-        "order": 2,
-        "id": "Gorilla_Gorilla_Current",
-        "type": "feature",
-        "url": "https://services.arcgis.com/x494PplYsmeeZsYB/arcgis/rest/services/Gorilla_Chimp/FeatureServer/0",
-        "label": {
-          "en": "Gorilla Gorilla - Currrent Range",
-          "fr": "Gorilla Gorilla - Current Range"
-        }
-      }, {
-        "order": 3,
-        "id": "Gorilla_Gorilla_Historic",
-        "type": "feature",
-        "url": "https://services.arcgis.com/x494PplYsmeeZsYB/arcgis/rest/services/Gorilla_Chimp/FeatureServer/1",
-        "label": {
-          "en": "Gorilla Gorilla - Historic Range",
-          "fr": "Gorilla Gorilla - Historic Range"
-        }
-      }, {
-        "order": 4,
-        "id": "Chimp_Current",
-        "type": "feature",
-        "url": "https://services.arcgis.com/x494PplYsmeeZsYB/arcgis/rest/services/Gorilla_Chimp/FeatureServer/2",
-        "label": {
-          "en": "Chimp - Current Range",
-          "fr": "Chimp - Current Range"
-        }
-      }, {
-        "order": 5,
-        "id": "Chimp_Historic",
-        "type": "feature",
-        "url": "https://services.arcgis.com/x494PplYsmeeZsYB/arcgis/rest/services/Gorilla_Chimp/FeatureServer/3",
-        "label": {
-          "en": "Chimp - Historic Range",
-          "fr": "Chimp - Historic Range"
-        }
       }]
     },
     "GROUP_Other": {
-      "order": 5,
+      "order": 4,
       "label": {
         "en": "Other"
       },
@@ -1341,29 +925,11 @@ export default {
         "label": {
           "en": "Roads"
         }
-      }, {
-        "order": 3,
-        "id": "Oth3",
-        "type": "dynamic",
-        "url": "https://tiles.arcgis.com/tiles/x494PplYsmeeZsYB/arcgis/rest/services/HF2009/MapServer",
-        "layerIds": [0],
-        "label": {
-          "en": "Human Footprint"
-        }
-      }, {
-        "order": 4,
-        "id": "Oth4",
-        "type": "dynamic",
-        "url": "https://gis.unep-wcmc.org/arcgis/rest/services/marine/WCMC_035_MeanSeaSurfaceTemperature2015/MapServer",
-        "layerIds": [0],
-        "label": {
-          "en": "Mean Sea Surface Temperature"
-        }
       }]
     },
     "GROUP_BASEMAP": {
       "groupType": "basemap",
-      "order": 6,
+      "order": 5,
       "label": {
         "en": "Basemap",
         "fr": "Basemap",
@@ -1436,4 +1002,4 @@ export default {
       "visible": true
     }]
   }
-};
+}
