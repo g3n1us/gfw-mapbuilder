@@ -73,6 +73,11 @@ test('resources has the required properties', () => {
 describe('resources layer spec', () => {
 
   const layerPanelKeys = Object.keys(resources.layerPanel).filter(g => g !== 'GROUP_BASEMAP' && g !== 'GROUP_WEBMAP' && g !== 'extraLayers');
+
+  layerPanelKeys.forEach(panel => {
+    expect(resources.layerPanel[panel]).toHaveProperty('layers');
+  });
+
   const allLayers = layerPanelKeys.map(k => resources.layerPanel[k].layers).reduce((acc, current) => [...acc, ...current], []);
 
   allLayers.forEach((layer) => {
