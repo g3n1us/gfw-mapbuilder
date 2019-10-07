@@ -170,7 +170,7 @@ export default class Map extends Component {
   storeDidUpdate = () => {
     this.setState(MapStore.getState());
   };
-  
+
   updateSelectIndex = () => {
     mapActions.updateSelectIndex(-1);
   };
@@ -180,7 +180,7 @@ export default class Map extends Component {
     if (brApp.map.measurement && brApp.map.measurement.getTool()) {
       return;
     }
-    
+
     // let selectedFeats;
     const selectedFeatureTitlesArray = [];
     if (brApp.map.infoWindow && brApp.map.infoWindow.getSelectedFeature()) {
@@ -227,7 +227,7 @@ export default class Map extends Component {
       //- Attach events I need for the info window
       response.map.infoWindow.on('show, hide, set-features, selection-change', mapActions.infoWindowUpdated);
       response.map.infoWindow.on('set-features, selection-change', this.getSelectedFeatureTitles);
-      response.map.on('click', this.updateSelectIndex);
+      // response.map.on('click', this.updateSelectIndex);
       response.map.on('zoom-end', mapActions.mapUpdated);
 
       //- Add a scalebar
@@ -285,6 +285,11 @@ export default class Map extends Component {
 
         // Get WMS Features on click
         response.map.on('click', (evt) => {
+          if (brApp.map.measurement && brApp.map.measurement.getTool()) {
+            brApp.map.setInfoWindowOnClick(false);
+            brApp.map.infoWindow.fillSymbol = new SimpleFillSymbol().setOutline(null).setColor(null);
+          }
+          this.updateSelectIndex();
           if (this.state.drawButtonActive || this.state.enterValuesButtonActive || this.state.editCoordinatesActive) {
             // don't run this function if we are drawing a custom shape
             return;
@@ -310,7 +315,7 @@ export default class Map extends Component {
             });
           }
         });
-        
+
 
         //- Add click event for user-features layer
         const userFeaturesLayer = response.map.getLayer(layerKeys.USER_FEATURES);
@@ -328,14 +333,14 @@ export default class Map extends Component {
             }
           }
         });
-        
+
       //- Hide the selected feature highlight if using the measurement tool
-      response.map.on('click', evt => {
-        if (brApp.map.measurement && brApp.map.measurement.getTool()) {
-          brApp.map.setInfoWindowOnClick(false);
-          brApp.map.infoWindow.fillSymbol = new SimpleFillSymbol().setOutline(null).setColor(null);
-        }
-      });
+      // response.map.on('click', evt => {
+      //   if (brApp.map.measurement && brApp.map.measurement.getTool()) {
+      //     brApp.map.setInfoWindowOnClick(false);
+      //     brApp.map.infoWindow.fillSymbol = new SimpleFillSymbol().setOutline(null).setColor(null);
+      //   }
+      // });
 
         editToolbar = new Edit(response.map);
         editToolbar.on('deactivate', evt => {
