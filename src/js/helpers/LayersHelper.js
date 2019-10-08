@@ -40,7 +40,7 @@ const LayersHelper = {
       const firesLayer = layer.hasOwnProperty('visibleLayers') ? layer : brApp.map.getLayer(layer.id);
       // let layerObj = {};
       // const options = {};
-     
+
       // const layersPanel = resources.layerPanel.GROUP_LCD.layers;
       // layersPanel.forEach(layerPanel => {
       //   if (firesLayer.id.includes(layerPanel.id)) {
@@ -50,7 +50,7 @@ const LayersHelper = {
       //     layerObj.id = firesLayer.id;
       //   }
       // });
-     
+
       // if (selectValue && layerObj.id.includes('VIIRS_ACTIVE_FIRES')) {
       //   switch (selectValue) {
       //     case '0':
@@ -78,7 +78,7 @@ const LayersHelper = {
       //       break;
       //   }
       // }
-      
+
       // if (selectValue && layerObj.id.includes('MODIS_ACTIVE_FIRES')) {
       //   switch (selectValue) {
       //     case '0':
@@ -106,7 +106,7 @@ const LayersHelper = {
       //       break;
       //   }
       // }
-      
+
       // options.id = layerObj.id;
       // options.visible = layerObj.visible || false;
       // options.opacity = layerObj.opacity || 1.0;
@@ -117,7 +117,7 @@ const LayersHelper = {
       //     options.infoTemplates[id] = { infoTemplate: template };
       //   });
       //  }
-       
+
       //  const newFiresLayer = layerFactory(layerObj, language);
       //  newFiresLayer.legendLayer = layerObj.legendLayer || null;
       //  newFiresLayer.layerIds = layerObj.layerIds;
@@ -127,7 +127,7 @@ const LayersHelper = {
       const newFiresLayer = firesLayer;
       newFiresLayer.layersId = [21];
       const fireID = firesLayer.id.includes('VIIRS_ACTIVE_FIRES') ? 'viirs' : 'modis';
-      
+
       if (selectValue) {
         if (firesLayer && firesLayer.visible) {
           const defs = [];
@@ -142,14 +142,20 @@ const LayersHelper = {
               layerActions.addActiveLayer(newFiresLayer.id);
               console.log('new fires layer', newFiresLayer);
               break;
-            case 1: //past 48 hours
-              newFiresLayer.url = shortTermServices[`${fireID}48HR`].url;
-              newFiresLayer._url.path = shortTermServices[`${fireID}48HR`].url;
-              newFiresLayer.setVisibleLayers([shortTermServices[`${fireID}48HR`].id]);
-              brApp.map.removeLayer(firesLayer);
-              brApp.map.addLayer(newFiresLayer);
-              layerActions.removeActiveLayer(firesLayer.id);
-              layerActions.addActiveLayer(newFiresLayer.id);
+            case 1: //past 48 hours //TODO: hide the 24 hour layer, show the 48 hour layer!
+            const tenwyfo = brApp.map.getLayer('VIIRS_ACTIVE_FIRES_24HR');
+            const fotyEig = brApp.map.getLayer('VIIRS_ACTIVE_FIRES_48HR');
+            newFiresLayer.hide();
+            tenwyfo.hide();
+            fotyEig.show();
+
+              // newFiresLayer.url = shortTermServices[`${fireID}48HR`].url;
+              // newFiresLayer._url.path = shortTermServices[`${fireID}48HR`].url;
+              // newFiresLayer.setVisibleLayers([shortTermServices[`${fireID}48HR`].id]);
+              // brApp.map.removeLayer(firesLayer);
+              // brApp.map.addLayer(newFiresLayer);
+              // layerActions.removeActiveLayer(firesLayer.id);
+              // layerActions.addActiveLayer(newFiresLayer.id);
               console.log('new fires layer', newFiresLayer);
               break;
             case 2: //past 72 hours

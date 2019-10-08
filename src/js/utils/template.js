@@ -36,7 +36,10 @@ const filterLayers = ({layers, layerKey}) => {
   return layers.filter(layer => {
     layer = layerKey ? layer[layerKey] : layer;
     switch (layer.id) {
-      case layerKeys.VIIRS_ACTIVE_FIRES:
+      // case layerKeys.VIIRS_ACTIVE_FIRES:
+      case layerKeys.VIIRS_ACTIVE_FIRES_24HR:
+      case layerKeys.VIIRS_ACTIVE_FIRES_48HR:
+      case layerKeys.VIIRS_ACTIVE_FIRES_72HR:
         return resources.viirsFires;
       case layerKeys.MODIS_ACTIVE_FIRES:
         return resources.modisFires;
@@ -240,7 +243,14 @@ const formatResources = () => {
             }
           }
         });
+        if (item.layer.id === 'VIIRS_ACTIVE_FIRES_48HR') {
+          layer.attributes.layerConfig.url = 'https://gis-gfw.wri.org/arcgis/rest/services/Fires/FIRMS_Global_VIIRS_48hrs/MapServer';
+        }
+        // else if (item.layer.id === 'VIIRS_ACTIVE_FIRES_72HR') {
+        //   layer.attributes.layerConfig.url = 'https://gis-gfw.wri.org/arcgis/rest/services/Fires/FIRMS_Global_VIIRS_72hrs/MapServer';
+        // }
         item.layer = layer.attributes.layerConfig;
+        // item.layer.url = 'https://gis-gfw.wri.org/arcgis/rest/services/Fires/FIRMS_Global_VIIRS_24hrs/MapServer';
         item.group = itemGroup;
         item.layer.metadata = {
           metadata,
@@ -276,6 +286,7 @@ const formatResources = () => {
   .then(remoteLayers => {
     remoteLayers = filterLayers({layers: remoteLayers, layerKey: 'layer'});
     remoteLayers.forEach(item => {
+      console.log(item);
       item.layer.order = item.order; // item.order is the value we set in resources, this needs to be added to the layer object
       resources.layerPanel[item.groupId].layers.push(item.layer);
     });
