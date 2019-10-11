@@ -599,9 +599,18 @@ export default class Map extends Component {
       const opacityValues = params.o.split(',');
       const opacityObjs = [];
 
+      console.log('webmapLayerIds', webmapLayerIds);
+      console.log('layerIds', layerIds);
+      
+
       layerIds.forEach((layerId, j) => {
         if (webmapLayerIds.indexOf(layerId) === -1) {
-          layerActions.addActiveLayer(layerId);
+          if (layerId.indexOf('VIIRS_ACTIVE_FIRES') > -1) {
+            layerActions.addActiveLayer('VIIRS_ACTIVE_FIRES');
+          } else {
+
+            layerActions.addActiveLayer(layerId);
+          }
         }
         if (opacityValues[j] && opacityValues[j] !== 1) {
           opacityObjs.push({

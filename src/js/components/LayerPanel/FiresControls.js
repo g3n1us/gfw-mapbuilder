@@ -48,6 +48,7 @@ export default class FiresControls extends React.Component {
   componentDidUpdate(prevProps, prevState, prevContext) {
     if (prevProps.startDate !== this.props.startDate || prevProps.endDate !== this.props.endDate) {
       brApp.map.infoWindow.clearFeatures();
+      
       LayersHelper.updateFiresLayerDefinitions(this.props.startDate, this.props.endDate, this.props.layer, 5);
     }
     // Anytime the map changes to a new map, update that here
@@ -55,6 +56,8 @@ export default class FiresControls extends React.Component {
     if (prevContext.map !== map && prevContext.map.loaded) {
       const signal = map.on('update-end', () => {
         signal.remove();
+        console.log(1);
+        
         LayersHelper.updateFiresLayerDefinitions(this.props.startDate, this.props.endDate, this.props.layer);
       });
     }
@@ -76,6 +79,8 @@ export default class FiresControls extends React.Component {
 
   updateActiveFires = (evt, fireOptions) => {
     brApp.map.infoWindow.clearFeatures();
+    console.log(3);
+    
     LayersHelper.updateFiresLayerDefinitions(this.props.startDate, this.props.endDate, this.props.layer, evt.target.value);
     layerActions.updateCustomRange(false);
     layerActions.updateActiveFireOption(parseInt(evt.target.value));

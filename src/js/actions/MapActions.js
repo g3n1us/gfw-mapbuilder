@@ -98,6 +98,8 @@ class MapActions {
   }
 
   createLayers (map, layerPanel, activeLayers, language) {
+    console.log('activeLayers', activeLayers);
+    
     //- Organize and order the layers before adding them to the map
     let maxOrder = 0;
     let layers = Object.keys(layerPanel).filter((groupName) => {
@@ -132,6 +134,8 @@ class MapActions {
         if (activeLayers.indexOf(layer.id) === -1) {
           layer.visible = false;
         } else {
+          console.log('layaa?');
+          
           layer.visible = true;
         }
       }
