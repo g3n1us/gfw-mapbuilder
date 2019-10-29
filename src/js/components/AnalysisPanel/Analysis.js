@@ -368,7 +368,11 @@ export default class Analysis extends Component {
   }
 
   renderResults = (type, results, language, config) => {
-    const chartComponent = <VegaChart component='Analysis' language={language} results={results} setLoading={() => this.setState({isLoading: false})}/>;
+    // console.log('config', config);
+    // console.log('type', type);
+    // debugger
+    
+    const chartComponent = <VegaChart component='Analysis' language={language} results={results} selectedFeature={this.props.selectedFeature} id={config.widgetId} setLoading={() => this.setState({isLoading: false})}/>;
     this.setState({ chartComponent });
   }
 
