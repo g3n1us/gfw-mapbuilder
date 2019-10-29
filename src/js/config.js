@@ -61,11 +61,14 @@ const config = {
     'production-api.globalforestwatch.org/v1/ogr',
     'production-api.globalforestwatch.org/v1/ogr/convert',
     'api.resourcewatch.org',
+    'https://library.wcs.org/DesktopModules/WCSVega/API/Data/PopulationMeasure',
+    'https://measures.wcs.org/DesktopModules/WCSVega/API/Data/MapBuilderVegaSQL',
+    'https://library.wcs.org',
+    'library.wcs.org',
     'gis.wri.org',
     'tiles.globalforestwatch.org',
     'staging-api.globalforestwatch.org',
     'wri-01.carto.com',
-
   ],
 
   urls: {

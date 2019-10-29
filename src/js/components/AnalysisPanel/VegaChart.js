@@ -49,6 +49,8 @@ export default class VegaChart extends Component {
         isLoading: true
       });
       const config = this.props.results.data.attributes.widgetConfig;
+      console.log('config widgetConfig!', config);
+      
       if (this.props.component === 'Report') {
         if (!config.signals) {
           config.signals = [];
@@ -59,29 +61,92 @@ export default class VegaChart extends Component {
         };
 
         const resizeWidthSignal = {
-          name: "width",
-          update: "containerSize()[0]*0.95",
-          value: "",
+          name: 'width',
+          update: 'containerSize()[0]*0.95',
+          value: '',
           on: [
             {
               events: {
-                source: "window",
-                type: "resize"
+                source: 'window',
+                type: 'resize'
               },
-              update: "containerSize()[0]*0.95"
+              update: 'containerSize()[0]*0.95'
             }
           ]
         };
         config.signals.push(resizeWidthSignal);
       }
 
+      
+      
       const {setLoading, language} = this.props;
+      console.log('config.data[0].url first', config.data[0].url);
       if (config.data[0].url.indexOf('?&') > -1) {
         const urlPieces = config.data[0].url.split('?&');
         config.data[0].url = `${urlPieces[0]}?${urlPieces[1]}`;
       }
+      console.log('config.data[0].url 2nd', config.data[0].url);
+
+      //IF WCS
+      // if (selectedAttributes && config.featureDataFieldsToPass) { // WCS Specific logic
+      //   const baseConfig = resources.analysisModules.find(mod => mod.widgetId === id);
+      //   console.log('baseConfig', baseConfig);
+      //   const baseUrl = config.data[0].url.split('?')[0];
+      //   let queryParams = encodeURI(config.featureDataFieldsToPass
+      //     .filter(fieldName => {
+      //       const fieldToSubstitute = baseConfig.fieldToSubstitute ? baseConfig.fieldToSubstitute : 'analyticId';
+      //       return selectedAttributes[fieldName === 'analyticid' ? fieldToSubstitute : fieldName];
+      //     })
+      //     .map(fieldName => {
+      //     const fieldToSubstitute = baseConfig.fieldToSubstitute ? baseConfig.fieldToSubstitute : 'analyticId';
+      //     fieldName = fieldName === 'analyticid' ? fieldToSubstitute : fieldName;
+      //     const value = selectedAttributes[fieldName];
+      //     fieldName = fieldName === fieldToSubstitute ? 'analyticid' : fieldName;
+      //     return `${fieldName}=${value}`;
+      //   }).join('&'));
+  
+      //   //We have the correct queryParams, but this 'MapBuilderVegaSQL' also requires the analysisId from the analysisModule sent in as a param: analysisId=...
+      //   let analysisSuffix = '';
+      //   if (baseConfig.analysisId) {
+      //     analysisSuffix = encodeURI('analysisId=' + baseConfig.analysisId);
+      //     queryParams += '&' + analysisSuffix;
+      //   }
+
+      //   // url: `${baseUrl}?${queryParams}`,
+
+      // function render(spec) {
+      //   if (vega) {
+      //     console.log('spec', spec);
+      //     new vega.View(vega.parse(spec))
+      //     .renderer('canvas')
+      //     .initialize(el)
+      //     .hover()
+      //     .run();
+      //   } else {
+      //     handleError('Error creating analysis.');
+      //   }
+      // }
+
+      // esriRequest({
+      //   url: `${baseUrl}?${queryParams}`,
+      //   handleAs: 'json',
+      //   callbackParamName: 'callback'
+      // }).then(res => {
+      //   render(res);
+      //   if (callback) { callback(); }
+      // }, err => {
+      //   console.log('err', err);
+      //   handleError('Error creating analysis.');
+      // });
+
+      // }
+
       const dataset = this.props.results.data.attributes.dataset;
       const id = this.props.results.data.id;
+      console.log('dataset', dataset);
+      console.log('id', id);
+
+      
       if (this.props.component === 'Report'){
         fetch(`https://production-api.globalforestwatch.org/v1/dataset/${dataset}/widget/${id}/metadata?language=${language}`).then(res => {
           res.json().then(json => {
@@ -99,6 +164,26 @@ export default class VegaChart extends Component {
           });
         });
       }
+
+        //TODO:
+
+
+      //for WCS we USED TO just fire off the `makeVegaChart` function with lots of arguments and let that function run the makeEsriRequest get back data after
+        //appending lots of params onto the URL. For Mapbuild we actually do that here (ANND we make a direct GFW API call for the `description` from the report which we'll get to)
+            //let's do it all from here and let the charts.js render it! (change the wcs 'esriRequest' in charts.js to the 'fetch' call here after adding to url params!)
+
+      // const selectedFeature = this.props.selectedFeature;
+      // const attributes = selectedFeature && selectedFeature.attributes ? selectedFeature.attributes : null; //Only WCS-specific widgets need this property
+      // charts.makeVegaChart(this.chart, config, this.props.setLoading, attributes, this.props.results.data.id, this.handleError);
+
+      // charts.makeVegaChart(this.chart, config, language, setLoading, this.addChartDownload);
+
+
+      //we have 6 for WCS, 5 for MB - we need to add language, addChartDownload to WCS. We need to add attributes, results.data.id, handleError to MB.
+      //we need to figure out WHERE to make the analysis Request - in MB it is done Here, in WCS its done inside the charts.js makeVegaChart
+
+      //we need to somehow differentiate if this request is a GFW API request!
+        //Can we check for those 2 config properties that they use: 'featureDataFieldsToPass' and 'fieldToSubstitute' ?
       
       fetch(config.data[0].url).then(res => {
         if (res.status !== 200) {
@@ -107,7 +192,7 @@ export default class VegaChart extends Component {
           res.json().then(json => {
             charts.makeVegaChart(this.chart, config, language, setLoading, this.addChartDownload);
             const downloadOptions = [];
-            if (json.data && json.data.attributes && json.data.attributes.downloadUrls && !json.data.attributes.downloadUrls.csv.includes("month") && !config.title) {
+            if (json.data && json.data.attributes && json.data.attributes.downloadUrls && !json.data.attributes.downloadUrls.csv.includes('month') && !config.title) {
               const downloadUrls = json.data.attributes.downloadUrls;
               const label = 'csv';
               downloadOptions.push({label, url: downloadUrls[label]});
@@ -194,6 +279,25 @@ export default class VegaChart extends Component {
         </div>
       );
     } else {
+       //TODO:
+      // case 'FRAGMENTATION':
+      //       console.log('results', results);
+      //       console.log('config', config);
+      //       // results.startYearValue = startCount;
+      //       // results.totalRangeValue = totalCount;
+      //       const diff = results.totalRangeValue - results.startYearValue;
+      //       // debugger
+
+      //       const style = {
+      //         borderColor: 'purple',
+      //         color: 'purple'
+      //       };
+      //       chartComponent = <div className='results__badge' style={style}>
+      //         <div className='results__badge-label'>Frag Loss {config.startYear}-{config.endYear}</div>
+      //         <div className='results__badge-value'>{diff.toFixed(3)}</div>
+      //       </div>;
+
+      //       break;
       return (
         <div className='vega-chart_container'>
           { showDownloadOptions &&

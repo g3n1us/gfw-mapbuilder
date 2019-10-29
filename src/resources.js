@@ -1,714 +1,1439 @@
 export default {
-  "webmap": "6142e76453354c0b83633370e6a6f006 ",
-  "title": "Atlas Forestier du Cameroun",
-  "subtitle": "Ministère des Forêts et de la Faune",
-  "webmapMenuName": "Affectation des Terres",
-  "logoUrl": "https://cmr.forest-atlas.org/system/site_settings/images/000/000/094/original/CAMEROON.png?1487267590",
-  "logoLinkUrl": "http://www.minfof.cm/",
-  "printServiceUrl": "https://gis.forest-atlas.org/server/rest/services/cmr/ExportWebMap/GPServer/Export%20Web%20Map",
-  "narrative": "\u003cp\u003eCe thème présente la situation générale de l\'affectation des terres au Cameroun. Sont représentés : les permis minier (d\'exploitation et de recherche), les zones d\'intérêt cynégétique, les ventes de coupe, les forêts de production (UFA et forêt communale), les forêts communautaires, les aires protégées, les réserves forestières et les plantations agro industrielle.\u003cbr\u003e\u003c/p\u003e",
-  "includeSubscribeButton": true,
-  "sharinghost": "https://www.arcgis.com",
-  "analyticsCode": "UA-62288390-1",
-  "iso": "CMR",
-  "language": "fr",
+  "webmap": "fd99107f138d43dbbe0b13c7fc101b33",
+  "title": "Natures Strongholds Impact Platform - Sample Demonstration Data",
+  "subtitle": "Demonstrating Our Global Impact",
+  "logoUrl": "https://measures.wcs.org/Portals/_default/Skins/WCS_2016/images/wcsPeru_logo.png",
+  "logoLinkUrl": "https://www.wcs.org",
+  "aboutLinkUrl": "",
+  "downloadLinkUrl": "https://measures.wcs.org/beta/NSIPdownloadlinks",
+  "printServiceUrl": "https://gis.forest-atlas.org/server/rest/services/print/ExportWebMap/GPServer/Export Web Map",
+  "maskServiceUrl": "",
+  "mapThemeIds": "",
+  "mapThemes": "",
+  "narrative": "",
+  "includeSubscribeButton": false,
+  "includeMyGFWLogin": false,
+  "navLinksInNewTab": false,
+  "hideHeader": false,
+  "hideFooter": false,
+  "language": "en",
   "useAlternativeLanguage": true,
-  "alternativeLanguage": "en",
-  "alternativeWebmap": "b96ee7fcd75e405dbf9a8b5a44ae734a",
-  "alternativeLanguageTitle": "Forest Atlas of Cameroon",
-  "alternativeLanguageSubtitle": "Ministry of Forest and Wildlife",
-  "alternativeNarrative": "\u003cp\u003eThis map show the general land use allocation in Cameroon. It includes mining permits, hunting zones, various forest titles as well as agro-industrial plantations.\u003cbr\u003e\u003c/p\u003e",
-  "alternativeWebmapMenuName": "Land Use",
-  "includeDocumentsTab": true,
-  "includeMeasurementTab": true,
+  "alternativeWebmap": "",
+  "alternativeLanguage": "fr",
+  "alternativeLanguageTitle": "",
+  "alternativeLanguageSubtitle": "",
+  "alternativeMapThemes": "",
+  "alternativeNarrative": "",
+  "alternativeWebmapMenuName": "",
+  "includeDocumentsTab": false,
+  "documentsDirectory": "https://cmr.forest-atlas.org/resources/docs/",
+  "documentsMapserver": "https://gis.forest-atlas.org/server/rest/services/CMR/documents_administratifs/MapServer",
+  "iso": "",
+  "activeFires": false,
+  "initialExtent": {
+    "x": "7.52",
+    "y": "4.74",
+    "z": "3"
+  },
   "viirsFires": true,
   "modisFires": true,
   "intactForests": true,
   "aboveGroundBiomass": true,
   "landCover": true,
-  "mangroves": false,
-  "sadAlerts": false,
+  "mangroves": true,
+  "sadAlerts": true,
   "gladAlerts": true,
   "terraIAlerts": true,
-  "forma": true,
-  "primaryForests": true,
-  "recentImagery": true,
+  "webmapMenuName": "",
+  "slopePotentialOptions": "",
+  "alternativeSlopePotentialOptions": "",
+  "slopePotentialColors": "",
+  "slopeClassNames": "",
+  "slopeClassColors": "",
+  "treeCoverClassNames": "",
+  "treeCoverClassColors": "",
+  "landCoverClassNames": "",
+  "landCoverClassColors": "",
+  "populationClassNames": "",
+  "populationClassColors": "",
+  "rainfallClassNames": "",
+  "rainfallClassColors": "",
+  "alternativeSlopeDescription": "",
+  "sharinghost": "https://www.arcgis.com",
+  "analyticsCode": "",
+  "userFeatureToken": "",
   "analysisModules": [{
-      "analysisId": "TC_LOSS_GAIN",
-      "chartType": "badge",
-      "label": {
-          "en": "Total tree cover loss/ gain",
-          "fr": "Perte/gain total de la couverture arborée",
-          "es": "Pérdida/ganancia de cobertura arbórea total",
-          "pt": "Perda/ganho total de cobertura arbórea",
-          "id": "Total kehilangan/perolehan tutupan pohon",
-          "zh": "总森林覆盖减少/增加面积量",
-          "ka": "ხის ვარჯის საერთო კარგვა / მატება"
-      },
-      "title": {
-          "en": "Total tree cover loss/ gain",
-          "fr": "Perte/gain total de la couverture arborée",
-          "es": "Pérdida/ganancia de cobertura arbórea total",
-          "pt": "Perda/ganho total de cobertura arbórea",
-          "id": "Total kehilangan/perolehan tutupan pohon ",
-          "zh": "总森林覆盖减少/增加面积量",
-          "ka": "ხის ვარჯის საერთო კარგვა / მატება"
-      },
-      "description": {
-          "en": "Select range and tree cover density for loss data then click the run analysis button to see results. Gain data is currently only available for 2000 – 2012 and the gain analysis will always reflect the full 12-year time-period.",
-          "fr": "Sélectionner la plage et la densité de couverture arborée pour les données de perte, puis cliquer sur le bouton « lancer l’analyse » pour voir les résultats. Les données de gain ne sont actuellement disponibles que pour 2000 – 2012 et l’analyse de gain reflétera toujours la plage de 12 ans entière.",
-          "es": "Para obtener los datos sobre pérdida, seleccione el rango y la densidad de la cobertura arbórea, después haga clic en el botón ejecutar análisis para ver los resultados. Los datos sobre ganancia actualmente solo están disponibles para los años 2000 a 2012 y el análisis de la ganancia siempre reflejará el periodo de 12 años completo.",
-          "pt": "Selecione o período e a densidade de cobertura arbórea para dados de perda; em seguida, clique no botão para executar a análise e ver os resultados. Os dados de ganho estão disponíveis atualmente apenas para o período 2000 – 2012 e a análise de ganho sempre refletirá o período completo de 12 anos.",
-          "id": "Pilih rentang dan kerapatan tutupan pohon untuk data yang hilang, kemudian klik tombol mulai analisis untuk melihat hasilnya. Data perolehan saat ini hanya tersedia untuk periode 2000 – 2012 dan analisis perolehan akan selalu mencerminkan periode waktu 12 tahun penuh.",
-          "zh": "选择要考察减少量数据的范围和森林覆盖密度，然后点击“运行分析”按钮查看结果。目前仅有 2000 – 2012 年的增加量数据，增加分析始终反映这 12 年的完整情况。",
-          "ka": "შეარჩიეთ საზღვრები და ხის ვარჯის სიხშირე კარგვის მონაცემებისთვის, შემდეგ დააჭირეთ ღილაკს ანალიზის ჩატარება შედეგების სანახავად. მატების მონაცემები ამჟამად ხელმისაწვდომია 2000-2012 წლებისთვის და მატების ანალიზი ყოველთვის ასახავს სრულ 12-წლიან დროის პერიოდს."
-      },
-      "useGfwWidget": true,
-      "widgetId": "95c2c559-ca78-4b7a-b18b-7b2bca14ce83",
-      "uiParams": [{
-          "inputType": "rangeSlider",
-          "startParamName": "period",
-          "combineParams": true,
-          "valueSeparator": ",",
-          "bounds": [2001, 2018],
-          "valueType": "date",
-          "label": {
-              "en": "Select range for analysis:",
-              "fr": "Sélectionner une plage pour l’analyse:",
-              "es": "Seleccione un rango para el análisis:",
-              "pt": "Selecione o período para análise:",
-              "id": "Pilih rentang untuk analisis:",
-              "zh": "选择分析范围:",
-              "ka": "საზღვრების შერჩევა ანალიზისთვის:"
-          }
-      }, {
-          "name": "thresh",
-          "inputType": "tcd",
-          "label": {
-              "en": "Select tree cover density: ",
-              "fr": "Sélectionner la densité de couverture arborée: ",
-              "es": "Seleccione la densidad de la cobertura arbórea: ",
-              "pt": "Selecione a densidade de cobertura arbórea: ",
-              "id": "Pilih kerapatan tutupan pohon: ",
-              "zh": "选择森林覆盖密度: ",
-              "ka": "ხის ვარჯის სიხშირის შერჩევა: "
-          }
-      }]
+    "analysisId": "WCS_SpeciesPopulationTrend_WCSBarChart2DropDown_[TabID]_[PortalID]_[Locale]___",
+    "label": {
+      "en": "Species: Population Trend"
+    },
+    "title": {
+      "en": "Species: Population Trend"
+    },
+    "description": {
+      "en": "Population trend analysis based on field surveys and peer reviewed papers"
+    },
+    "useGfwWidget": true,
+    "widgetId": "53a2ad48-46c2-41b0-9a72-8d6ef34131c9",
+    "uiParams": "none",
+    "featureDataFieldsToPass": ["polygonname", "analysisId"],
+    "fieldToSubstitute": "AnnualPopulationTrend"
   }, {
-      "analysisId": "TC_LOSS",
-      "chartType": "bar",
+    "analysisId": "FRAGMENTATION",
+    "label": {
+      "en": "Habitat: Fragmentation Analysis",
+      "fr": "Total perte/ gain en couvert arborÃƒÂ©",
+      "es": "PÃƒÂ©rdida/ Aumento de la cobertura arbÃƒÂ³rea",
+      "pt": "Perda/ Ganho de cobertura arbÃƒÂ³rea",
+      "id": "Total tree cover loss/ gain",
+      "zh": "Ã¦Â£Â®Ã¦Å¾â€”Ã¨Â¦â€ Ã§â€ºâ€“Ã¦ÂÅ¸Ã¥Â¤Â±/ Ã¦Â£Â®Ã¦Å¾â€”Ã¨Â¦â€ Ã§â€ºâ€“Ã¥Â¢Å¾Ã¯Â¿Â½ ",
+      "ka": "Ã¡Æ’Â®Ã¡Æ’ËœÃ¡Æ’Â¡ Ã¡Æ’â€¢Ã¡Æ’ÂÃ¯Â¿Â½ Ã¡Æ’Â¯Ã¡Æ’ËœÃ¡Æ’Â¡ Ã¡Æ’â„¢Ã¡Æ’ÂÃ¯Â¿Â½ Ã¡Æ’â€™Ã¡Æ’â€¢Ã¡Æ’Â/ Ã¡Æ’Å“Ã¡Æ’ÂÃ¡Æ’â€ºÃ¡Æ’ÂÃ¡Æ’Â¢Ã¡Æ’Ëœ"
+    },
+    "title": {
+      "en": "Fragmentation",
+      "fr": "Forest Loss Analysis",
+      "es": "Forest Loss Analysis",
+      "pt": "Forest Loss Analysis",
+      "id": "Forest Loss Analysis",
+      "zh": "Forest Loss Analysis",
+      "ka": "Forest Loss Analysis"
+    },
+    "description": {
+      "en": "Select a year range click the run analysis button to see net change in the fragmentation for your selected polygons(s)",
+      "fr": "Select range and tree cover density then click the run analysis button to see results",
+      "es": "Select range and tree cover density then click the run analysis button to see results",
+      "pt": "Select range and tree cover density then click the run analysis button to see results",
+      "id": "Select range and tree cover density then click the run analysis button to see results",
+      "zh": "Select range and tree cover density then click the run analysis button to see results",
+      "ka": "Select range and tree cover density then click the run analysis button to see results"
+    },
+    "chartType": "badge",
+    "valueAttribute": "data",
+    "badgeLabel": {
+      "en": "Active Fires",
+      "fr": "Feux actifs",
+      "es": "Incendios activos",
+      "pt": "IncÃªndios ativos",
+      "id": "Active fires",
+      "zh": "æ´»è·ƒç«ç‚¹",
+      "ka": "áƒáƒ¥áƒ¢áƒ˜áƒ£áƒ áƒ˜ áƒ®áƒáƒœáƒ«áƒ áƒ”áƒ‘áƒ˜"
+    },
+    "analysisUrl": "https://us-central1-ambell-166721.cloudfunctions.net/wcs-ee-deforestation-debug",
+    "uiParams": [{
+      "inputType": "rangeSlider",
+      "startParamName": "period",
+      "combineParams": true,
+      "valueSeparator": ",",
+      "bounds": [2001, 2017],
+      "valueType": "date",
       "label": {
-          "en": "Annual Tree cover loss",
-          "fr": "Pertes de la couverture arborée annuelles",
-          "es": "Pérdida de cobertura arbórea anual",
-          "pt": "Perda anual de cobertura arbórea",
-          "id": "Kehilangan tutupan pohon tahunan",
-          "zh": "年度森林覆盖减少量面积",
-          "ka": "წლიური ხის ვარჯის კარგვა"
-      },
-      "title": {
-          "en": "Annual Tree cover loss",
-          "fr": "Pertes de la couverture arborée annuelles",
-          "es": "Pérdida de cobertura arbórea anual",
-          "pt": "Perda anual de cobertura arbórea",
-          "id": "Kehilangan tutupan pohon tahunan",
-          "zh": "年度森林覆盖减少量面积",
-          "ka": "წლიური ხის ვარჯის კარგვა"
-      },
-      "description": {
-          "en": "Select range and tree cover density then click the run analysis button to see results.",
-          "fr": "Sélectionner la plage et la densité de couverture arborée, puis cliquer sur le bouton « Lancer l’analyse » pour voir les résultats.",
-          "es": "Para ver los resultados, seleccione el rango y la densidad de la cobertura arbórea, después haga clic en el botón ejecutar análisis.",
-          "pt": "Para ver os resultados, selecione o período e a densidade de cobertura arbórea; em seguida, clique no botão para executar a análise.",
-          "id": "Pilih rentang dan kerapatan tutupan pohon kemudian klik tombol mulai analisis untuk melihat hasil.",
-          "zh": "选择范围和森林覆盖密度，然后点击“运行分析”按钮查看结果。",
-          "ka": "შეარჩიეთ საზღვრები და ხის ვარჯის სიხშირე, შემდეგ დააჭირეთ ღილაკს ანალიზის ჩატარება შედეგებს სანახავად."
-      },
-      "useGfwWidget": true,
-      "widgetId": "e53e541c-92cd-4b00-9aa7-2c7bb36d4697",
-      "uiParams": [{
-          "inputType": "rangeSlider",
-          "startParamName": "period",
-          "combineParams": true,
-          "valueSeparator": ",",
-          "bounds": [2001, 2018],
-          "valueType": "date",
-          "label": {
-              "en": "Select range for analysis",
-              "fr": "Sélectionner une plage pour l’analyse:",
-              "es": "Seleccione un rango para el análisis:",
-              "pt": "Selecione o período para análise:",
-              "id": "Pilih rentang untuk analisis:",
-              "zh": "选择分析范围:",
-              "ka": "საზღვრების შერჩევა ანალიზისთვის:"
-          }
-      }, {
-          "name": "thresh",
-          "inputType": "tcd",
-          "label": {
-              "en": "Select tree cover density: ",
-              "fr": "Sélectionner la densité de couverture arborée: ",
-              "es": "Seleccione la densidad de la cobertura arbórea: ",
-              "pt": "Selecione a densidade de cobertura arbórea: ",
-              "id": "Pilih kerapatan tutupan pohon: ",
-              "zh": "选择森林覆盖密度: ",
-              "ka": "ხის ვარჯის სიხშირის შერჩევა: "
-          }
-      }]
+        "en": "Select range for analysis",
+        "fr": "Select range for analysis",
+        "es": "Select range for analysis",
+        "pt": "Select range for analysis",
+        "id": "Select range for analysis",
+        "zh": "Select range for analysis",
+        "ka": "Select range for analysis"
+      }
+    }]
   }, {
-      "analysisId": "IFL",
-      "chartType": "bar",
-      "label": {
-          "en": "Annual tree cover loss in IFL",
-          "fr": "Perte annuelle de la couverture arborée en PFI",
-          "es": "Pérdida de cobertura arbórea anual en IFL",
-          "pt": "Perda anual de cobertura arbórea em IFL",
-          "id": "Kehilangan tutupan pohon tahunan di IFL",
-          "zh": "年度原生森林（IFL）覆盖减面积",
-          "ka": "ყოველწლიური ხის ვარჯის კარგვა ხტლ-ში"
-      },
-      "title": {
-          "en": "Annual Tree Cover Loss in Intact Forest Landscapes (IFL)",
-          "fr": "Perte annuelle de la couverture arborée en Paysage Forestier Intact (PFI)",
-          "es": "Pérdida de cobertura arbórea anual en Paisajes Forestales Intactos (Intact Forest Landscapes, IFL)",
-          "pt": "Perda anual de cobertura arbórea em paisagens florestais intactas (IFL)",
-          "id": "Kehilangan Tutupan Pohon Tahunan di Lanskap Hutan Utuh (IFL)",
-          "zh": "年度原生森林（IFL）树木覆盖减面积",
-          "ka": "ყოველწლიური ხის ვარჯის კარგვა ხელუხლებელი ტყის ლანდშაფტებში (ხტლ)"
-      },
-      "description": {
-          "en": "Results will not be available if the area you selected does not include IFL. Select range and tree cover density then click the run analysis button to see results.",
-          "fr": "Les résultats ne seront pas disponibles si la zone que vous avez sélectionnée n’inclut pas de PFI. Sélectionner la plage et la densité de couverture arborée, puis cliquer sur le bouton « Lancer l’analyse » pour voir les résultats.",
-          "es": "Los resultados no estarán disponibles si el área que seleccionó no incluye IFL. Para ver los resultados, seleccione el rango y la densidad de la cobertura arbórea, después haga clic en el botón ejecutar análisis.",
-          "pt": "Os resultados não estarão disponíveis se a área selecionada não for considerada IFL. Para ver os resultados, selecione o período e a densidade de cobertura arbórea; em seguida, clique no botão para executar a análise.",
-          "id": "Hasil tidak akan tersedia jika kawasan yang Anda pilih tidak mencakup Lanskap Hutan Utuh (IFL). Pilih rentang dan kerapatan tutupan pohon kemudian klik tombol mulai analisis untuk melihat hasil.",
-          "zh": "如果您选择的区域不包括原生森林，将不会提供结果。选择范围和森林覆盖密度，然后点击“运行分析”按钮查看结果。",
-          "ka": "შედეგები არ იქნება ხელმისაწვდომი, თუკი თქვენ მიერ შერჩეული ფართობი არ შეიცავს ხტლ-ს. შეარჩიეთ საზღვრები და ხის ვარჯის სიხშირე, შემდეგ დააჭირეთ ღილაკს ანალიზის ჩატარება შედეგების სანახავად."
-      },
-      "useGfwWidget": true,
-      "widgetId": "2083a1bc-440d-43fe-8b50-ff9918a37c57",
-      "params": [{
-          "name": "layer",
-          "value": "ifl2000"
-      }],
-      "uiParams": [{
-          "inputType": "rangeSlider",
-          "startParamName": "period",
-          "combineParams": true,
-          "valueSeparator": ",",
-          "bounds": [2001, 2018],
-          "valueType": "date",
-          "label": {
-              "en": "Select range for analysis",
-              "fr": "Sélectionner une plage pour l’analyse:",
-              "es": "Seleccione un rango para el análisis:",
-              "pt": "Selecione o período para análise:",
-              "id": "Pilih rentang untuk analisis:",
-              "zh": "选择分析范围:",
-              "ka": "საზღვრების შერჩევა ანალიზისთვის:"
-          }
-      }, {
-          "name": "thresh",
-          "inputType": "tcd",
-          "label": {
-              "en": "Select tree cover density: ",
-              "fr": "Sélectionner la densité de couverture arborée: ",
-              "es": "Seleccione la densidad de la cobertura arbórea: ",
-              "pt": "Selecione a densidade de cobertura arbórea: ",
-              "id": "Pilih kerapatan tutupan pohon: ",
-              "zh": "选择森林覆盖密度: ",
-              "ka": "ხის ვარჯის სიხშირის შერჩევა: "
-          }
-      }]
+    "analysisId": "WCS_LEMEffectivenessPatrolTeams_WCSBarChart1DropDown_[TabID]_[PortalID]_[Locale]___",
+    "label": {
+      "en": "LEM: Effectiveness Patrol Teams"
+    },
+    "title": {
+      "en": "LEM: Effectiveness Patrol Teams"
+    },
+    "description": {
+      "en": "Click below to run the analysis for Law Enforcement Monitoring - Effectiveness Patrol Teams"
+    },
+    "useGfwWidget": true,
+    "widgetId": "00629c5f-8d51-4373-86da-53222d36bac0",
+    "uiParams": "none"
   }, {
-      "analysisId": "Loss_LandCover",
-      "chartType": "bar",
-      "label": {
-          "en": "Annual tree cover loss by land cover class",
-          "fr": "Perte annuelle de la couverture arborée par catégorie de couverture terrestre",
-          "es": "Pérdida de cobertura arbórea anual por clase de cobertura de tierra",
-          "pt": "Perda anual de cobertura arbórea por classe de cobertura de terra",
-          "id": "Kehilangan tutupan pohon tahunan berdasarkan kelas tutupan lahan",
-          "zh": "年度森林覆盖减少量（按土地覆盖分类）",
-          "ka": "ყოველწლიური ხის ვარჯის კარგვა მიწის საფარის კლასის მიხედვით"
-      },
-      "title": {
-          "en": "Annual tree cover loss by land cover class",
-          "fr": "Perte annuelle de la couverture arborée par catégorie de couverture terrestre",
-          "es": "Pérdida de cobertura arbórea anual por clase de cobertura de tierra",
-          "pt": "Perda anual de cobertura arbórea por classe de cobertura de terra",
-          "id": "Kehilangan tutupan pohon tahunan berdasarkan kelas tutupan lahan",
-          "zh": "年度森林覆盖减少量（按土地覆盖分类）",
-          "ka": "ყოველწლიური ხის ვარჯის კარგვა მიწის საფარის კლასის მიხედვით"
-      },
-      "description": {
-          "en": "Land cover data from 2000 and provided by the European Space Agency (ESA) and UCLouvain. Select range and tree cover density then click the run analysis button to see results.",
-          "fr": "Données de couverture du sol datant de 2000 et fournies par l’Agence Spatiale Européenne (European Space Agency, ESA) et UCLouvain. Sélectionner la plage et la densité de couverture arborée, puis cliquer sur le bouton « Lancer l’analyse » pour voir les résultats.",
-          "es": "Los datos de la cobertura de tierra son de 2000 y fueron proporcionados por la Agencia Espacial Europea (European Space Agency, ESA) y UCLouvain. Para ver los resultados, seleccione el rango y la densidad de la cobertura arbórea, después haga clic en el botón ejecutar análisis.",
-          "pt": "Dados de cobertura de terra relativos ao período posterior a 2000 e fornecidos pela Agência Espacial Europeia (ESA) e pela Universidade Católica da Lovaina (UCLouvain). Para ver os resultados, selecione o período e a densidade de cobertura arbórea; em seguida, clique no botão para executar a análise.",
-          "id": "Data tutupan lahan dari tahun 2000 dan disediakan oleh Badan Antariksa Eropa –(ESA) dan UCLouvain. Pilih rentang dan kerapatan tutupan pohon kemudian klik tombol mulai analisis untuk melihat hasil.",
-          "zh": "自 2000 年以来的土地覆盖数据，由欧洲空间局 (ESA) 和 UCLouvain 提供。选择范围和森林覆盖密度，然后点击“运行分析”按钮查看结果。",
-          "ka": "მიწის საფარის მონაცემები 2000 წლიდან მოწოდებულია ევროპული კოსმოსური სააგენტოს (ESA) და ლუვენის კათოლიკური უნივერსიტეტის (UCLouvain) მიერ. შეარჩიეთ საზღვრები და ხის ვარჯის სიხშირე, შემდეგ დააჭირეთ ღილაკს ანალიზის ჩატარება შედეგების სანახავად."
-      },
-      "useGfwWidget": true,
-      "widgetId": "31f78466-fc0b-42f9-a7ae-bea8559740d8",
-      "params": [{
-          "name": "layer",
-          "value": "gfw-landcover-2000"
-      }],
-      "uiParams": [{
-          "inputType": "rangeSlider",
-          "startParamName": "period",
-          "combineParams": true,
-          "valueSeparator": ",",
-          "bounds": [2001, 2018],
-          "valueType": "date",
-          "label": {
-              "en": "Select range for analysis",
-              "fr": "Sélectionner une plage pour l’analyse:",
-              "es": "Seleccione un rango para el análisis:",
-              "pt": "Selecione o período para análise:",
-              "id": "Pilih rentang untuk analisis:",
-              "zh": "选择分析范围:",
-              "ka": "საზღვრების შერჩევა ანალიზისთვის:"
-          }
-      }, {
-          "name": "thresh",
-          "inputType": "tcd",
-          "label": {
-              "en": "Select tree cover density: ",
-              "fr": "Sélectionner la densité de couverture arborée: ",
-              "es": "Seleccione la densidad de la cobertura arbórea: ",
-              "pt": "Selecione a densidade de cobertura arbórea: ",
-              "id": "Pilih kerapatan tutupan pohon: ",
-              "zh": "选择森林覆盖密度: ",
-              "ka": "ხის ვარჯის სიხშირის შერჩევა: "
-          }
-      }]
+    "analysisId": "WCS_LEMEffectivenessPatrolsYear_WCSBarChart1DropDown_[TabID]_[PortalID]_[Locale]___",
+    "label": {
+      "en": "LEM: Effectiveness Patrols/Year"
+    },
+    "title": {
+      "en": "LEM: Effectiveness Patrols/Year"
+    },
+    "description": {
+      "en": "Click below to run the analysis for Law Enforcement Monitoring - Effectiveness Patrols/Year"
+    },
+    "useGfwWidget": true,
+    "widgetId": "6a6158bd-02a8-4053-9e4e-b8fb10777ea0",
+    "uiParams": "none"
   }, {
-      "analysisId": "BIO_LOSS",
-      "chartType": "bar",
-      "label": {
-          "en": "CO2 emissions from biomass loss",
-          "fr": "Émissions de Co2 de la perte de biomasse",
-          "es": "Emisiones de CO2 provenientes de la pérdida de biomasa",
-          "pt": "Emissões de CO₂ por perda de biomassa",
-          "id": "Emisi CO2 dari kehilangan biomassa",
-          "zh": "生物量损失导致的二氧化碳排放量",
-          "ka": "CO2 ემისია ბიომასის კარგვის გამო"
-      },
-      "title": {
-          "en": "Carbon Dioxide Emissions from Above Ground Live Woody Biomass Loss",
-          "fr": "Émissions de dioxyde de carbone de la perte de biomasse ligneuse vivante aérienne",
-          "es": "Emisiones de dióxido de carbono provenientes de la pérdida de biomasa leñosa viva en superficie",
-          "pt": "Emissões de dióxido de carbono por perda de biomassa de vegetação lenhosa viva acima do solo",
-          "id": "Emisi Karbon Dioksida dari kehilangan biomassa vegetasi berkayu di atas permukaan tanah",
-          "zh": "地上活木生物量损失导致的二氧化碳排放",
-          "ka": "ნახშირორჟანგის ემისია მიწისზედა ცოცხალი ბიომასის კარგვის გამო"
-      },
-      "description": {
-          "en": "Emissions do not include carbon emissions from other sources besides woody biomass (tree cover) loss. Select range and tree cover density then click the run analysis button to see results.",
-          "fr": "Les émissions n’incluent pas les émissions de carbone d’autres sources que la perte de biomasse (couverture arborée). Sélectionner la plage et la densité de couverture arborée, puis cliquer sur le bouton « Lancer l’analyse » pour voir les résultats.",
-          "es": "Las emisiones no incluyen las emisiones de carbono de otras fuentes además de la pérdida de biomasa leñosa (cobertura arbórea). Para ver los resultados, seleccione el rango y la densidad de la cobertura arbórea, después haga clic en el botón ejecutar análisis.",
-          "pt": "As estimativas não incluem emissões de carbono geradas por fontes diferentes de perda (de cobertura arbórea) de biomassa de material lenhoso. Para ver os resultados, selecione o período e a densidade de cobertura arbórea; em seguida, clique no botão para executar a análise.",
-          "id": "Emisi tidak termasuk emisi karbon dari sumber lain selain kehilangan biomasa kayu (tutupan pohon). Pilih rentang dan kerapatan tutupan pohon kemudian klik tombol mulai analisis untuk melihat hasil.",
-          "zh": "排放量不包括除树木生物量（森林覆盖）损失之外的其他来源导致的碳排放量。选择范围和森林覆盖密度，然后点击“运行分析”按钮查看结果。总碳排放量 (吨 二氧化碳)",
-          "ka": "ემისიები არ შეიცავენ ნახშირის ემისიებს სხვა წყაროებიდან, გარდა ცოცხალი ბიომასის (ხის ვარჯი) კარგვის. შეარჩიეთ საზღვრები და ხის ვარჯის სიხშირე, შემდეგ დააჭირეთ ღილაკს ანალიზის ჩატარება შედეგების სანახავად."
-      },
-      "useGfwWidget": true,
-      "widgetId": "ac38fdbd-fdb1-4d8e-9109-674013fb51a2",
-      "uiParams": [{
-          "inputType": "rangeSlider",
-          "startParamName": "period",
-          "combineParams": true,
-          "valueSeparator": ",",
-          "bounds": [2001, 2018],
-          "valueType": "date",
-          "label": {
-              "en": "Select range for analysis",
-              "fr": "Sélectionner une plage pour l’analyse:",
-              "es": "Seleccione un rango para el análisis:",
-              "pt": "Selecione o período para análise:",
-              "id": "Pilih rentang untuk analisis:",
-              "zh": "选择分析范围:",
-              "ka": "საზღვრების შერჩევა ანალიზისთვის:"
-          }
-      }, {
-          "name": "thresh",
-          "inputType": "tcd",
-          "label": {
-              "en": "Select tree cover density: ",
-              "fr": "Sélectionner la densité de couverture arborée: ",
-              "es": "Seleccione la densidad de la cobertura arbórea: ",
-              "pt": "Selecione a densidade de cobertura arbórea: ",
-              "id": "Pilih kerapatan tutupan pohon: ",
-              "zh": "选择森林覆盖密度: ",
-              "ka": "ხის ვარჯის სიხშირის შერჩევა: "
-          }
-      }]
+    "analysisId": "WCS_LEMEffectivenessAverageDistancePerPatrol_WCSBarChart1DropDown_[TabID]_[PortalID]_[Locale]___",
+    "label": {
+      "en": "LEM: Effectiveness Average Distance Per Patrol"
+    },
+    "title": {
+      "en": "LEM: Effectiveness Average Distance Per Patrol"
+    },
+    "description": {
+      "en": "Click below to run the analysis for Law Enforcement Monitoring - Effectiveness Average Distance Per Patrol"
+    },
+    "useGfwWidget": true,
+    "widgetId": "c682ae57-8918-48e6-8f43-164c43c07811",
+    "uiParams": "none"
   }, {
-      "analysisId": "GLAD_ALERTS",
-      "chartType": "line",
-      "label": {
-          "en": "GLAD alerts per month",
-          "fr": "Alertes GLAD par mois",
-          "es": "Alertas GLAD por mes",
-          "pt": "Alertas GLAD por mês",
-          "id": "Peringatan GLAD per bulan",
-          "zh": "每月 GLAD 预警",
-          "ka": "GLAD შეტყობინებები"
-      },
-      "title": {
-          "en": "GLAD alerts per month",
-          "fr": "Alertes GLAD par mois",
-          "es": "Alertas GLAD por mes",
-          "pt": "Alertas GLAD por mês",
-          "id": "Peringatan GLAD per bulan",
-          "zh": "每月 GLAD 预警",
-          "ka": "GLAD შეტყობინებები"
-      },
-      "description": {
-          "en": "Count the number of GLAD tree cover loss alerts per month over the past two years and compare to the historical average.",
-          "fr": "Compte le nombre d’alertes GLAD de perte de la couverture arborée par mois sur les deux dernières années et le compare à la moyenne historique.",
-          "es": "Cuente el número de alertas GLAD sobre pérdida de cobertura arbórea por mes en los últimos dos años y compárela con el promedio histórico.",
-          "pt": "Apresentação da quantidade de alertas GLAD de perda de cobertura arbórea por mês nos últimos dois anos e comparação com a média histórica.",
-          "id": "Hitung jumlah peringatan kehilangan tutupan pohon GLAD per bulan selama dua tahun terakhir dan bandingkan dengan rata-rata historis.",
-          "zh": "统计过去两年内每月 GLAD 森林覆盖减少预警次数，并与历史平均值比较。",
-          "ka": "Count the number of GLAD tree cover loss alerts per month over the past two years and compare to the historical average."
-      },
-      "useGfwWidget": true,
-      "widgetId": "b5e43ea3-2812-484e-bc31-1bf5d2fe8aa0",
-      "uiParams": "none"
+    "analysisId": "WCS_LEMPresenceDaysPerMonth_WCSBarChart1DropDown_[TabID]_[PortalID]_[Locale]___",
+    "label": {
+      "en": "LEM: Presence Days Per Month"
+    },
+    "title": {
+      "en": "LEM: Presence Days Per Month"
+    },
+    "description": {
+      "en": "Click below to run the analysis for Law Enforcement Monitoring - Presence Days Per Month"
+    },
+    "useGfwWidget": true,
+    "widgetId": "c746e150-892a-4b27-bc2c-dd49c7a1ad40",
+    "uiParams": "none"
   }, {
-      "analysisId": "GLAD_ALERTS_Badge",
-      "chartType": "badge",
-      "label": {
-          "en": "Total GLAD Alerts",
-          "fr": "Total des alertes GLAD",
-          "es": "Alertas GLAD totales",
-          "pt": "Total de alertas GLAD",
-          "id": "Total Peringatan GLAD",
-          "zh": "GLAD 预警总数",
-          "ka": "GLAD შეტყობინებები"
-      },
-      "title": {
-          "en": "Total GLAD Alerts",
-          "fr": "Total des alertes GLAD",
-          "es": "Alertas GLAD totales",
-          "pt": "Total de alertas GLAD",
-          "id": "Total Peringatan GLAD",
-          "zh": "GLAD 预警总数",
-          "ka": "Total GLAD Alerts"
-      },
-      "description": {
-          "en": "Count the number of GLAD alerts which occurred within the selected time range.",
-          "fr": "Compte le nombre d’alertes GLAD durant la période sélectionnée.",
-          "es": "Cuente el número de alertas GLAD que ocurrieron en el rango de tiempo seleccionado.",
-          "pt": "Quantifica o número de alertas GLAD ocorridos em um período selecionado.",
-          "id": "Hitung jumlah peringatan GLAD yang terjadi dalam rentang waktu yang dipilih.",
-          "zh": "统计在所选时间范围内出现的 GLAD 预警次数。",
-          "ka": "Count the number of GLAD tree cover loss alerts per month."
-      },
-      "useGfwWidget": true,
-      "widgetId": "16ff6282-8ceb-4055-938a-43726a62b205",
-      "uiParams": [{
-          "inputType": "datepicker",
-          "startParamName": "period",
-          "combineParams": true,
-          "valueSeparator": ",",
-          "multi": true,
-          "defaultStartDate": "2018-01-01",
-          "minDate": "2015-01-01",
-          "label": {
-              "en": "Select range for analysis",
-              "fr": "Sélectionner une plage pour l’analyse",
-              "es": "Seleccione un rango para el análisis",
-              "pt": "Selecione o período para análise",
-              "id": "Pilih rentang untuk analisis",
-              "zh": "选择分析范围",
-              "ka": "საზღვრების შერჩევა ანალიზისთვის"
-          }
-      }]
+    "analysisId": "WCS_LEMIllegalIncidents_WCSBarChart1DropDown_[TabID]_[PortalID]_[Locale]___",
+    "label": {
+      "en": "LEM: IllegalIncidents"
+    },
+    "title": {
+      "en": "LEM: IllegalIncidents"
+    },
+    "description": {
+      "en": "Click below to run the analysis for Law Enforcement Monitoring - IllegalIncidents"
+    },
+    "useGfwWidget": true,
+    "widgetId": "91292286-6dbf-48a8-a600-56e2b4513a72",
+    "uiParams": "none"
   }, {
-      "analysisId": "VIIRS_FIRES",
-      "chartType": "badge",
-      "label": {
-          "en": "VIIRS Active Fires",
-          "fr": "Feux actifs VIIRS",
-          "es": "Incendios activos VIIRS",
-          "pt": "Incêndios ativos VIIRS",
-          "id": "Kebakaran Aktif VIIRS",
-          "zh": "VIIRS 活跃火点",
-          "ka": "VIIRS აქტიური ხანძრები"
-      },
-      "title": {
-          "en": "VIIRS Active Fires",
-          "fr": "Feux actifs VIIRS",
-          "es": "Incendios activos VIIRS",
-          "pt": "Incêndios ativos VIIRS",
-          "id": "Kebakaran Aktif VIIRS",
-          "zh": "VIIRS 活跃火点",
-          "ka": "VIIRS აქტიური ხანძრები"
-      },
-      "description": {
-          "en": "This analysis counts the number of VIIRS fire alert detections during the past 7 days",
-          "fr": "Cette analyse compte le nombre d’alertes de détection d’incendies VIIRS durant les 7 derniers jours",
-          "es": "Este análisis cuenta el número de detecciones de alertas de incendios VIIRS durante los últimos siete días",
-          "pt": "Esta análise apresenta a quantidade de detecções de alertas de incêndio VIIRS nos últimos 7 dias",
-          "id": "Analisis ini menghitung jumlah deteksi peringatan kebakaran VIIRS selama 7 hari terakhir",
-          "zh": "此分析可统计过去 7 天 VIIRS 火警监测的次数。",
-          "ka": "ეს ანალიზი თვლის VIIRS ხანძრის შეტყობინებების გამოვლენის რაოდენობას ბოლო 7 დღის განმავლობაში."
-      },
-      "useGfwWidget": true,
-      "widgetId": "5d696f96-e6c7-4323-8bda-4c99cd6b0cb4",
-      "uiParams": "none"
+    "analysisId": "WCS_LEMArrestsPer100kmPatrol_WCSBarChart1DropDown_[TabID]_[PortalID]_[Locale]___",
+    "label": {
+      "en": "LEM: Arrests Per 100km Patrol"
+    },
+    "title": {
+      "en": "LEM: Arrests Per 100km Patrol"
+    },
+    "description": {
+      "en": "Click below to run the analysis for Law Enforcement Monitoring - Arrests Per 100km Patrol"
+    },
+    "useGfwWidget": true,
+    "widgetId": "684e5f08-d657-41c8-aa1d-0b87f3bec079",
+    "uiParams": "none"
   }, {
-      "analysisId": "LCC",
-      "chartType": "pie",
+    "analysisId": "WCS_LivelihoodsBNSAverageNoActivities_WCSBarChart1DropDown_[TabID]_[PortalID]_[Locale]___",
+    "label": {
+      "en": "Livelihoods: BNS Average Number of Livelihoods Activities"
+    },
+    "title": {
+      "en": "Livelihoods: BNS Average Number of Livelihoods Activities"
+    },
+    "description": {
+      "en": "Click below to run the analysis for Livelihoods: BNS Average Number of Livelihoods Activities"
+    },
+    "useGfwWidget": true,
+    "widgetId": "47b78588-9dc7-4591-bd0d-72839532eadb",
+    "uiParams": "none"
+  }, {
+    "analysisId": "WCS_GovernanceLegitimacy_WCSBarChart1DropDown_[TabID]_[PortalID]_[Locale]___",
+    "label": {
+      "en": "Governance: Legitimacy"
+    },
+    "title": {
+      "en": "Governance: Legitimacy"
+    },
+    "description": {
+      "en": "Click below to run the analysis for Governance: Legitimacy"
+    },
+    "useGfwWidget": true,
+    "widgetId": "5bb4844d-4c98-4dbc-a156-0150f6645ed4",
+    "uiParams": "none"
+  }, {
+    "analysisId": "WCS_GovernanceAccountability_WCSBarChart1DropDown_[TabID]_[PortalID]_[Locale]___",
+    "label": {
+      "en": "Governance: Accountability"
+    },
+    "title": {
+      "en": "Governance: Accountability"
+    },
+    "description": {
+      "en": "Click below to run the analysis for Governance: Accountability"
+    },
+    "useGfwWidget": true,
+    "widgetId": "7e562354-1a35-4ea6-9a72-410a837d75f1",
+    "uiParams": "none"
+  }, {
+    "analysisId": "WCS_GovernanceTransparency_WCSBarChart1DropDown_[TabID]_[PortalID]_[Locale]___",
+    "label": {
+      "en": "Governance: Transparency"
+    },
+    "title": {
+      "en": "Governance: Transparency"
+    },
+    "description": {
+      "en": "Click below to run the analysis for Governance: Transparency"
+    },
+    "useGfwWidget": true,
+    "widgetId": "180fd1cb-73be-4637-aaa4-07a2683830a1",
+    "uiParams": "none"
+  }, {
+    "analysisId": "WCS_GovernanceParticipation_WCSBarChart1DropDown_[TabID]_[PortalID]_[Locale]___",
+    "label": {
+      "en": "Governance: Participation"
+    },
+    "title": {
+      "en": "Governance: Participation"
+    },
+    "description": {
+      "en": "Click below to run the analysis for Governance: Participation"
+    },
+    "useGfwWidget": true,
+    "widgetId": "7c9ba495-5bc6-4a31-87b4-0eff67e25ef8",
+    "uiParams": "none"
+  }, {
+    "analysisId": "WCS_GovernanceFairness_WCSBarChart1DropDown_[TabID]_[PortalID]_[Locale]___",
+    "label": {
+      "en": "Governance: Fairness"
+    },
+    "title": {
+      "en": "Governance: Fairness"
+    },
+    "description": {
+      "en": "Click below to run the analysis for Governance: Fairness"
+    },
+    "useGfwWidget": true,
+    "widgetId": "90c1c1be-e8e2-494f-834b-e05a7fc19fc0",
+    "uiParams": "none"
+  }, {
+    "analysisId": "WCS_GovernanceMotivation_WCSBarChart1DropDown_[TabID]_[PortalID]_[Locale]___",
+    "label": {
+      "en": "Governance: Motivation"
+    },
+    "title": {
+      "en": "Governance: Motivation"
+    },
+    "description": {
+      "en": "Click below to run the analysis for Governance: Motivation"
+    },
+    "useGfwWidget": true,
+    "widgetId": "b83916c5-17d8-4ed5-a0a5-79e447d6b8df",
+    "uiParams": "none"
+  }, {
+    "analysisId": "WCS_GovernanceKnowledgeSkills_WCSBarChart1DropDown_[TabID]_[PortalID]_[Locale]___",
+    "label": {
+      "en": "Governance: Knowledge Skills"
+    },
+    "title": {
+      "en": "Governance: Knowledge Skills"
+    },
+    "description": {
+      "en": "Click below to run the analysis for Governance: Knowledge Skills"
+    },
+    "useGfwWidget": true,
+    "widgetId": "eaa88911-882e-4796-9cc6-35a62bc3651b",
+    "uiParams": "none"
+  }, {
+    "analysisId": "WCS_GovernanceResources_WCSBarChart1DropDown_[TabID]_[PortalID]_[Locale]___",
+    "label": {
+      "en": "Governance: Resources"
+    },
+    "title": {
+      "en": "Governance: Resources"
+    },
+    "description": {
+      "en": "Click below to run the analysis for Governance: Resources"
+    },
+    "useGfwWidget": true,
+    "widgetId": "cf2aeaef-d842-4471-875f-21b463f0e787",
+    "uiParams": "none"
+  }, {
+    "analysisId": "WCS_GovernanceHeldAccountable_WCSBarChart1DropDown_[TabID]_[PortalID]_[Locale]___",
+    "label": {
+      "en": "Governance: Held Accountable"
+    },
+    "title": {
+      "en": "Governance: Held Accountable"
+    },
+    "description": {
+      "en": "Click below to run the analysis for Governance: Held Accountable"
+    },
+    "useGfwWidget": true,
+    "widgetId": "e58f9cdf-4da4-4a5b-ba82-8ad1e7d4a1c1",
+    "uiParams": "none"
+  }, {
+    "analysisId": "WCS_GovernanceEnactDecision_WCSBarChart1DropDown_[TabID]_[PortalID]_[Locale]___",
+    "label": {
+      "en": "Governance: Enact Decision"
+    },
+    "title": {
+      "en": "Governance: Enact Decision"
+    },
+    "description": {
+      "en": "Click below to run the analysis for Governance: Enact Decision"
+    },
+    "useGfwWidget": true,
+    "widgetId": "026a09c6-5527-4fe3-a8bc-a007a96f97f6",
+    "uiParams": "none"
+  }, {
+    "analysisId": "WCS_GovernanceDiversity_WCSBarChart1DropDown_[TabID]_[PortalID]_[Locale]___",
+    "label": {
+      "en": "Governance: Diversity"
+    },
+    "title": {
+      "en": "Governance: Diversity"
+    },
+    "description": {
+      "en": "Click below to run the analysis for Governance: Diversity"
+    },
+    "useGfwWidget": true,
+    "widgetId": "84db730b-28c0-4395-a00f-f88780e5a508",
+    "uiParams": "none"
+  }, {
+    "analysisId": "TC_LOSS_GAIN",
+    "label": {
+      "en": "Total tree cover loss/ gain",
+      "fr": "Total perte/ gain en couvert arborÃ©",
+      "es": "PÃ©rdida/ Aumento de la cobertura arbÃ³rea",
+      "pt": "Perda/ Ganho de cobertura arbÃ³rea",
+      "id": "Total tree cover loss/ gain",
+      "zh": "æ£®æž—è¦†ç›–æ¿Ÿå¤±/ æ£®æž—è¦†ç›–å¢žåŠ ",
+      "ka": "áƒ®áƒ˜áƒ¡ áƒ•áƒ¿áƒ áƒ¯áƒ˜áƒ¡ áƒ™áƒ¿áƒ áƒ’áƒ•áƒ¿/ áƒœáƒ¿áƒ›áƒ¿áƒ¢áƒ˜"
+    },
+    "title": {
+      "en": "Forest Loss Analysis",
+      "fr": "Forest Loss Analysis",
+      "es": "Forest Loss Analysis",
+      "pt": "Forest Loss Analysis",
+      "id": "Forest Loss Analysis",
+      "zh": "Forest Loss Analysis",
+      "ka": "Forest Loss Analysis"
+    },
+    "description": {
+      "en": "Select range and tree cover density then click the run analysis button to see results",
+      "fr": "Select range and tree cover density then click the run analysis button to see results",
+      "es": "Select range and tree cover density then click the run analysis button to see results",
+      "pt": "Select range and tree cover density then click the run analysis button to see results",
+      "id": "Select range and tree cover density then click the run analysis button to see results",
+      "zh": "Select range and tree cover density then click the run analysis button to see results",
+      "ka": "Select range and tree cover density then click the run analysis button to see results"
+    },
+    "useGfwWidget": true,
+    "widgetId": "e6c01eff-0d79-4865-a431-65d6adb89589",
+    "uiParams": [{
+      "inputType": "rangeSlider",
+      "startParamName": "period",
+      "combineParams": true,
+      "valueSeparator": ",",
+      "bounds": [2001, 2018],
+      "valueType": "date",
       "label": {
-          "en": "Land Cover Composition",
-          "fr": "Composition de la couverture terrestre",
-          "es": "Cobertura terrestre",
-          "pt": "Cobertura do Solo",
-          "id": "Komposisi tutupan lahan",
-          "zh": "土地覆盖构成",
-          "ka": "მიწის საფარის შემადგენლობა"
-      },
-      "title": {
-          "en": "Land Cover Composition",
-          "fr": "Composition de la couverture terrestre",
-          "es": "Composición de la cobertura de tierra",
-          "pt": "Composição da cobertura de terra",
-          "id": "Komposisi tutupan lahan",
-          "zh": "土地覆盖构成",
-          "ka": "მიწის საფარის შემადგენლობა"
-      },
-      "description": {
-          "en": "Land cover data is from 2015 and provided by the European Space Agency (ESA) and UCLouvain.",
-          "fr": "Les données de la couverture terrestre datent de 2015 et sont fournies par l’Agence Spatiale Européenne (European Space Agency, ESA) et UCLouvain.",
-          "es": "Los datos de la cobertura de tierra son de 2015 y fueron proporcionados por la Agencia Espacial Europea (European Space Agency, ESA) y UCLouvain. ",
-          "pt": "Dados de cobertura de terra relativos ao período posterior a 2015 e fornecidos pela Agência Espacial Europeia (ESA) e pela UCLouvain. ",
-          "id": "Data tutupan lahan dari tahun 2015 yang disediakan oleh Badan Antariksa Eropa () dan UCLouvain.",
-          "zh": "自 2015 年以来的土地覆盖数据，由欧洲空间局 (ESA) 和 UCLouvain 提供。 ",
-          "ka": "მიწის საფარის მონაცემები 2015 წლის შემდეგაა და მოწოდებულია ევროპული კოსმოსური სააგენტოს (ESA) და ლუვენის კათოლიკური უნივერსიტეტის (UCLouvain) მიერ."
-      },
-      "useGfwWidget": true,
-      "widgetId": "1b84364d-0efd-4d60-81ef-870f7d13ee7b",
-      "uiParams": "none",
-      "params": [{
-          "name": "layer",
-          "value": "gfw-landcover-2015"
-      }]
+        "en": "Select range for analysis",
+        "fr": "Sélectionner une plage pour l’analyse:",
+        "es": "Seleccione un rango para el análisis:",
+        "pt": "Selecione o período para análise:",
+        "id": "Pilih rentang untuk analisis:",
+        "zh": "选择分枿范围:",
+        "ka": "სჿზღვრების შერჩევჿ ჿნჿლიზისთვის:"
+      }
+    }, {
+      "name": "thresh",
+      "inputType": "tcd",
+      "label": {
+        "en": "Select tree cover density: ",
+        "fr": "Sélectionner la densité de couverture arborée: ",
+        "es": "Seleccione la densidad de la cobertura arbórea: ",
+        "pt": "Selecione a densidade de cobertura arbórea: ",
+        "id": "Pilih kerapatan tutupan pohon: ",
+        "zh": "选择森林覆盖密度: ",
+        "ka": "ხის ვჿრჯის სიხშირის შერჩევჿ: "
+      }
+    }]
+  }, {
+    "analysisId": "TC_LOSS",
+    "label": {
+      "en": "Tree cover loss",
+      "fr": "Perte en couvert arborÃƒÂ©",
+      "es": "PÃƒÂ©rdida de la cobertura arbÃƒÂ³rea",
+      "pt": "Perda de cobertura arbÃƒÂ³rea",
+      "id": "Tree cover loss",
+      "zh": "Ã¦Â£Â®Ã¦Å¾â€”Ã¨Â¦â€ Ã§â€ºâ€“Ã¦ÂÅ¸Ã¥Â¤Â±",
+      "ka": "Ã¡Æ’Â®Ã¡Æ’ËœÃ¡Æ’Â¡ Ã¡Æ’â€¢Ã¡Æ’ÂÃ¡Æ’ Ã¡Æ’Â¯Ã¡Æ’ËœÃ¡Æ’Â¡ Ã¡Æ’â„¢Ã¡Æ’ÂÃ¡Æ’ Ã¡Æ’â€™Ã¡Æ’â€¢Ã¡Æ’Â"
+    },
+    "title": {
+      "en": "Tree cover loss",
+      "fr": "Perte en couvert arborÃƒÂ©",
+      "es": "PÃƒÂ©rdida de la cobertura arbÃƒÂ³rea",
+      "pt": "Perda de cobertura arbÃƒÂ³rea",
+      "id": "Tree cover loss",
+      "zh": "Ã¦Â£Â®Ã¦Å¾â€”Ã¨Â¦â€ Ã§â€ºâ€“Ã¦ÂÅ¸Ã¥Â¤Â±",
+      "ka": "Ã¡Æ’Â®Ã¡Æ’ËœÃ¡Æ’Â¡ Ã¡Æ’â€¢Ã¡Æ’ÂÃ¡Æ’ Ã¡Æ’Â¯Ã¡Æ’ËœÃ¡Æ’Â¡ Ã¡Æ’â„¢Ã¡Æ’ÂÃ¡Æ’ Ã¡Æ’â€™Ã¡Æ’â€¢Ã¡Æ’Â"
+    },
+    "description": {
+      "en": "Select range and tree cover density then click the run analysis button to see results",
+      "fr": "Select range and tree cover density then click the run analysis button to see results",
+      "es": "Select range and tree cover density then click the run analysis button to see results",
+      "pt": "Select range and tree cover density then click the run analysis button to see results",
+      "id": "Select range and tree cover density then click the run analysis button to see results",
+      "zh": "Select range and tree cover density then click the run analysis button to see results",
+      "ka": "Select range and tree cover density then click the run analysis button to see results"
+    },
+    "useGfwWidget": true,
+    "widgetId": "23c064f5-fc93-4888-9db7-6d34c8681dd6",
+    "uiParams": [{
+      "inputType": "rangeSlider",
+      "startParamName": "period",
+      "combineParams": true,
+      "valueSeparator": ",",
+      "bounds": [2001, 2018],
+      "valueType": "date",
+      "label": {
+        "en": "Select range for analysis",
+        "fr": "SÃ©lectionner une plage pour lâ€™analyse:",
+        "es": "Seleccione un rango para el anÃ¡lisis:",
+        "pt": "Selecione o perÃ­odo para anÃ¡lise:",
+        "id": "Pilih rentang untuk analisis:",
+        "zh": "é€‰æ‹©åˆ†æžèŒƒå›´:",
+        "ka": "áƒ¡áƒáƒ–áƒ¦áƒ•áƒ áƒ”áƒ‘áƒ˜áƒ¡ áƒ¨áƒ”áƒ áƒ©áƒ”áƒ•áƒ áƒáƒœáƒáƒšáƒ˜áƒ–áƒ˜áƒ¡áƒ—áƒ•áƒ˜áƒ¡:"
+      }
+    }, {
+      "name": "thresh",
+      "inputType": "tcd",
+      "label": {
+        "en": "Select tree cover density: ",
+        "fr": "SÃ©lectionner la densitÃ© de couverture arborÃ©e: ",
+        "es": "Seleccione la densidad de la cobertura arbÃ³rea: ",
+        "pt": "Selecione a densidade de cobertura arbÃ³rea: ",
+        "id": "Pilih kerapatan tutupan pohon: ",
+        "zh": "é€‰æ‹©æ£®æž—è¦†ç›–å¯†åº¦: ",
+        "ka": "áƒ®áƒ˜áƒ¡ áƒ•áƒáƒ áƒ¯áƒ˜áƒ¡ áƒ¡áƒ˜áƒ®áƒ¨áƒ˜áƒ áƒ˜áƒ¡ áƒ¨áƒ”áƒ áƒ©áƒ”áƒ•áƒ: "
+      }
+    }]
+  }, {
+    "analysisId": "BIO_LOSS",
+    "label": {
+      "en": "Aboveground Live Woody Biomass Density",
+      "fr": "DensitÃ© de la biomasse aÃ©rienne vivante",
+      "es": "Densidad de la biomasa viva en la superficie del suelo",
+      "pt": "Densidade de biomassa viva acima do solo",
+      "id": "Aboveground Live Woody Biomass Density",
+      "zh": "Aboveground Live Woody Biomass Density",
+      "ka": "áƒ›áƒ˜áƒ¬áƒ˜áƒ¡áƒ–áƒ”áƒ“áƒ áƒªáƒáƒªáƒ®áƒáƒšáƒ˜ áƒ¢áƒ§áƒ˜áƒ¡ áƒ‘áƒ˜áƒáƒ›áƒáƒ¡áƒ˜áƒ¡ áƒ¡áƒ˜áƒ®áƒ¨áƒ˜áƒ áƒ”"
+    },
+    "title": {
+      "en": "Aboveground Live Woody Biomass Density",
+      "fr": "DensitÃ© de la biomasse aÃ©rienne vivante",
+      "es": "Densidad de la biomasa viva en la superficie del suelo",
+      "pt": "Densidade de biomassa viva acima do solo",
+      "id": "Aboveground Live Woody Biomass Density",
+      "zh": "Aboveground Live Woody Biomass Density",
+      "ka": "áƒ›áƒ˜áƒ¬áƒ˜áƒ¡áƒ–áƒ”áƒ“áƒ áƒªáƒáƒªáƒ®áƒáƒšáƒ˜ áƒ¢áƒ§áƒ˜áƒ¡ áƒ‘áƒ˜áƒáƒ›áƒáƒ¡áƒ˜áƒ¡ áƒ¡áƒ˜áƒ®áƒ¨áƒ˜áƒ áƒ”"
+    },
+    "useGfwWidget": true,
+    "widgetId": "937a74e7-f616-4d1d-91b3-e69c68e278aa",
+    "uiParams": [{
+      "inputType": "rangeSlider",
+      "startParamName": "period",
+      "combineParams": true,
+      "valueSeparator": ",",
+      "bounds": [2001, 2018],
+      "valueType": "date",
+      "label": {
+        "en": "Select range for analysis",
+        "fr": "SÃ©lectionner une plage pour lâ€™analyse:",
+        "es": "Seleccione un rango para el anÃ¡lisis:",
+        "pt": "Selecione o perÃ­odo para anÃ¡lise:",
+        "id": "Pilih rentang untuk analisis:",
+        "zh": "é€‰æ‹©åˆ†æžèŒƒå›´:",
+        "ka": "áƒ¡áƒáƒ–áƒ¦áƒ•áƒ áƒ”áƒ‘áƒ˜áƒ¡ áƒ¨áƒ”áƒ áƒ©áƒ”áƒ•áƒ áƒáƒœáƒáƒšáƒ˜áƒ–áƒ˜áƒ¡áƒ—áƒ•áƒ˜áƒ¡:"
+      }
+    }, {
+      "name": "thresh",
+      "inputType": "tcd",
+      "label": {
+        "en": "Select tree cover density: ",
+        "fr": "SÃ©lectionner la densitÃ© de couverture arborÃ©e: ",
+        "es": "Seleccione la densidad de la cobertura arbÃ³rea: ",
+        "pt": "Selecione a densidade de cobertura arbÃ³rea: ",
+        "id": "Pilih kerapatan tutupan pohon: ",
+        "zh": "é€‰æ‹©æ£®æž—è¦†ç›–å¯†åº¦: ",
+        "ka": "áƒ®áƒ˜áƒ¡ áƒ•áƒáƒ áƒ¯áƒ˜áƒ¡ áƒ¡áƒ˜áƒ®áƒ¨áƒ˜áƒ áƒ˜áƒ¡ áƒ¨áƒ”áƒ áƒ©áƒ”áƒ•áƒ: "
+      }
+    }]
+  }, {
+    "analysisId": "IFL",
+    "label": {
+      "en": "Intact Forest Landscape",
+      "fr": "Paysage forestier intact",
+      "es": "Paisajes Forestales Intactos",
+      "pt": "Paisagens Florestais Intactas",
+      "id": "Intact Forest Landscape",
+      "zh": "Ã¥Å½Å¸Ã§â€Å¸Ã¦Â£Â®Ã¦Å¾â€”Ã¦â„¢Â¯Ã¨Â§â€š",
+      "ka": "Ã¡Æ’Â®Ã¡Æ’â€Ã¡Æ’Å¡Ã¡Æ’Â£Ã¡Æ’Â®Ã¡Æ’Å¡Ã¡Æ’â€Ã¡Æ’â€˜Ã¡Æ’â€Ã¡Æ’Å¡Ã¡Æ’Ëœ Ã¡Æ’Â¢Ã¡Æ’Â§Ã¡Æ’ËœÃ¡Æ’Â¡ Ã¡Æ’Å¡Ã¡Æ’ÂÃ¡Æ’Å“Ã¡Æ’â€œÃ¡Æ’Â¨Ã¡Æ’ÂÃ¡Æ’Â¤Ã¡Æ’Â¢Ã¡Æ’Ëœ"
+    },
+    "colors": ["#186513"],
+    "useGfwWidget": true,
+    "widgetId": "d0d22aeb-9642-4c4d-a310-f7fb95a48c21",
+    "uiParams": [{
+      "inputType": "rangeSlider",
+      "startParamName": "period",
+      "combineParams": true,
+      "valueSeparator": ",",
+      "bounds": [2001, 2018],
+      "valueType": "date",
+      "label": {
+        "en": "Select range for analysis",
+        "fr": "SÃ©lectionner une plage pour lâ€™analyse:",
+        "es": "Seleccione un rango para el anÃ¡lisis:",
+        "pt": "Selecione o perÃ­odo para anÃ¡lise:",
+        "id": "Pilih rentang untuk analisis:",
+        "zh": "é€‰æ‹©åˆ†æžèŒƒå›´:",
+        "ka": "áƒ¡áƒáƒ–áƒ¦áƒ•áƒ áƒ”áƒ‘áƒ˜áƒ¡ áƒ¨áƒ”áƒ áƒ©áƒ”áƒ•áƒ áƒáƒœáƒáƒšáƒ˜áƒ–áƒ˜áƒ¡áƒ—áƒ•áƒ˜áƒ¡:"
+      }
+    }, {
+      "name": "thresh",
+      "inputType": "tcd",
+      "label": {
+        "en": "Select tree cover density: ",
+        "fr": "SÃ©lectionner la densitÃ© de couverture arborÃ©e: ",
+        "es": "Seleccione la densidad de la cobertura arbÃ³rea: ",
+        "pt": "Selecione a densidade de cobertura arbÃ³rea: ",
+        "id": "Pilih kerapatan tutupan pohon: ",
+        "zh": "é€‰æ‹©æ£®æž—è¦†ç›–å¯†åº¦: ",
+        "ka": "áƒ®áƒ˜áƒ¡ áƒ•áƒáƒ áƒ¯áƒ˜áƒ¡ áƒ¡áƒ˜áƒ®áƒ¨áƒ˜áƒ áƒ˜áƒ¡ áƒ¨áƒ”áƒ áƒ©áƒ”áƒ•áƒ: "
+      }
+    }],
+    "params": [{
+      "name": "layer",
+      "value": "ifl2000"
+    }]
+  }, {
+    "analysisId": "GLAD_ALERTS",
+    "label": {
+      "en": "GLAD Alerts",
+      "fr": "Alertes GLAD",
+      "es": "Alertas GLAD",
+      "pt": "Alertas GLAD",
+      "id": "GLAD Alerts",
+      "zh": "GLAD Alerts",
+      "ka": "GLAD შეტყობინებები"
+    },
+    "title": {
+      "en": "GLAD Alerts",
+      "fr": "Alertes GLAD",
+      "es": "Alertas GLAD",
+      "pt": "Alertas GLAD",
+      "id": "GLAD Alerts",
+      "zh": "GLAD Alerts",
+      "ka": "GLAD შეტყობინებები"
+    },
+    "chartType": "timeSeries",
+    "analysisUrl": "https://production-api.globalforestwatch.org/v1/glad-alerts",
+    "uiParams": [{
+      "inputType": "datepicker",
+      "startParamName": "period",
+      "combineParams": true,
+      "valueSeparator": ",",
+      "multi": true,
+      "defaultStartDate": "2016-01-01",
+      "minDate": "2015-01-01",
+      "label": {
+        "en": "Select range for analysis",
+        "fr": "Select range for analysis",
+        "es": "Select range for analysis",
+        "pt": "Select range for analysis",
+        "id": "Select range for analysis",
+        "zh": "Select range for analysis",
+        "ka": "Select range for analysis"
+      }
+    }],
+    "params": [{
+      "name": "aggregate_values",
+      "value": "true"
+    }, {
+      "name": "aggregate_by",
+      "value": "day"
+    }]
+  }, {
+    "analysisId": "TERRAI_ALERTS",
+    "label": {
+      "en": "Terra-I Alerts",
+      "fr": "Alertes Terra-I",
+      "es": "Alertas Terra-I",
+      "pt": "Alertas Terra-I",
+      "id": "Terra-I Alerts",
+      "zh": "Terra-I Alerts",
+      "ka": "Terra-I ??????????????"
+    },
+    "chartType": "timeSeries",
+    "analysisUrl": "https://production-api.globalforestwatch.org/v1/terrai-alerts",
+    "uiParams": [{
+      "inputType": "datepicker",
+      "startParamName": "period",
+      "combineParams": true,
+      "valueSeparator": ",",
+      "multi": true,
+      "defaultStartDate": "2006-06-20",
+      "minDate": "2004-01-01",
+      "maxDate": "2016-07-12",
+      "label": {
+        "en": "Select date(s) for analysis",
+        "fr": "Select date(s) for analysis",
+        "es": "Select date(s) for analysis",
+        "pt": "Select date(s) for analysis",
+        "id": "Select date(s) for analysis",
+        "zh": "Select date(s) for analysis",
+        "ka": "Select date(s) for analysis"
+      }
+    }],
+    "params": [{
+      "name": "aggregate_values",
+      "value": "true"
+    }, {
+      "name": "aggregate_by",
+      "value": "day"
+    }]
+  }, {
+    "analysisId": "VIIRS_FIRES",
+    "label": {
+      "en": "VIIRS Active Fires",
+      "fr": "Feux actifs VIIRS",
+      "es": "Incendios activos VIIRS",
+      "pt": "IncÃƒÂªndios ativos VIIRS",
+      "id": "VIIRS Active fires",
+      "zh": "Ã¦Â´Â»Ã¨Â·Æ’Ã§ÂÂ«Ã§â€šÂ¹ VIIRS",
+      "ka": "VIIRS Ã¡Æ’ÂÃ¡Æ’Â¥Ã¡Æ’Â¢Ã¡Æ’ËœÃ¡Æ’Â£Ã¡Æ’ Ã¡Æ’Ëœ Ã¡Æ’Â®Ã¡Æ’ÂÃ¡Æ’Å“Ã¡Æ’Â«Ã¡Æ’ Ã¡Æ’â€Ã¡Æ’â€˜Ã¡Æ’Ëœ"
+    },
+    "useGfwWidget": true,
+    "widgetId": "97b82853-d9fb-4e74-b9b3-2fac7937f38f",
+    "uiParams": "none"
+  }, {
+    "analysisId": "LCC",
+    "label": {
+      "en": "Land Cover Composition",
+      "fr": "Couverture des sols",
+      "es": "Cobertura terrestre",
+      "pt": "Cobertura do Solo",
+      "id": "Land Cover",
+      "zh": "åœŸåœ°è¦†ç›–",
+      "ka": "áƒ›áƒ˜áƒ¬áƒ˜áƒ¡ áƒ¡áƒáƒ¤áƒáƒ áƒ˜"
+    },
+    "useGfwWidget": true,
+    "widgetId": "65dc8170-0049-48e7-94ba-fa846fcb295c",
+    "uiParams": "none",
+    "params": [{
+      "name": "layer",
+      "value": "gfw-landcover-2015"
+    }]
+  }, {
+    "analysisId": "VEGA_RESTORATION_TREE_COVER",
+    "label": {
+      "en": "Tree cover"
+    },
+    "title": {
+      "en": "Tree cover analysis"
+    },
+    "description": {
+      "en": "Restoration potential per tree cover class"
+    },
+    "useGfwWidget": true,
+    "widgetId": "9a200983-65aa-400e-9415-912ab0312cf8",
+    "uiParams": "none"
+  }, {
+    "analysisId": "VEGA_RESTORATION_LAND_COVER",
+    "label": {
+      "en": "Land Cover"
+    },
+    "title": {
+      "en": "Land Cover Analysis"
+    },
+    "description": {
+      "en": "Restoration potential per land cover class"
+    },
+    "useGfwWidget": true,
+    "widgetId": "fcf6788a-1382-4e16-8828-0d45354b9def",
+    "uiParams": "none"
+  }, {
+    "analysisId": "VEGA_RESTORATION_POP_DEN",
+    "label": {
+      "en": "Population Density"
+    },
+    "title": {
+      "en": "Population Density Analysis"
+    },
+    "description": {
+      "en": "Restoration potential per analysis class"
+    },
+    "useGfwWidget": true,
+    "widgetId": "569c65a4-3107-41cc-8100-f5d8dc71ec6e",
+    "uiParams": "none"
+  }, {
+    "analysisId": "VEGA_RESTORATION_RAINFALL",
+    "label": {
+      "en": "Average Annual Rainfall"
+    },
+    "title": {
+      "en": "Average Annual Rainfall Analysis"
+    },
+    "description": {
+      "en": "Restoration potential per rainfall class"
+    },
+    "useGfwWidget": true,
+    "widgetId": "6ade3c8e-cec1-415e-bf72-3f9cd69e2369",
+    "uiParams": "none"
+  }, {
+    "analysisId": "VEGA_RESTORATION_SLOPE",
+    "label": {
+      "en": "Slope"
+    },
+    "title": {
+      "en": "Slope Analysis"
+    },
+    "description": {
+      "en": "Restoration potential per slope class"
+    },
+    "useGfwWidget": true,
+    "widgetId": "f01ef13d-cfbe-4588-ae16-27ef2713a15a",
+    "uiParams": "none"
   }],
   "layerPanel": {
-      "GROUP_WEBMAP": {
-          "order": 2,
-          "label": {},
-          "layers": []
+    "GROUP_WEBMAP": {
+      "order": 1,
+      "label": {
+        "en": "WCS Scapes"
       },
-      "GROUP_LCD": {
-          "grouptype": "default",
-          "order": 1,
-          "label": {
-              "en": "Land Cover Dynamics",
-              "fr": "Evolution de la couverture des sols",
-              "es": "Dinámica de la Cobertura del Suelo",
-              "pt": "Dinâmica de cobertura da terra",
-              "id": "Land Cover Dynamics",
-              "zh": "土地覆盖动态数据",
-              "ka": "მიწის საფარის დინამიკა"
-          },
-          "layers": [{
-              "order": 1,
-              "id": "TREE_COVER_LOSS",
-              "type": "remoteDataLayer",
-              "uuid": "2aed67b3-3643-40d3-9c1e-8af9afb5d9e2"
-          }, {
-              "order": 2,
-              "type": "remoteDataLayer",
-              "id": "TREE_COVER_GAIN",
-              "uuid": "cb016f17-f12d-463a-9dc2-aabcf5db566c"
-          }, {
-              "order": 3,
-              "type": "remoteDataLayer",
-              "id": "IMAZON_SAD",
-              "uuid": "3e9e86ae-e38d-4c59-8484-c8214ca5186a"
-          }, {
-              "order": 4,
-              "id": "GLAD_ALERTS",
-              "type": "remoteDataLayer",
-              "uuid": "356f862b-3e70-493a-997b-dc2a193410e9"
-          }, {
-              "order": 5,
-              "id": "TERRA_I_ALERTS",
-              "type": "remoteDataLayer",
-              "uuid": "1fc7b0c5-259a-4685-8665-b2f1ed3f808f"
-          }, {
-              "order": 6,
-              "id": "VIIRS_ACTIVE_FIRES",
-              "type": "remoteDataLayer",
-              "uuid": "15cb32c9-874f-4552-afdc-8a35ef70682f"
-          }, {
-              "order": 7,
-              "id": "MODIS_ACTIVE_FIRES",
-              "type": "remoteDataLayer",
-              "uuid": "8ae39d34-a5e5-4742-b06e-6e913a8f1eb8"
-          }]
+      "layers": []
+    },
+    "GROUP_LCD": {
+      "groupType": "default",
+      "order": 2,
+      "label": {
+        "en": "Land Cover Dynamics",
+        "fr": "Evolution de la couverture des sols",
+        "es": "Din?mica de la Cobertura del Suelo",
+        "pt": "Din?mica de cobertura da terra ",
+        "id": "Land Cover Dynamics",
+        "zh": "????????",
+        "ka": "????? ??????? ????????"
       },
-      "GROUP_LC": {
-          "groupttype": "default",
-          "order": 3,
-          "label": {
-              "en": "Land Cover",
-              "fr": "Couverture des sols",
-              "es": "Cobertura terrestre",
-              "pt": "Cobertura do Solo",
-              "id": "Land Cover",
-              "zh": "土地覆盖",
-              "ka": "მიწის საფარი"
-          },
-          "layers": [{
-              "order": 1,
-              "id": "GLOB_MANGROVE",
-              "type": "remoteDataLayer",
-              "uuid": "533cbe18-22a6-46ac-99ca-027c96f33ac3"
-          }, {
-              "order": 2,
-              "id": "IFL",
-              "type": "remoteDataLayer",
-              "uuid": "5f815a7d-457e-4eae-a8e5-8864a60696ad"
-          }, {
-              "order": 3,
-              "id": "PRIMARY_FORESTS",
-              "type": "remoteDataLayer",
-              "uuid": "edffb745-e523-462d-ad1e-3052006a3dbc"
-          }, {
-              "order": 4,
-              "id": "AG_BIOMASS",
-              "type": "remoteDataLayer",
-              "uuid": "04526d47-f3f5-4f76-a939-e5f7861fd085"
-          }, {
-              "order": 5,
-              "id": "LAND_COVER",
-              "type": "remoteDataLayer",
-              "uuid": "b8d3f175-0565-443f-839a-49eb890a4b3d"
-          }, {
-              "order": 6,
-              "id": "TREE_COVER",
-              "type": "remoteDataLayer",
-              "uuid": "2569adca-ef87-42c4-a153-57c5e8ba0ef7"
-          }]
-      },
-      "GROUP_IMAGERY": {
-          "grouptype": "imagery",
-          "order": 4,
-          "label": {
-              "en": "Recent Imagery",
-              "fr": "Imagerie récente",
-              "es": "Imágenes recientes",
-              "pt": "Imagens recentes",
-              "id": "Citra Satelit Terbaru",
-              "zh": "Recent Imagery",
-              "ka": "ბოლო გამოსახულება"
-          },
-          "layers": [{
-              "order": 1,
-              "id": "RECENT_IMAGERY",
-              "type": "imagery",
-              "technicalName": "recent_satellite_imagery",
-              "visible": false,
-              "label": {
-                  "en": "Recent Imagery",
-                  "fr": "Imagerie récente",
-                  "es": "Imágenes recientes",
-                  "pt": "Imagens recentes",
-                  "id": "Citra Satelit Terbaru",
-                  "zh": "云层覆盖",
-                  "ka": "ბოლო გამოსახულება"
-              },
-              "dynamicSublabel": {
-                  "en": "({DATE_TIME}, {CLOUD_COVERAGE}% cloud coverage, {INSTRUMENT})",
-                  "fr": "({DATE_TIME}, {CLOUD_COVERAGE}% Imagerie récente, {INSTRUMENT})",
-                  "es": "({DATE_TIME}, {CLOUD_COVERAGE}% Cobertura de nubes, {INSTRUMENT})",
-                  "pt": "({DATE_TIME}, {CLOUD_COVERAGE}% Cobertura de nuvens, {INSTRUMENT})",
-                  "id": "({DATE_TIME}, {CLOUD_COVERAGE}% Tutupan Awan, {INSTRUMENT})",
-                  "zh": "({DATE_TIME}, {CLOUD_COVERAGE}% 近期图像, {INSTRUMENT})",
-                  "ka": "({DATE_TIME}, {CLOUD_COVERAGE}% ღრუბლიანობა, {INSTRUMENT})"
-              }
-          }]
-      },
-      "GROUP_BASEMAP": {
-          "groupType": "basemap",
-          "order": 6,
-          "label": {
-              "en": "Basemap",
-              "fr": "Basemap",
-              "es": "Basemap",
-              "pt": "Basemap",
-              "id": "Basemap",
-              "zh": "Basemap",
-              "ka": "საბაზო რუკა"
-          },
-          "layers": [{
-              "id": "landsat",
-              "thumbnailUrl": "https://my.gfw-mapbuilder.org/img/basemaps-sdd18a411a3-5bf18f445e58b8766f773184b7741c67.png",
-              "templateUrl": "https://d2h71bpqsyf4vw.cloudfront.net/2016/${level}/${col}/${row}.png",
-              "years": ["2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017"],
-              "title": {
-                  "en": "Landsat",
-                  "fr": "Landsat",
-                  "es": "Landsat",
-                  "pt": "Landsat",
-                  "id": "Landsat",
-                  "zh": "Landsat",
-                  "ka": "Landsat"
-              }
-          }, {
-              "id": "wri_mono",
-              "thumbnailUrl": "https://my.gfw-mapbuilder.org/img/wri_mono.png",
-              "title": {
-                  "en": "WRI Mono",
-                  "fr": "WRI Mono",
-                  "es": "WRI Mono",
-                  "pt": "WRI Mono",
-                  "id": "WRI Mono",
-                  "zh": "WRI Mono",
-                  "ka": "WRI Mono"
-              }
-          }, {
-              "id": "wri_contextual",
-              "thumbnailUrl": "https://my.gfw-mapbuilder.org/img/wri_contextual.png",
-              "title": {
-                  "en": "WRI Contextual",
-                  "fr": "WRI Contextual",
-                  "es": "WRI Contextual",
-                  "pt": "WRI Contextual",
-                  "id": "WRI Contextual",
-                  "zh": "WRI Contextual",
-                  "ka": "WRI Contextual"
-              }
-          }]
-      },
-      "extraLayers": [{
-          "id": "MASK",
-          "type": "dynamic",
-          "order": 10000,
-          "url": "https://gis.forest-atlas.org/server/rest/services/country_masks/country_mask_global/MapServer",
-          "opacity": 0.35,
-          "layerIds": [0]
+      "layers": [{
+        "order": 1,
+        "id": "TREE_COVER_LOSS 2",
+        "type": "loss",
+        "url": "https://storage.googleapis.com/wri-public/Hansen_16/tiles/hansen_world/v1/tc30/{z}/{x}/{y}.png",
+        "technicalName": "tree_cover_loss",
+        "legendLayer": [0],
+        "layerIds": [3],
+        "label": {
+          "en": "Tree Cover Loss",
+          "fr": "Perte en couvert arbor?",
+          "es": "P?rdida de la cobertura arb?rea",
+          "pt": "Perda de cobertura arb?rea",
+          "id": "Tree cover loss",
+          "zh": "??????",
+          "ka": "??? ?????? ??????"
+        },
+        "sublabel": {
+          "en": "(annual, 30m, global, Hansen/UMD/Google/USGS/NASA)",
+          "fr": "(annuel, 30m, global, Hansen/UMD/Google/USGS/NASA)",
+          "es": "(anual, 30m, global, Hansen/UMD/Google/USGS/NASA)",
+          "pt": "(anual, 30m, global, Hansen/UMD/Google/USGS/NASA)",
+          "id": "(annual, 30m, global, Hansen/UMD/Google/USGS/NASA)",
+          "zh": "(????, 30?, ????, ??/?????/??/???????(USGS)/?????(NASA))",
+          "ka": "(??????, 30?, ?????????, Hansen/UMD/Google/USGS/NASA)"
+        },
+        "minYear": 7,
+        "maxYear": 20
       }, {
-          "id": "LEGEND_LAYER",
-          "type": "dynamic",
-          "url": "https://gis-gfw.wri.org/arcgis/rest/services/legends/MapServer",
-          "visible": false,
-          "opacity": 0,
-          "layerIds": []
+        "order": 2,
+        "id": "TREE_COVER_GAIN",
+        "type": "gain",
+        "url": "https://earthengine.google.org/static/hansen_2013/gain_alpha/{z}/{x}/{y}.png",
+        "technicalName": "tree_cover_gain",
+        "legendLayer": [1],
+        "label": {
+          "en": "Tree cover gain",
+          "fr": "Gain en couvert arbor?",
+          "es": "Aumento de la cobertura arb?rea",
+          "pt": "Ganho de cobertura arb?rea",
+          "id": "Tree cover gain",
+          "zh": "??????",
+          "ka": "??? ?????? ??????"
+        },
+        "sublabel": {
+          "en": "(12 years, 30m, global, Hansen/UMD/Google/USGS/NASA)",
+          "fr": "(12 ans, 30m, global, Hansen/UMD/Google/USGS/NASA)",
+          "es": "(12 a?os, 30m, global, Hansen/UMD/Google/USGS/NASA)",
+          "pt": "(12 anos, 30m, global, Hansen/UMD/Google/USGS/NASA)",
+          "id": "(12 years, 30m, global, Hansen/UMD/Google/USGS/NASA)",
+          "zh": "(12 ?, 30?, ????, ??/?????/??/???????(USGS)/?????(NASA))",
+          "ka": "(12 ????????, 30?, ?????????, Hansen/UMD/Google/USGS/NASA)"
+        }
       }, {
-          "id": "USER_FEATURES",
-          "type": "graphic",
-          "visible": true
+        "order": 3,
+        "id": "IMAZON_SAD",
+        "type": "dynamic",
+        "url": "https://gis-gfw.wri.org/arcgis/rest/services/forest_change/MapServer",
+        "technicalName": "imazon_sad",
+        "layerIds": [2],
+        "label": {
+          "en": "SAD alerts",
+          "fr": "Alertes SAD",
+          "es": "Alertas SAD",
+          "pt": "Alertas SAD",
+          "id": "SAD alerts",
+          "zh": "SAD alerts",
+          "ka": "SAD ?????????????"
+        },
+        "sublabel": {
+          "en": "(monthly, 250m, Brazilian Amazon, Imazon)",
+          "fr": "(mensuel, 250m, Amazonie br?silienne, Imazon)",
+          "es": "(mensual, 250m, Amazonia brasile?a, Imazon)",
+          "pt": "(mensal, 250m, Amaz?nia brasileira, Imazon)",
+          "id": "(monthly, 250m, Brazilian Amazon, Imazon)",
+          "zh": "(monthly, 250m, Brazilian Amazon, Imazon)",
+          "ka": "(???????????, 250?, ????????? ????????, Imazon)"
+        }
+      }, {
+        "order": 4,
+        "id": "GLAD_ALERTS",
+        "type": "glad",
+        "url": "https://wri-tiles.s3.amazonaws.com/glad_prod/tiles/{z}/{x}/{y}.png",
+        "technicalName": "umd_landsat_alerts",
+        "legendLayer": [7],
+        "label": {
+          "en": "GLAD Alerts",
+          "fr": "Alertes GLAD",
+          "es": "Alertas GLAD",
+          "pt": "Alertas GLAD",
+          "id": "GLAD Alerts",
+          "zh": "GLAD Alerts",
+          "ka": "GLAD ?????????????"
+        },
+        "sublabel": {
+          "en": "(weekly, 30m, select countries, UMD/ GLAD)",
+          "fr": "(hebdomadaire, 30m, certains pays, UMD/ GLAD)",
+          "es": "(semanal, 30m, select countries, UMD/ GLAD)",
+          "pt": "(semanal, 30m, select countries, UMD/ GLAD)",
+          "id": "(weekly, 30m, select countries, UMD/ GLAD)",
+          "zh": "(weekly, 30m, select countries, UMD/ GLAD)",
+          "ka": "(?????????????, 30?, ??????? ????????, UMD/ GLAD)"
+        },
+        "minDateValue": 15000,
+        "maxDateValue": 999999,
+        "confidence": [0, 1]
+      }, {
+        "order": 5,
+        "id": "TERRA_I_ALERTS",
+        "type": "terra",
+        "url": "https://wri-tiles.s3.amazonaws.com/terrai_prod/tiles/{z}/{x}/{y}.png",
+        "technicalName": "terra_i_alerts",
+        "legendLayer": [13],
+        "label": {
+          "en": "Terra-I Alerts",
+          "fr": "Alertes Terra-I",
+          "es": "Alertas Terra-I",
+          "pt": "Alertas Terra-I",
+          "id": "Terra-I Alerts",
+          "zh": "Terra-I Alerts",
+          "ka": "Terra-I ?????????????"
+        },
+        "sublabel": {
+          "en": "(monthly, 250m, Latin America, CIAT)",
+          "fr": "(mensuel, 250m, Am?rique Latine, CIAT)",
+          "es": "(mensual, 250m, Latin America, CIAT)",
+          "pt": "(Mensal, 250m, Latin America, CIAT)",
+          "id": "(monthly, 250m, Latin America, CIAT)",
+          "zh": "(monthly, 250m, Latin America, CIAT)",
+          "ka": "(???????????, 250?, ???????? ???????, CIAT)"
+        },
+        "maxZoom": 10,
+        "minDateValue": 4000,
+        "maxDateValue": 20000,
+        "imageServer": "https://gis-gfw.wri.org/arcgis/rest/services/image_services/terrai_analysis/ImageServer"
+      }, {
+        "order": 6,
+        "id": "VIIRS_ACTIVE_FIRES",
+        "type": "dynamic",
+        "url": "https://gis-gfw.wri.org/arcgis/rest/services/Fires/FIRMS_Global/MapServer",
+        "technicalName": "viirs_fires",
+        "layerIds": [8],
+        "label": {
+          "en": "VIIRS Active Fires",
+          "fr": "Feux actifs",
+          "es": "Incendios activos",
+          "pt": "Inc?ndios ativos",
+          "id": "Active fires",
+          "zh": "????",
+          "ka": "VIIRS ??????? ????????"
+        },
+        "sublabel": {
+          "en": "(daily, 375m, global, NASA)",
+          "fr": "(journalier, 375m, global, NASA)",
+          "es": "(Diaria, 375m, global, NASA)",
+          "pt": "(Di?ria, 375m, global, NASA)",
+          "id": "(daily, 375m, global, NASA)",
+          "zh": "(????, 375?, ????, ??????NASA))",
+          "ka": "(???????????, 375?, ?????????, NASA)"
+        },
+        "popup": {
+          "title": {
+            "en": "Active Fires"
+          },
+          "content": {
+            "en": [{
+              "label": "Brightness",
+              "fieldExpression": "BRIGHTNESS"
+            }, {
+              "label": "Confidence",
+              "fieldExpression": "CONFIDENCE"
+            }, {
+              "label": "Latitude",
+              "fieldExpression": "LATITUDE"
+            }, {
+              "label": "Longitude",
+              "fieldExpression": "LONGITUDE"
+            }, {
+              "label": "Acquisition Date",
+              "fieldExpression": "ACQ_DATE:DateString(hideTime:true)"
+            }, {
+              "label": "Acquisition Time",
+              "fieldExpression": "ACQ_TIME"
+            }]
+          },
+          "sublabel": {
+            "en": "(annual, 30m, global, Hansen/UMD/Google/USGS/NASA)",
+            "fr": "(annuel, 30m, global, Hansen/UMD/Google/USGS/NASA)",
+            "es": "(anual, 30m, global, Hansen/UMD/Google/USGS/NASA)",
+            "pt": "(anual, 30m, global, Hansen/UMD/Google/USGS/NASA)",
+            "id": "(annual, 30m, global, Hansen/UMD/Google/USGS/NASA)",
+            "zh": "(????, 30?, ????, ??/?????/??/???????(USGS)/?????(NASA))",
+            "ka": "(??????, 30?, ?????????, Hansen/UMD/Google/USGS/NASA)"
+          }
+        }
+      }, {
+        "order": 7,
+        "id": "MODIS_ACTIVE_FIRES",
+        "type": "dynamic",
+        "url": "https://gis-gfw.wri.org/arcgis/rest/services/Fires/FIRMS_Global/MapServer",
+        "technicalName": "firms_active_fires",
+        "layerIds": [9],
+        "label": {
+          "en": "MODIS Active Fires",
+          "fr": "Feux actifs",
+          "es": "Incendios activos",
+          "pt": "Inc?ndios ativos",
+          "id": "Active fires",
+          "zh": "????",
+          "ka": "MODIS ??????? ????????"
+        },
+        "sublabel": {
+          "en": "(daily, 1km, global, NASA)",
+          "fr": "(journalier, 1km, global, NASA)",
+          "es": "(Diaria, 1km, global, NASA)",
+          "pt": "(Di?ria, 1km, global, NASA)",
+          "id": "(daily, 1km, global, NASA)",
+          "zh": "(????, 1??, ????, ??????NASA))",
+          "ka": "(???????????, 1??, ?????????, NASA)"
+        },
+        "popup": {
+          "title": {
+            "en": "Active Fires"
+          },
+          "content": {
+            "en": [{
+              "label": "Brightness",
+              "fieldExpression": "BRIGHTNESS"
+            }, {
+              "label": "Confidence",
+              "fieldExpression": "CONFIDENCE"
+            }, {
+              "label": "Latitude",
+              "fieldExpression": "LATITUDE"
+            }, {
+              "label": "Longitude",
+              "fieldExpression": "LONGITUDE"
+            }, {
+              "label": "Acquisition Date",
+              "fieldExpression": "ACQ_DATE:DateString(hideTime:true)"
+            }, {
+              "label": "Acquisition Time",
+              "fieldExpression": "ACQ_TIME"
+            }]
+          },
+          "sublabel": {
+            "en": "(annual, 30m, global, Hansen/UMD/Google/USGS/NASA)",
+            "fr": "(annuel, 30m, global, Hansen/UMD/Google/USGS/NASA)",
+            "es": "(anual, 30m, global, Hansen/UMD/Google/USGS/NASA)",
+            "pt": "(anual, 30m, global, Hansen/UMD/Google/USGS/NASA)",
+            "id": "(annual, 30m, global, Hansen/UMD/Google/USGS/NASA)",
+            "zh": "(????, 30?, ????, ??/?????/??/???????(USGS)/?????(NASA))",
+            "ka": "(??????, 30?, ?????????, Hansen/UMD/Google/USGS/NASA)"
+          }
+        }
       }]
-  },
-  "otherFieldsModules": ""
+    },
+    "GROUP_LC": {
+      "groupType": "default",
+      "order": 3,
+      "label": {
+        "en": "Land Cover",
+        "fr": "Couverture des sols",
+        "es": "Cobertura terrestre",
+        "pt": "Cobertura do Solo",
+        "id": "Land Cover",
+        "zh": "????",
+        "ka": "????? ??????"
+      },
+      "layers": [{
+        "order": 2,
+        "id": "INTACTFORESTS_FRAGMENTATION17",
+        "type": "webtiled",
+        "url": "https://storage.googleapis.com/intactforest_fragmentation/intactforest_fragmentation_17/{level}/{col}/{row}",
+        "technicalName": "intactforests_fragmentation17",
+        "legendLayer": [0],
+        "label": {
+          "en": "Fragmentation 2017"
+        },
+        "sublabel": {
+          "en": "(Fragmentation 2017)"
+        },
+        "minYear": 7,
+        "maxYear": 20
+      }, {
+        "order": 1,
+        "id": "FRAGMENTATION",
+        "type": "webtiled",
+        "url": "https://storage.googleapis.com/intactforests.appspot.com/intactforest_distance_00/${level}/${col}/${row}",
+        "technicalName": "fragmentation",
+        "legendLayer": [0],
+        "label": {
+          "en": "Fragmentation",
+          "fr": "",
+          "es": "",
+          "pt": "",
+          "id": "",
+          "zh": "",
+          "ka": ""
+        },
+        "sublabel": {
+          "en": "(annual, 30m, global, Hansen/UMD/Google/USGS/NASA)",
+          "fr": "(annuel, 30m, global, Hansen/UMD/Google/USGS/NASA)",
+          "es": "(anual, 30m, global, Hansen/UMD/Google/USGS/NASA)",
+          "pt": "(anual, 30m, global, Hansen/UMD/Google/USGS/NASA)",
+          "id": "(annual, 30m, global, Hansen/UMD/Google/USGS/NASA)",
+          "zh": "(每年更新, 30米, 全球覆盖, 汉森/马里兰大学/谷歌/美国地质测量局(USGS)/美国宇航局(NASA))",
+          "ka": "(წლიური, 30მ, გლობალური, Hansen/UMD/Google/USGS/NASA)"
+        },
+        "minYear": 0,
+        "maxYear": 17
+      }, {
+        "order": 3,
+        "id": "INTACTFORESTS_ANTHROTONE",
+        "type": "webtiled",
+        "url": "https://storage.googleapis.com/intactforest_fragmentation/intactforest_anthrotone/{level}/{col}/{row}",
+        "technicalName": "anthrotone",
+        "legendLayer": [0],
+        "label": {
+          "en": "Anthrotone"
+        },
+        "sublabel": {
+          "en": "(Anthrotone)"
+        },
+        "minYear": 7,
+        "maxYear": 20
+      }, {
+        "order": 4,
+        "id": "INTACTFORESTS_INTACTNESSINDEX",
+        "type": "webtiled",
+        "url": "https://storage.googleapis.com/intactforest_fragmentation/intactforest_intactnessindex/{level}/{col}/{row}",
+        "technicalName": "intactforests_intactnessindex",
+        "legendLayer": [0],
+        "label": {
+          "en": "Intactnessndex"
+        },
+        "sublabel": {
+          "en": "(Intactness index)"
+        },
+        "minYear": 7,
+        "maxYear": 20
+      }, {
+        "order": 5,
+        "id": "GLOB_MANGROVE",
+        "type": "webtiled",
+        "url": "https://{subDomain}.ashbu.cartocdn.com/wri-01/api/v1/map/209485bfcb3eafb435befa0c405242ae:1467735931596/0/{level}/{col}/{row}.png",
+        "technicalName": "global_mangroves",
+        "legendLayer": [11],
+        "label": {
+          "en": "Global Mangrove",
+          "fr": "Global Mangrove",
+          "es": "Global Mangrove",
+          "pt": "Global Mangrove",
+          "id": "Global Mangrove",
+          "zh": "Global Mangrove",
+          "ka": "????????? ????????"
+        },
+        "subDomains": [0, 1, 2, 3]
+      }, {
+        "order": 6,
+        "id": "IFL",
+        "type": "dynamic",
+        "url": "https://gis-gfw.wri.org/arcgis/rest/services/forest_cover/MapServer",
+        "technicalName": "intact_forest_landscapes_change",
+        "layerIds": [0],
+        "label": {
+          "en": "intact Forest Landscape",
+          "fr": "Paysage forestier intact",
+          "es": "Paisajes Forestales Intactos",
+          "pt": "Paisagens Florestais Intactas",
+          "id": "Intact Forest Landscape",
+          "zh": "??????",
+          "ka": "??????????? ???? ?????????"
+        }
+      }, {
+        "order": 7,
+        "id": "AG_BIOMASS",
+        "type": "image",
+        "url": "https://gis-gfw.wri.org/arcgis/rest/services/image_services/whrc_carbon_tcd/ImageServer",
+        "technicalName": "aboveground_biomass",
+        "legendLayer": [8],
+        "label": {
+          "en": "Aboveground Live Woody Biomass Density",
+          "fr": "Densit? de la biomasse a?rienne vivante",
+          "es": "Densidad de la biomasa viva en la superficie del suelo",
+          "pt": "Densidade de biomassa viva acima do solo",
+          "id": "Aboveground Live Woody Biomass Density",
+          "zh": "Aboveground Live Woody Biomass Density",
+          "ka": "????????? ??????? ???? ???????? ???????"
+        }
+      }, {
+        "order": 8,
+        "id": "LAND_COVER",
+        "type": "webtiled",
+        "url": "https://wri-tiles.s3.amazonaws.com/global-landcover/{level}/{col}/{row}.png",
+        "technicalName": "global_landcover",
+        "legendLayer": [15],
+        "label": {
+          "en": "Land Cover",
+          "fr": "Couverture des sols",
+          "es": "Cobertura vegetal",
+          "pt": "Land cover",
+          "id": "Land cover",
+          "zh": "????",
+          "ka": "????? ??????"
+        },
+        "rasterId": "$568",
+        "bounds": "[            1,            16          ]",
+        "classes": {
+          "en": ["Land Cover", "Agriculture", "Forest", "Grassland", "Shrubland", "Sparse vegetation", "Wetland", "Settlement", "Bare", "Water", "Permanent snow and ice"],
+          "fr": ["Irrigated croplands", "Rainfed croplands", "Cropland forest mosaic", "Broadleaved evergreen or semi-deciduous forest", "Broadleaved deciduous forest", "Needleleaved evergreen or deciduous forest", "Mixed broadleaved and needleleaved forest", "Mosaic of forest, shrubland and grassland", "Shrubland", "Grassland", "Sparse vegetation", "Flooded broadleaved forest", "Flooded vegetation", "Artificial areas", "Bare areas", "Permanent snow and ice"],
+          "es": ["Irrigated croplands", "Rainfed croplands", "Cropland forest mosaic", "Broadleaved evergreen or semi-deciduous forest", "Broadleaved deciduous forest", "Needleleaved evergreen or deciduous forest", "Mixed broadleaved and needleleaved forest", "Mosaic of forest, shrubland and grassland", "Shrubland", "Grassland", "Sparse vegetation", "Flooded broadleaved forest", "Flooded vegetation", "Artificial areas", "Bare areas", "Permanent snow and ice"],
+          "pt": ["Culturas Irrigadas", "Rainfed croplands", "Mosaico de areas florestais e de cultivo", "Floresta verde ou semi-dec?dua", "Floresta dec?dua de folha larga", "Floresta verde de con?feras ou Floresta dec?dua", "Misto de floresta de conifera e de folha larga", "Mosaic of forest, shrubland and grassland", "Shrubland", "Grassland", "Sparse vegetation", "Flooded broadleaved forest", "Flooded vegetation", "Artificial areas", "Bare areas", "Permanent snow and ice"],
+          "id": ["Irrigated croplands", "Rainfed croplands", "Cropland forest mosaic", "Broadleaved evergreen or semi-deciduous forest", "Broadleaved deciduous forest", "Needleleaved evergreen or deciduous forest", "Mixed broadleaved and needleleaved forest", "Mosaic of forest, shrubland and grassland", "Shrubland", "Grassland", "Sparse vegetation", "Flooded broadleaved forest", "Flooded vegetation", "Artificial areas", "Bare areas", "Permanent snow and ice"],
+          "zh": ["Irrigated croplands", "Rainfed croplands", "Cropland forest mosaic", "Broadleaved evergreen or semi-deciduous forest", "Broadleaved deciduous forest", "Needleleaved evergreen or deciduous forest", "Mixed broadleaved and needleleaved forest", "Mosaic of forest, shrubland and grassland", "Shrubland", "Grassland", "Sparse vegetation", "Flooded broadleaved forest", "Flooded vegetation", "Artificial areas", "Bare areas", "Permanent snow and ice"],
+          "ka": ["????????? ?/? ?????????", "?????? ????????? ?????????", "?/? ?????????? ?? ???? ???????", "?????????????? ??????????? ?? ????????-??????????? ???", "?????????????? ??????????? ???", "????????? ??????????? ?? ??????????? ???", "??????? ?????????????? ?? ????????? ???", "????, ????????? ?? ???????? ???????", "????????", "???????", "??????? ????????????", "????????? ?????????????? ???", "????????? ????????????", "?????????? (?????????) ????????", "???????????? ????????", "??????? ????? ?? ??????"]
+        },
+        "colors": ["#D2A965", "#157764", "#CCDB98", "#596B2C", "#D5C998", "#2789D4", "#E9462B", "#F6F0EA", "#A3DCFF", "#FFFFFF"]
+      }, {
+        "order": 9,
+        "id": "TREE_COVER",
+        "type": "image",
+        "url": "https://gis-treecover.wri.org/arcgis/rest/services/TreeCover2000/ImageServer",
+        "technicalName": "tree_cover",
+        "legendLayer": [2],
+        "label": {
+          "en": "Tree cover density",
+          "fr": "Densit? du couvert arbor?",
+          "es": "Densidad de follaje",
+          "pt": "Tree cover density",
+          "id": "Tree cover density",
+          "zh": "??????",
+          "ka": "??? ?????? ???????"
+        },
+        "sublabel": {
+          "en": "(year 2000, 30m global, Hansen/UMD/Google/USGS/NASA)",
+          "fr": "(ann?e 2000, 30m global, Hansen/UMD/Google/USGS/NASA)",
+          "es": "(2000, 30m, global, Hansen/UMD/Google/USGS/NASA)",
+          "pt": "(year 2000, 30m global, Hansen/UMD/Google/USGS/NASA)",
+          "id": "(year 2000, 30m global, Hansen/UMD/Google/USGS/NASA)",
+          "zh": "(2000?, 30? ????, ??/?????/??/???????(USGS)/?????(NASA))",
+          "ka": "(2000 ?, 30? ?????????, Hansen/UMD/Google/USGS/NASA)"
+        },
+        "opacity": 0.80,
+        "colormap": [
+          [1, 0, 179, 0]
+        ],
+        "inputRange": [30, 101],
+        "outputRange": [1]
+      }]
+    },
+    "GROUP_Range": {
+      "order": 4,
+      "label": {
+        "en": "Species Ranges"
+      },
+      "layers": [{
+        "order": 1,
+        "id": "Elephant_Current",
+        "type": "feature",
+        "url": "https://services.arcgis.com/x494PplYsmeeZsYB/arcgis/rest/services/AfricanEle/FeatureServer/0",
+        "label": {
+          "en": "Elephant Current Range",
+          "fr": "Elephant Current Range"
+        }
+      }, {
+        "order": 2,
+        "id": "Gorilla_Gorilla_Current",
+        "type": "feature",
+        "url": "https://services.arcgis.com/x494PplYsmeeZsYB/arcgis/rest/services/Gorilla_Chimp/FeatureServer/0",
+        "label": {
+          "en": "Gorilla Gorilla - Currrent Range",
+          "fr": "Gorilla Gorilla - Current Range"
+        }
+      }, {
+        "order": 3,
+        "id": "Gorilla_Gorilla_Historic",
+        "type": "feature",
+        "url": "https://services.arcgis.com/x494PplYsmeeZsYB/arcgis/rest/services/Gorilla_Chimp/FeatureServer/1",
+        "label": {
+          "en": "Gorilla Gorilla - Historic Range",
+          "fr": "Gorilla Gorilla - Historic Range"
+        }
+      }, {
+        "order": 4,
+        "id": "Chimp_Current",
+        "type": "feature",
+        "url": "https://services.arcgis.com/x494PplYsmeeZsYB/arcgis/rest/services/Gorilla_Chimp/FeatureServer/2",
+        "label": {
+          "en": "Chimp - Current Range",
+          "fr": "Chimp - Current Range"
+        }
+      }, {
+        "order": 5,
+        "id": "Chimp_Historic",
+        "type": "feature",
+        "url": "https://services.arcgis.com/x494PplYsmeeZsYB/arcgis/rest/services/Gorilla_Chimp/FeatureServer/3",
+        "label": {
+          "en": "Chimp - Historic Range",
+          "fr": "Chimp - Historic Range"
+        }
+      }]
+    },
+    "GROUP_Other": {
+      "order": 5,
+      "label": {
+        "en": "Other"
+      },
+      "layers": [{
+        "order": 1,
+        "id": "Oth1",
+        "type": "dynamic",
+        "url": "https://gis-gfw.wri.org/arcgis/rest/services/hydrology/MapServer",
+        "layerIds": [2],
+        "label": {
+          "en": "Hydrology"
+        }
+      }, {
+        "order": 2,
+        "id": "Oth2",
+        "type": "dynamic",
+        "url": "https://sampleserver6.arcgisonline.com/arcgis/rest/services/World_Street_Map/MapServer",
+        "layerIds": [0],
+        "label": {
+          "en": "Roads"
+        }
+      }, {
+        "order": 3,
+        "id": "Oth3",
+        "type": "dynamic",
+        "url": "https://tiles.arcgis.com/tiles/x494PplYsmeeZsYB/arcgis/rest/services/HF2009/MapServer",
+        "layerIds": [0],
+        "label": {
+          "en": "Human Footprint"
+        }
+      }, {
+        "order": 4,
+        "id": "Oth4",
+        "type": "dynamic",
+        "url": "https://gis.unep-wcmc.org/arcgis/rest/services/marine/WCMC_035_MeanSeaSurfaceTemperature2015/MapServer",
+        "layerIds": [0],
+        "label": {
+          "en": "Mean Sea Surface Temperature"
+        }
+      }]
+    },
+    "GROUP_BASEMAP": {
+      "groupType": "basemap",
+      "order": 6,
+      "label": {
+        "en": "Basemap",
+        "fr": "Basemap",
+        "es": "Basemap",
+        "pt": "Basemap",
+        "id": "Basemap",
+        "zh": "Basemap",
+        "ka": "?????? ????"
+      },
+      "layers": [{
+        "order": 1,
+        "id": "landsat",
+        "thumbnailUrl": "https://my.gfw-mapbuilder.org/img/basemaps-sdd18a411a3-5bf18f445e58b8766f773184b7741c67.png",
+        "templateUrl": "https://d2h71bpqsyf4vw.cloudfront.net/2016/${level}/${col}/${row}.png",
+        "years": ["2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016"],
+        "title": {
+          "en": "Landsat",
+          "fr": "Landsat",
+          "es": "Landsat",
+          "pt": "Landsat",
+          "id": "Landsat",
+          "zh": "Landsat",
+          "ka": "Landsat"
+        }
+      }, {
+        "order": 2,
+        "id": "wri_mono",
+        "thumbnailUrl": "https://my.gfw-mapbuilder.org/img/wri_mono.png",
+        "title": {
+          "en": "Grey Basemap",
+          "fr": "Mono",
+          "es": "Mono",
+          "pt": "Mono",
+          "id": "Mono",
+          "zh": "Mono",
+          "ka": "Mono"
+        }
+      }, {
+        "order": 3,
+        "id": "wri_contextual",
+        "thumbnailUrl": "https://my.gfw-mapbuilder.org/img/wri_contextual.png",
+        "title": {
+          "en": "Contextual",
+          "fr": "Contextual",
+          "es": "Contextual",
+          "pt": "Contextual",
+          "id": "Contextual",
+          "zh": "Contextual",
+          "ka": "Contextual"
+        }
+      }]
+    },
+    "extraLayers": [{
+      "order": 10000,
+      "id": "MASK",
+      "type": "dynamic",
+      "url": "https://gis.forest-atlas.org/server/rest/services/country_masks/country_mask_global/MapServer",
+      "layerIds": [0],
+      "opacity": 0.35
+    }, {
+      "order": 10001,
+      "id": "LEGEND_LAYER",
+      "type": "dynamic",
+      "url": "https://gis-gfw.wri.org/arcgis/rest/services/legends/MapServer",
+      "layerIds": []
+    }, {
+      "order": 10002,
+      "id": "USER_FEATURES",
+      "type": "graphic",
+      "visible": true
+    }]
+  }
 };
-

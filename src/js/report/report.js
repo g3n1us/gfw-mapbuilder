@@ -13,6 +13,8 @@ import appUtils from 'utils/AppUtils';
 import Deferred from 'dojo/Deferred';
 import symbols from 'utils/symbols';
 import arcgisUtils from 'esri/arcgis/utils';
+import webmercatorUtils from 'esri/geometry/webMercatorUtils';
+import analysisUtils from 'utils/analysisUtils';
 import {formatters} from 'utils/analysisUtils';
 import all from 'dojo/promise/all';
 import Graphic from 'esri/graphic';
@@ -40,6 +42,7 @@ import {shortTermServices} from '../config';
 
 let map;
 let appSettings;
+let selectedFeat;
 
 export default class Report extends Component {
   constructor(props){
@@ -368,6 +371,12 @@ export default class Report extends Component {
 
         terraILayer.setDateRange(julianFrom, julianTo);
       }
+    // if (map.getZoom() > 9) {
+    //   map.setExtent(map.extent, true); //To trigger our custom layers' refresh above certain zoom leves (10 or 11)
+    // }
+    // console.log('');
+    // console.log('feature', feature);
+    // console.log('');
 
       if (viirsFiresLayer24HR) {
         layersHelper.updateFiresLayerDefinitions(viirsFrom, viirsTo, viirsFiresLayer24HR, map);
@@ -530,6 +539,35 @@ export default class Report extends Component {
         }
       });
     });
+
+      //TODO: explore what this runAnalysis call does with this feature!
+    // const { layerId, OBJECTID, OBJECTID_Field } = params;
+
+    // if (layerId && OBJECTID) {
+
+    //   const hashDecoupled = layerId.split('--');
+    //   const url = hashDecoupled[0];
+
+    //   const queryTask = new QueryTask(url);
+    //   const query = new Query();
+    //   query.where = OBJECTID_Field + ' = ' + OBJECTID;
+    //   console.log('query.where', query.where);
+    //   query.returnGeometry = false;
+    //   // query.outFields = fieldsWeNeed;
+    //   query.outFields = ['*'];
+
+    //   queryTask.execute(query).then(res => {
+    //     if (res.features && res.features.length > 0) {
+    //       // debugger
+    //       selectedFeat = res.features[0];
+    //     }
+    //     runAnalysis(params, feature);
+    //   }, () => {
+    //     runAnalysis(params, feature);
+    //   });
+    // } else {
+    //   runAnalysis(params, feature);
+    // }
     return config;
   };
 
@@ -814,6 +852,96 @@ export default class Report extends Component {
       if (module.useGfwWidget) {
         module.reportParams = uiParamsToAppend;
       }
+      // if (module.analysisId === 'FRAGMENTATION') {
+      //   // debugger
+  
+      //   // if (feature.geometry.spatialReference.isWebMercator()) {
+      //   //   feature.geometry = webmercatorUtils.webMercatorToGeographic(feature.geometry);
+      //   // }
+  
+      //   // const geojson = geojsonUtil.arcgisToGeoJSON(feature.geometry);
+  
+      //   // const content = {
+      //   //   polygon: geojson.coordinates
+      //   // };
+      //   // console.log('content', content);
+      //   // debugger
+  
+  
+  
+      //   fetch(
+      //     module.analysisUrl,
+      //     {
+      //       method: 'POST',
+      //       // mode: 'no-cors',
+      //       headers: {
+      //         'Content-Type': 'application/json'
+      //       },
+      //       body: JSON.stringify(content)
+      //     }
+      //   ).then(results => {
+      //     console.log('results', results);
+  
+      //     if (results.json) {
+  
+      //       results.json().then(newRes => {
+      //         console.log('newResss', newRes);
+      //         console.log('uiParamsToAppend.period', uiParamsToAppend.period);
+      //         const dates = uiParamsToAppend.period.split(',');
+  
+      //         const startYear = dates[0].split('-')[0];
+      //         const endYear = dates[1].split('-')[0];
+      //         module.startYear = parseInt(startYear);
+      //         module.endYear = parseInt(endYear);
+      //         let startCount;
+      //         let totalCount = 0;
+      //         console.log('module.startYear', module.startYear);
+      //         console.log('module.endYear', module.endYear);
+      //         Object.keys(newRes).forEach(year => {
+      //           console.log(year, typeof year);
+      //           if (parseInt(year) === module.startYear) {
+      //             startCount = newRes[year];
+      //           } else if (parseInt(year) > module.startYear && parseInt(year) <= module.endYear) {
+      //             totalCount += newRes[year];
+      //           }
+      //         });
+      //         newRes.startYearValue = startCount;
+      //         newRes.totalRangeValue = totalCount;
+      //         // this.setState({ isLoading: false });
+      //         module.chartType = 'badge';
+      //         module.analysisId = 'FRAGMENTATION';
+  
+      //         const div = document.createElement('div');
+      //         div.id = module.analysisId;
+      //         div.classList.add('results-chart');
+      //         resultsContainer.appendChild(div);
+      //         // chartTypechartType
+      //         // renderResults(module.analysisId, newRes, language, module);
+      //         // const renderResults = (results, lang, config, params) => {
+      //         const fragBadge = renderResults(newRes, language, module, params);
+      //         // const chartComponent = renderResults(results, language, module, params);
+  
+      //         if (!fragBadge) {
+      //           div.remove();
+      //         } else {
+      //           ReactDOM.render(fragBadge, div);
+      //         }
+      //       });
+      //     }
+  
+      //   }, (error) => {
+      //     console.log('err!', error);
+      //     // this.setState({
+      //     //   isLoading: false,
+      //     //   results: {
+      //     //     error: error,
+      //     //     message: 'An error occured performing selected analysis. Please select another analysis or try again later.'
+      //     //   },
+      //     // }, () => {
+      //     //   this.renderResults(analysisId, this.state.results, language, module);
+      //     // });
+      //   });
+      // }
     });
     this.setState({
       analysisModules: settings.analysisModules

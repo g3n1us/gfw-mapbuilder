@@ -137,7 +137,6 @@ var MapBuilder = function(args){
     constructorParams.cssPath = makePath(newBase, 'css');
 
     var base = makePath(newBase);
-
     window.dojoConfig = {
       parseOnLoad: false,
       async: true,
