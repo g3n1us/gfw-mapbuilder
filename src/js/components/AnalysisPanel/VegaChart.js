@@ -182,7 +182,7 @@ export default class VegaChart extends Component {
           res.json().then(json => {
             console.log('we in??');
             
-            charts.makeVegaChart(this.chart, config, language, setLoading, this.addChartDownload);
+            charts.makeVegaChart(this.chart, json, language, setLoading, this.addChartDownload);
             const downloadOptions = [];
             if (json.data && json.data.attributes && json.data.attributes.downloadUrls && !json.data.attributes.downloadUrls.csv.includes('month') && !config.title) {
               const downloadUrls = json.data.attributes.downloadUrls;
