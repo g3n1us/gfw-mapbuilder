@@ -53,7 +53,7 @@ export default class VegaChart extends Component {
       const selectedFeature = this.props.selectedFeature;
       const selectedAttributes = selectedFeature && selectedFeature.attributes ? selectedFeature.attributes : null; //Only WCS-specific widgets need this property
       console.log('this.props', this.props);
-      debugger
+      
       
       if (this.props.component === 'Report') {
         if (!config.signals) {
@@ -125,13 +125,17 @@ export default class VegaChart extends Component {
         }
       }
 
+      console.log('config.data[0].url', config.data[0].url);
+      //TODO: why doesnt this have our extra params in the urL??
+      
+
+
       const dataset = this.props.results.data.attributes.dataset;
       const id = this.props.results.data.id;
       // console.log('dataset', dataset);
       // console.log('id', id);
 
       // console.log('this.props', this.props);
-      // debugger
       // console.log('urlurlurl', url);
       
 
@@ -181,7 +185,11 @@ export default class VegaChart extends Component {
         } else {
           res.json().then(json => {
             console.log('we in??');
+            console.log(json);
+
+            //config = widgetConfig!!
             
+          //charts.makeVegaChart(this.chart, config, this.props.setLoading, attributes, this.props.results.data.id, this.handleError);
             charts.makeVegaChart(this.chart, json, language, setLoading, this.addChartDownload);
             const downloadOptions = [];
             if (json.data && json.data.attributes && json.data.attributes.downloadUrls && !json.data.attributes.downloadUrls.csv.includes('month') && !config.title) {

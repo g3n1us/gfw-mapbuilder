@@ -383,8 +383,10 @@ export default {
         }
     }
 
-    new vega.View(vega.parse(config))
-    .renderer('svg') // Vega needs to be rendered in an svg, not canvas!
+	console.log('spec', config);
+	new vega.View(vega.parse(config))
+	.renderer('svg') // Vega needs to be rendered in an svg, not canvas!
+	// .renderer('canvas') // Vega needs to be rendered in an svg, not canvas!
     .initialize(el)
     .hover()
     .run()
