@@ -4,7 +4,7 @@ import enableExporting from 'highcharts/modules/exporting';
 import analysisKeys from 'constants/AnalysisConstants';
 import esriRequest from 'esri/request';
 import Highcharts from 'highcharts';
-import * as vega from 'vega';
+// import * as vega from 'vega';
 import resources from 'resources';
 import number from 'dojo/number';
 
