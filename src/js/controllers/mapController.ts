@@ -1,5 +1,8 @@
 import Map from 'esri/Map';
 import MapView from 'esri/views/MapView';
+import Measurement from 'esri/widgets/Measurement';
+import DistanceMeasurement2D from 'esri/widgets/DistanceMeasurement2D';
+import AreaMeasurement2D from 'esri/widgets/AreaMeasurement2D';
 import WebMap from 'esri/WebMap';
 import Legend from 'esri/widgets/Legend';
 // import Zoom from 'esri/widgets/Zoom'
@@ -11,12 +14,12 @@ interface ZoomParams {
 }
 
 export class MapController {
-  _map: Map | null;
-  _mapview: MapView | null;
+  _map: Map | undefined;
+  _mapview: MapView | undefined;
 
   constructor() {
-    this._map = null;
-    this._mapview = null;
+    this._map = undefined;
+    this._mapview = undefined;
   }
 
   initializeMap(domRef: RefObject<any>): void {
@@ -68,6 +71,20 @@ export class MapController {
         zoom: zoomNum
       });
     }
+  }
+
+  setMeasureWidget(): void {
+    // const measurement = new Measurement({
+    //   view: this._mapview,
+    //   activeTool: 'distance'
+    // })
+
+    var measurementWidget = new DistanceMeasurement2D({
+      view: this._mapview
+    });
+
+    this._mapview?.ui.add(measurementWidget, 'top-right');
+    // TODO ^ instead, use .createRef() to mount measurementWidget to measureContent.tsx
   }
 }
 
