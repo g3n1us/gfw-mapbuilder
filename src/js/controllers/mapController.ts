@@ -95,16 +95,26 @@ export class MapController {
     });
   }
 
-  setMeasureDistance(setMeasureOption: boolean): void {
+  setMeasureDistance(setMeasureOption: boolean, unitOfLength?: string): void {
+    const newUnit =
+      unitOfLength && unitOfLength.length
+        ? unitOfLength
+        : this._measureByDistance.unit;
     if (setMeasureOption) {
+      this._measureByDistance.unit = newUnit;
       this._measureByDistance.viewModel.newMeasurement();
     } else {
       this._measureByDistance.viewModel.clearMeasurement();
     }
   }
 
-  setMeasureArea(setAreaOption: boolean): void {
+  setMeasureArea(setAreaOption: boolean, unitOfLength?: string): void {
+    const newUnit =
+      unitOfLength && unitOfLength.length
+        ? unitOfLength
+        : this._measureByArea.unit;
     if (setAreaOption) {
+      this._measureByArea.unit = newUnit;
       this._measureByArea.viewModel.newMeasurement();
     } else {
       this._measureByArea.viewModel.clearMeasurement();

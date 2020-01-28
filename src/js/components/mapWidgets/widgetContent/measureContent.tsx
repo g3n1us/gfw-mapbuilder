@@ -5,6 +5,11 @@ import { mapController } from '../../../controllers/mapController';
 
 import { measureContent } from 'configs/modal.config';
 
+interface SpecificDropDownOption {
+  text: string;
+  esriUnit: string;
+}
+
 const MeasureContent: FunctionComponent = () => {
   const selectedLanguage = useSelector(
     (state: any) => state.appState.selectedLanguage
@@ -17,6 +22,7 @@ const MeasureContent: FunctionComponent = () => {
   const [renderAreaOption, setAreaOption] = useState(false);
   // const [renderLatLongOption, setLatLongOption] = useState(false);
   const [dropDownOptions, setDropDownOptions] = useState([]);
+  const [selectedDropDownOption, setSelectedDropDownOption] = useState('');
 
   useEffect(() => {
     toggleMeasureByDistance();
@@ -26,11 +32,16 @@ const MeasureContent: FunctionComponent = () => {
     toggleMeasureByAreaOption();
   }, [renderAreaOption]);
 
+  useEffect(() => {
+    setUnitOfLength();
+  }, [selectedDropDownOption]);
+
   const toggleMeasureByDistance = () => {
     if (renderDistanceOption) {
       setDropDownOptions(distanceUnitsOfLength);
-      mapController.setMeasureDistance(true);
+      mapController.setMeasureDistance(true, selectedDropDownOption);
     } else {
+      setSelectedDropDownOption('');
       mapController.setMeasureDistance(false);
     }
   };
@@ -38,9 +49,20 @@ const MeasureContent: FunctionComponent = () => {
   const toggleMeasureByAreaOption = () => {
     if (renderAreaOption) {
       setDropDownOptions(areaUnitsOfLength);
-      mapController.setMeasureArea(true);
+      mapController.setMeasureArea(true, selectedDropDownOption);
     } else {
+      setSelectedDropDownOption('');
       mapController.setMeasureArea(false);
+    }
+  };
+
+  const setUnitOfLength = () => {
+    if (dropDownOptions === areaUnitsOfLength) {
+      mapController.setMeasureArea(true, selectedDropDownOption);
+    }
+
+    if (dropDownOptions === distanceUnitsOfLength) {
+      mapController.setMeasureDistance(true, selectedDropDownOption);
     }
   };
 
@@ -52,11 +74,21 @@ const MeasureContent: FunctionComponent = () => {
   //   }
   // }
 
-  /**
-   * TODO
-   * [ ] DISTANCE OPTION - figure out how to render the ESRI map button icon
-   * [ ] AREA OPTION - figure out how to render the ESRI map button icon
-   */
+  const returnDropdownOptions = () => {
+    return dropDownOptions.map(
+      (lengthUnit: SpecificDropDownOption, index: number) => {
+        const { text, esriUnit } = lengthUnit;
+
+        return (
+          <>
+            <option value={esriUnit} key={index}>
+              {text}
+            </option>
+          </>
+        );
+      }
+    );
+  };
 
   return (
     <div className="measure-options-container">
@@ -73,15 +105,11 @@ const MeasureContent: FunctionComponent = () => {
           Lat/long
         </button> */}
         <select
-          onChange={e => console.log(e.target.value)}
+          onChange={e => setSelectedDropDownOption(e.target.value)}
           disabled={dropDownOptions.length ? false : true}
         >
           {dropDownOptions.length === 0 && <option selected>Unit</option>}
-          {dropDownOptions.map((lengthUnit: string, index: number) => (
-            <option value={lengthUnit} key={index}>
-              {lengthUnit}
-            </option>
-          ))}
+          {returnDropdownOptions()}
         </select>
       </div>
     </div>
