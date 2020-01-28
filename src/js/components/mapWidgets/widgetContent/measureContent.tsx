@@ -39,32 +39,48 @@ const MeasureContent: FunctionComponent = () => {
   const toggleMeasureByDistance = () => {
     if (renderDistanceOption) {
       setDropDownOptions(distanceUnitsOfLength);
-      mapController.setMeasureDistance(true, selectedDropDownOption);
+      mapController.setSpecificMeasureWidget({
+        measureByDistance: true,
+        setNewMeasure: true,
+        unitOfLength: ''
+      });
     } else {
       setDropDownOptions([]);
       setSelectedDropDownOption('');
-      mapController.setMeasureDistance(false, '');
+      mapController.setSpecificMeasureWidget({ measureByDistance: true });
     }
   };
 
   const toggleMeasureByAreaOption = () => {
     if (renderAreaOption) {
       setDropDownOptions(areaUnitsOfLength);
-      mapController.setMeasureArea(true, selectedDropDownOption);
+      mapController.setSpecificMeasureWidget({
+        measureByDistance: false,
+        setNewMeasure: true,
+        unitOfLength: ''
+      });
     } else {
       setDropDownOptions([]);
       setSelectedDropDownOption('');
-      mapController.setMeasureArea(false, '');
+      mapController.setSpecificMeasureWidget({ measureByDistance: false });
     }
   };
 
   const setUnitOfLength = () => {
     if (dropDownOptions === areaUnitsOfLength) {
-      mapController.setMeasureArea(true, selectedDropDownOption);
+      mapController.setSpecificMeasureWidget({
+        measureByDistance: false,
+        setNewMeasure: true,
+        unitOfLength: selectedDropDownOption
+      });
     }
 
     if (dropDownOptions === distanceUnitsOfLength) {
-      mapController.setMeasureDistance(true, selectedDropDownOption);
+      mapController.setSpecificMeasureWidget({
+        measureByDistance: true,
+        setNewMeasure: true,
+        unitOfLength: selectedDropDownOption
+      });
     }
   };
 

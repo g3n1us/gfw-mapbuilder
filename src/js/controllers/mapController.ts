@@ -82,53 +82,39 @@ export class MapController {
   }
 
   setMeasureWidget(): void {
-    // * NOTE: measures by area
     this._measureByArea = new AreaMeasurement2D({
       view: this._mapview,
       unit: 'acres'
     });
 
-    // * NOTE: measures by distance
     this._measureByDistance = new DistanceMeasurement2D({
       view: this._mapview,
       unit: 'miles'
     });
   }
 
-  setMeasureDistance(setMeasureOption: boolean, unitOfLength: string): void {
-    // TODO see if you can combine setMeasureDistance() and setMeasureArea()
-    if (setMeasureOption) {
-      const newUnit = unitOfLength.length
-        ? unitOfLength
-        : this._measureByDistance.unit;
+  setSpecificMeasureWidget({
+    measureByDistance = false,
+    setNewMeasure = false,
+    unitOfLength = ''
+  }: {
+    measureByDistance: boolean;
+    setNewMeasure?: boolean;
+    unitOfLength?: string;
+  }): void {
+    const selectedWidget = measureByDistance
+      ? this._measureByDistance
+      : this._measureByArea;
 
-      this._measureByDistance.unit = newUnit;
-      this._measureByDistance.viewModel.newMeasurement();
+    if (setNewMeasure) {
+      const newUnit = unitOfLength.length ? unitOfLength : selectedWidget.unit;
+
+      selectedWidget.unit = newUnit;
+      selectedWidget.viewModel.newMeasurement();
     }
 
-    if (setMeasureOption === false && this._measureByDistance) {
-      // * NOTE: checking whether this._measureByDistance is defined
-      // * resolves a race condition where the measure widget component
-      // * loads on the DOM before the mapview widget does
-      this._measureByDistance.viewModel.clearMeasurement();
-    }
-  }
-
-  setMeasureArea(setAreaOption: boolean, unitOfLength: string): void {
-    if (setAreaOption) {
-      const newUnit = unitOfLength.length
-        ? unitOfLength
-        : this._measureByArea.unit;
-
-      this._measureByArea.unit = newUnit;
-      this._measureByArea.viewModel.newMeasurement();
-    }
-
-    if (setAreaOption === false && this._measureByArea) {
-      // * NOTE: checking whether this._measureByArea is defined
-      // * this resolves a race condition where the measure widget component
-      // * loads on the DOM before the mapview widget does
-      this._measureByArea.viewModel.clearMeasurement();
+    if (setNewMeasure === false && selectedWidget) {
+      selectedWidget.viewModel.clearMeasurement();
     }
   }
 }
