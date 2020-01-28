@@ -41,8 +41,9 @@ const MeasureContent: FunctionComponent = () => {
       setDropDownOptions(distanceUnitsOfLength);
       mapController.setMeasureDistance(true, selectedDropDownOption);
     } else {
+      setDropDownOptions([]);
       setSelectedDropDownOption('');
-      mapController.setMeasureDistance(false);
+      mapController.setMeasureDistance(false, '');
     }
   };
 
@@ -51,8 +52,9 @@ const MeasureContent: FunctionComponent = () => {
       setDropDownOptions(areaUnitsOfLength);
       mapController.setMeasureArea(true, selectedDropDownOption);
     } else {
+      setDropDownOptions([]);
       setSelectedDropDownOption('');
-      mapController.setMeasureArea(false);
+      mapController.setMeasureArea(false, '');
     }
   };
 
@@ -92,18 +94,19 @@ const MeasureContent: FunctionComponent = () => {
 
   return (
     <div className="measure-options-container">
-      <div className="directions">
-        <p>MeasureContent</p>
-        <div className="measure-widget"></div>
-        <button onClick={() => setAreaOption(!renderAreaOption)}>
-          Measure area
-        </button>
-        <button onClick={() => setDistanceOption(!renderDistanceOption)}>
-          Measure distance
-        </button>
+      <div className="buttons-select-wrapper">
+        <button
+          onClick={() => setAreaOption(!renderAreaOption)}
+          className="esri-icon-measure-area"
+        />
+        <button
+          onClick={() => setDistanceOption(!renderDistanceOption)}
+          className="esri-icon-measure-line"
+        />
         {/* <button onClick={() => setLatLongOption(!renderLatLongOption)}>
           Lat/long
         </button> */}
+        <span>|</span>
         <select
           onChange={e => setSelectedDropDownOption(e.target.value)}
           disabled={dropDownOptions.length ? false : true}
@@ -112,6 +115,9 @@ const MeasureContent: FunctionComponent = () => {
           {returnDropdownOptions()}
         </select>
       </div>
+      <p>Measurement Result</p>
+      {/* TODO: render lat/long results here! */}
+      <hr />
     </div>
   );
 };

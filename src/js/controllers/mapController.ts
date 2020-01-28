@@ -95,28 +95,39 @@ export class MapController {
     });
   }
 
-  setMeasureDistance(setMeasureOption: boolean, unitOfLength?: string): void {
-    const newUnit =
-      unitOfLength && unitOfLength.length
+  setMeasureDistance(setMeasureOption: boolean, unitOfLength: string): void {
+    // TODO see if you can combine setMeasureDistance() and setMeasureArea()
+    if (setMeasureOption) {
+      const newUnit = unitOfLength.length
         ? unitOfLength
         : this._measureByDistance.unit;
-    if (setMeasureOption) {
+
       this._measureByDistance.unit = newUnit;
       this._measureByDistance.viewModel.newMeasurement();
-    } else {
+    }
+
+    if (setMeasureOption === false && this._measureByDistance) {
+      // * NOTE: checking whether this._measureByDistance is defined
+      // * resolves a race condition where the measure widget component
+      // * loads on the DOM before the mapview widget does
       this._measureByDistance.viewModel.clearMeasurement();
     }
   }
 
-  setMeasureArea(setAreaOption: boolean, unitOfLength?: string): void {
-    const newUnit =
-      unitOfLength && unitOfLength.length
+  setMeasureArea(setAreaOption: boolean, unitOfLength: string): void {
+    if (setAreaOption) {
+      const newUnit = unitOfLength.length
         ? unitOfLength
         : this._measureByArea.unit;
-    if (setAreaOption) {
+
       this._measureByArea.unit = newUnit;
       this._measureByArea.viewModel.newMeasurement();
-    } else {
+    }
+
+    if (setAreaOption === false && this._measureByArea) {
+      // * NOTE: checking whether this._measureByArea is defined
+      // * this resolves a race condition where the measure widget component
+      // * loads on the DOM before the mapview widget does
       this._measureByArea.viewModel.clearMeasurement();
     }
   }
