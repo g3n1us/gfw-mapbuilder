@@ -31,6 +31,13 @@
       width: 1rem;
     }
   }
+
+  &.measure-widget {
+    top: 20%;
+    left: 75%;
+    height: 7.5rem;
+    width: 10rem;
+  }
 }
 
 .dim-container {
@@ -41,6 +48,10 @@
   background-color: $black;
   top: 0;
   height: 100%;
+
+  &.measure-widget {
+    display: none;
+  }
 }
 
 @media screen and (max-width: $mobile-device) {

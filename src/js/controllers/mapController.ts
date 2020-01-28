@@ -1,8 +1,10 @@
 import Map from 'esri/Map';
 import MapView from 'esri/views/MapView';
+
 import Measurement from 'esri/widgets/Measurement';
 import DistanceMeasurement2D from 'esri/widgets/DistanceMeasurement2D';
 import AreaMeasurement2D from 'esri/widgets/AreaMeasurement2D';
+
 import WebMap from 'esri/WebMap';
 import Legend from 'esri/widgets/Legend';
 // import Zoom from 'esri/widgets/Zoom'
@@ -16,10 +18,14 @@ interface ZoomParams {
 export class MapController {
   _map: Map | undefined;
   _mapview: MapView | undefined;
+  _measureByDistance: DistanceMeasurement2D | string;
+  _measureByArea: AreaMeasurement2D | any;
 
   constructor() {
     this._map = undefined;
     this._mapview = undefined;
+    this._measureByDistance = '';
+    this._measureByArea = '';
   }
 
   initializeMap(domRef: RefObject<any>): void {
@@ -45,6 +51,9 @@ export class MapController {
       .when(
         () => {
           console.log('mapview is loaded');
+
+          this.setMeasureWidget();
+
           store.dispatch({ type: 'MAP_READY', payload: true });
         },
         (error: Error) => {
@@ -74,17 +83,59 @@ export class MapController {
   }
 
   setMeasureWidget(): void {
-    // const measurement = new Measurement({
-    //   view: this._mapview,
-    //   activeTool: 'distance'
-    // })
+    // * NOTE: measures by distance
+    this._measureByDistance = new DistanceMeasurement2D({
+      view: this._mapview
+    });
+    this._measureByDistance.viewModel.newMeasurement();
 
-    var measurementWidget = new DistanceMeasurement2D({
+    // * NOTE: measures by area
+    this._measureByArea = new AreaMeasurement2D({
       view: this._mapview
     });
 
-    this._mapview?.ui.add(measurementWidget, 'top-right');
     // TODO ^ instead, use .createRef() to mount measurementWidget to measureContent.tsx
+  }
+
+  renderMeasureWidget(): void {}
+
+  setMeasureByDistance(renderOption: boolean): void {
+    console.log('setMeasureByDistance()', renderOption);
+    if (renderOption) {
+      this._mapview?.ui.add(this._measureByDistance, 'bottom-left');
+    } else {
+      this._mapview?.ui.remove(this._measureByDistance);
+    }
+  }
+
+  setMeasureByArea(renderOption: boolean): void {
+    console.log('setMeasureByArea()', renderOption);
+    if (renderOption) {
+      this._mapview?.ui.add(this._measureByArea, 'bottom-left');
+
+      this._measureByArea?.watch(
+        'viewModel.measurement',
+        (measurement: any) => {
+          console.log(
+            'Area: ',
+            measurement.area,
+            'Perimeter: ',
+            measurement.perimeter
+          );
+        }
+      );
+    } else {
+      this._mapview?.ui.remove(this._measureByArea);
+    }
+  }
+
+  setMeasureByLatLong(renderOption: boolean): void {
+    console.log('setMeasureByLatLong()', renderOption);
+    // if (renderOption) {
+    //   console.log('setMeasureByLatLong()', renderOption)
+    // } else {
+    //   console.log('setMeasureByLatLong()', renderOption)
+    // }
   }
 }
 
