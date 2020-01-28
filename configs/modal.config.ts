@@ -231,3 +231,146 @@ export const searchContent = {
     buttonTitle: '搜寻'
   }
 };
+
+export const measureContent = {
+  en: {
+    distanceUnitsOfLength: [
+      'Acres',
+      'Sq Miles',
+      'Sq Kilometers',
+      'Hectares',
+      'Sq Yards',
+      'Sq Feet(US)',
+      'Sq Meters'
+    ],
+    areaUnitsOfLength: [
+      'Miles',
+      'Kilometers',
+      'Feet',
+      'Feet(US)',
+      'Meters',
+      'Yards',
+      'Nautical Miles'
+    ]
+  },
+  ka: {
+    distanceUnitsOfLength: [
+      'KA - Acres',
+      'KA - Sq Miles',
+      'KA - Sq Kilometers',
+      'KA - Hectares',
+      'KA - Sq Yards',
+      'KA - Sq Feet(US)',
+      'Sq Meters'
+    ],
+    areaUnitsOfLength: [
+      'Ka - Miles',
+      'Ka - Kilometers',
+      'Ka - Feet',
+      'Ka - Feet(US)',
+      'Ka - Meters',
+      'Ka - Yards',
+      'Ka - Nautical Miles'
+    ]
+  },
+  fr: {
+    distanceUnitsOfLength: [
+      'FR - Acres',
+      'FR - Sq Miles',
+      'FR - Sq Kilometers',
+      'FR - Hectares',
+      'FR - Sq Yards',
+      'FR - Sq Feet(US)',
+      'FR - Sq Meters'
+    ],
+    areaUnitsOfLength: [
+      'FR - Miles',
+      'FR - Kilometers',
+      'FR - Feet',
+      'FR - Feet(US)',
+      'FR - Meters',
+      'FR - Yards',
+      'FR - Nautical Miles'
+    ]
+  },
+  es: {
+    distanceUnitsOfLength: [
+      'ES - Acres',
+      'ES - Sq Miles',
+      'ES - Sq Kilometers',
+      'ES - Hectares',
+      'ES - Sq Yards',
+      'ES - Sq Feet(US)',
+      'ES - Sq Meters'
+    ],
+    areaUnitsOfLength: [
+      'ES - Miles',
+      'ES - Kilometers',
+      'ES - Feet',
+      'ES - Feet(US)',
+      'ES - Meters',
+      'ES - Yards',
+      'ES - Nautical Miles'
+    ]
+  },
+  pt: {
+    distanceUnitsOfLength: [
+      'PT - Acres',
+      'PT - Sq Miles',
+      'PT - Sq Kilometers',
+      'PT - Hectares',
+      'PT - Sq Yards',
+      'PT - Sq Feet(US)',
+      'PT - Sq Meters'
+    ],
+    areaUnitsOfLength: [
+      'PT - Miles',
+      'PT - Kilometers',
+      'PT - Feet',
+      'PT - Feet(US)',
+      'PT - Meters',
+      'PT - Yards',
+      'PT - Nautical Miles'
+    ]
+  },
+  id: {
+    distanceUnitsOfLength: [
+      'ID - Acres',
+      'ID - Sq Miles',
+      'ID - Sq Kilometers',
+      'ID - Hectares',
+      'ID - Sq Yards',
+      'ID - Sq Feet(US)',
+      'ID - Sq Meters'
+    ],
+    areaUnitsOfLength: [
+      'ID - Miles',
+      'ID - Kilometers',
+      'ID - Feet',
+      'ID - Feet(US)',
+      'ID - Meters',
+      'ID - Yards',
+      'ID - Nautical Miles'
+    ]
+  },
+  zh: {
+    distanceUnitsOfLength: [
+      'ZH - Acres',
+      'ZH - Sq Miles',
+      'ZH - Sq Kilometers',
+      'ZH - Hectares',
+      'ZH - Sq Yards',
+      'ZH - Sq Feet(US)',
+      'ZH - Sq Meters'
+    ],
+    areaUnitsOfLength: [
+      'ZH - Miles',
+      'ZH - Kilometers',
+      'ZH - Feet',
+      'ZH - Feet(US)',
+      'ZH - Meters',
+      'ZH - Yards',
+      'ZH - Nautical Miles'
+    ]
+  }
+};

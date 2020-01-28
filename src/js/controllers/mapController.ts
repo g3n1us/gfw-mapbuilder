@@ -18,14 +18,14 @@ interface ZoomParams {
 export class MapController {
   _map: Map | undefined;
   _mapview: MapView | undefined;
-  _measureByDistance: DistanceMeasurement2D | string;
-  _measureByArea: AreaMeasurement2D | any;
+  _measureByDistance: DistanceMeasurement2D | any; //TODO; test & resolve types!
+  _measureByArea: AreaMeasurement2D | any; //TODO; test & resolve types!
 
   constructor() {
     this._map = undefined;
     this._mapview = undefined;
-    this._measureByDistance = '';
-    this._measureByArea = '';
+    this._measureByDistance = undefined; //TODO; test & resolve types!
+    this._measureByArea = undefined; //TODO; test & resolve types!
   }
 
   initializeMap(domRef: RefObject<any>): void {
@@ -51,7 +51,6 @@ export class MapController {
       .when(
         () => {
           console.log('mapview is loaded');
-
           this.setMeasureWidget();
 
           store.dispatch({ type: 'MAP_READY', payload: true });
@@ -83,59 +82,33 @@ export class MapController {
   }
 
   setMeasureWidget(): void {
-    // * NOTE: measures by distance
-    this._measureByDistance = new DistanceMeasurement2D({
-      view: this._mapview
-    });
-    this._measureByDistance.viewModel.newMeasurement();
-
     // * NOTE: measures by area
     this._measureByArea = new AreaMeasurement2D({
-      view: this._mapview
+      view: this._mapview,
+      unit: 'acres'
     });
 
-    // TODO ^ instead, use .createRef() to mount measurementWidget to measureContent.tsx
+    // * NOTE: measures by distance
+    this._measureByDistance = new DistanceMeasurement2D({
+      view: this._mapview,
+      unit: 'miles'
+    });
   }
 
-  renderMeasureWidget(): void {}
-
-  setMeasureByDistance(renderOption: boolean): void {
-    console.log('setMeasureByDistance()', renderOption);
-    if (renderOption) {
-      this._mapview?.ui.add(this._measureByDistance, 'bottom-left');
+  setMeasureDistance(setMeasureOption: boolean): void {
+    if (setMeasureOption) {
+      this._measureByDistance.viewModel.newMeasurement();
     } else {
-      this._mapview?.ui.remove(this._measureByDistance);
+      this._measureByDistance.viewModel.clearMeasurement();
     }
   }
 
-  setMeasureByArea(renderOption: boolean): void {
-    console.log('setMeasureByArea()', renderOption);
-    if (renderOption) {
-      this._mapview?.ui.add(this._measureByArea, 'bottom-left');
-
-      this._measureByArea?.watch(
-        'viewModel.measurement',
-        (measurement: any) => {
-          console.log(
-            'Area: ',
-            measurement.area,
-            'Perimeter: ',
-            measurement.perimeter
-          );
-        }
-      );
+  setMeasureArea(setAreaOption: boolean): void {
+    if (setAreaOption) {
+      this._measureByArea.viewModel.newMeasurement();
     } else {
-      this._mapview?.ui.remove(this._measureByArea);
+      this._measureByArea.viewModel.clearMeasurement();
     }
-  }
-
-  setMeasureByLatLong(renderOption: boolean): void {
-    console.log('setMeasureByLatLong()', renderOption);
-    // if (renderOption) {
-    //   console.log('setMeasureByLatLong()', renderOption)
-    // } else {
-    //   console.log('setMeasureByLatLong()', renderOption)
-    // }
   }
 }
 
