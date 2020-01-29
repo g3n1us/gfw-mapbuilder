@@ -17,7 +17,8 @@ const initialState: AppState = {
   },
   measurementContent: {
     measurementResults: {},
-    activeButton: ''
+    selectedButton: '',
+    selectedButtonActive: false
   }
 };
 

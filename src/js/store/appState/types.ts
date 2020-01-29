@@ -5,7 +5,8 @@ export interface LeftPanel {
 
 export interface MeasureWidgetContent {
   measurementResults: object;
-  activeButton: string;
+  selectedButton: string;
+  selectedButtonActive: boolean;
 }
 
 export interface AppState {

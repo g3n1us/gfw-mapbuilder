@@ -1,5 +1,7 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { setMeasureWidgetContent } from 'js/store/appState/actions';
 
 import { mapController } from '../../../controllers/mapController';
 
@@ -11,6 +13,7 @@ interface SpecificDropDownOption {
 }
 
 const MeasureContent: FunctionComponent = () => {
+  const dispatch = useDispatch();
   const selectedLanguage = useSelector(
     (state: any) => state.appState.selectedLanguage
   );
@@ -22,7 +25,11 @@ const MeasureContent: FunctionComponent = () => {
     distanceUnitsOfLength,
     latitudeLongitudeUnits
   } = measureContent[selectedLanguage];
-  // const { measurementResults, activeButton } = selectedContent
+  const {
+    measurementResults,
+    selectedButton,
+    selectedButtonActive
+  } = selectedContent;
 
   const [renderDistanceOption, setDistanceOption] = useState(false);
   const [renderAreaOption, setAreaOption] = useState(false);
@@ -30,64 +37,57 @@ const MeasureContent: FunctionComponent = () => {
   const [dropDownOptions, setDropDownOptions] = useState([]);
   const [selectedDropDownOption, setSelectedDropDownOption] = useState('');
 
-  console.log('selectedContent', selectedContent);
-
   useEffect(() => {
-    toggleMeasureByAreaOption();
-    resetDropDownOptions();
-  }, [renderAreaOption]);
-
-  useEffect(() => {
-    toggleMeasureByDistance();
-    resetDropDownOptions();
-  }, [renderDistanceOption]);
+    setSelectedWidget(selectedButton);
+  }, [selectedButton]);
 
   useEffect(() => {
     setUnitOfLength();
   }, [selectedDropDownOption]);
 
   useEffect(() => {
-    toggleLatLong();
-    resetDropDownOptions();
+    setMeasureByArea();
+  }, [renderAreaOption]);
+
+  useEffect(() => {
+    setMeasureByDistance();
+  }, [renderDistanceOption]);
+
+  useEffect(() => {
+    setFindCoordinates();
   }, [renderLatLongOption]);
 
-  const toggleMeasureByAreaOption = () => {
-    if (renderAreaOption) {
-      setDistanceOption(false);
-      setLatLongOption(false);
-      setDropDownOptions(areaUnitsOfLength);
-      mapController.setSpecificMeasureWidget({
-        measureByDistance: false,
-        setNewMeasure: true,
-        unitOfLength: ''
-      });
-    } else {
-      mapController.setSpecificMeasureWidget({ measureByDistance: false });
-    }
-  };
+  const setSelectedWidget = (selectedButton: string) => {
+    mapController.setSpecificMeasureWidget({ measureByDistance: true });
+    mapController.setSpecificMeasureWidget({ measureByDistance: false });
 
-  const toggleMeasureByDistance = () => {
-    if (renderDistanceOption) {
-      setAreaOption(false);
-      setLatLongOption(false);
-      setDropDownOptions(distanceUnitsOfLength);
-      mapController.setSpecificMeasureWidget({
-        measureByDistance: true,
-        setNewMeasure: true,
-        unitOfLength: ''
-      });
+    if (selectedButtonActive) {
+      switch (selectedButton) {
+        case 'area':
+          mapController.setSpecificMeasureWidget({
+            measureByDistance: false,
+            setNewMeasure: true,
+            unitOfLength: ''
+          });
+          setDropDownOptions(areaUnitsOfLength);
+          break;
+        case 'distance':
+          mapController.setSpecificMeasureWidget({
+            measureByDistance: true,
+            setNewMeasure: true,
+            unitOfLength: ''
+          });
+          setDropDownOptions(distanceUnitsOfLength);
+          break;
+        case 'coordinates':
+          setDropDownOptions(latitudeLongitudeUnits);
+          break;
+        default:
+          break;
+      }
     } else {
-      mapController.setSpecificMeasureWidget({ measureByDistance: true });
-    }
-  };
-
-  const toggleLatLong = () => {
-    if (renderLatLongOption) {
-      setAreaOption(false);
-      setDistanceOption(false);
-      setDropDownOptions(latitudeLongitudeUnits);
-      // TODO will need to access measureContent property to update this component with content!
-      // * NOTE: will not need to conditionally fire mapController.setSpecificMeasureWidget()
+      setDropDownOptions([]);
+      setSelectedDropDownOption('');
     }
   };
 
@@ -109,17 +109,6 @@ const MeasureContent: FunctionComponent = () => {
     }
   };
 
-  const resetDropDownOptions = () => {
-    if (
-      renderAreaOption === false &&
-      renderDistanceOption === false &&
-      renderLatLongOption === false
-    ) {
-      setDropDownOptions([]);
-      setSelectedDropDownOption('');
-    }
-  };
-
   const returnDropdownOptions = () => {
     return dropDownOptions.map(
       (lengthUnit: SpecificDropDownOption, index: number) => {
@@ -136,24 +125,90 @@ const MeasureContent: FunctionComponent = () => {
     );
   };
 
+  const setMeasureByArea = () => {
+    if (renderAreaOption) {
+      dispatch(
+        setMeasureWidgetContent({
+          measurementResults: {},
+          selectedButton: 'area',
+          selectedButtonActive: renderAreaOption
+        })
+      );
+    } else {
+      dispatch(
+        setMeasureWidgetContent({
+          measurementResults: {},
+          selectedButton: '',
+          selectedButtonActive: renderAreaOption
+        })
+      );
+    }
+  };
+
+  const setMeasureByDistance = () => {
+    if (renderDistanceOption) {
+      dispatch(
+        setMeasureWidgetContent({
+          measurementResults: {},
+          selectedButton: 'distance',
+          selectedButtonActive: renderDistanceOption
+        })
+      );
+    } else {
+      dispatch(
+        setMeasureWidgetContent({
+          measurementResults: {},
+          selectedButton: '',
+          selectedButtonActive: renderDistanceOption
+        })
+      );
+    }
+  };
+
+  const setFindCoordinates = () => {
+    if (renderLatLongOption) {
+      dispatch(
+        setMeasureWidgetContent({
+          measurementResults: {},
+          selectedButton: 'coordinates',
+          selectedButtonActive: renderLatLongOption
+        })
+      );
+    } else {
+      dispatch(
+        setMeasureWidgetContent({
+          measurementResults: {},
+          selectedButton: '',
+          selectedButtonActive: renderLatLongOption
+        })
+      );
+    }
+  };
+
   return (
     <div className="measure-options-container">
       <div className="buttons-select-wrapper">
         <button
           onClick={() => setAreaOption(!renderAreaOption)}
           className={`esri-icon-measure-area ${
-            renderAreaOption ? 'selected' : ''
+            selectedButton === 'area' && selectedButtonActive ? 'selected' : ''
           }`}
         />
         <button
           onClick={() => setDistanceOption(!renderDistanceOption)}
           className={`esri-icon-measure ${
-            renderDistanceOption ? 'selected' : ''
+            selectedButton === 'distance' && selectedButtonActive
+              ? 'selected'
+              : ''
           }`}
         />
         <button
           onClick={() => setLatLongOption(!renderLatLongOption)}
-          className={`esri-icon-maps ${renderLatLongOption ? 'selected' : ''}`}
+          className={`esri-icon-maps ${
+            selectedButton === 'coordinates' && selectedButtonActive
+              ? 'selected'
+              : ''
+          }`}
         />
         <span>|</span>
         <select
