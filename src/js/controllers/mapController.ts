@@ -111,6 +111,14 @@ export class MapController {
 
       selectedWidget.unit = newUnit;
       selectedWidget.viewModel.newMeasurement();
+      selectedWidget.watch('viewModel.measurement', function(measurement: any) {
+        /**
+         * TODO [ ] create helper function that converts the area to a
+        value via newUnit constant! Then dispatch to redux store
+        so it renders in measureContent.tsx
+        */
+        console.log('measurement', measurement);
+      });
     }
 
     if (setNewMeasure === false && selectedWidget) {
