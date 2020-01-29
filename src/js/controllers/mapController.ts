@@ -11,7 +11,10 @@ import GraphicsLayer from 'esri/layers/GraphicsLayer';
 import SketchViewModel from 'esri/widgets/Sketch/SketchViewModel';
 
 import { RefObject } from 'react';
+
 import store from '../store/index';
+
+import { setMeasureWidgetContent } from 'js/store/appState/actions';
 
 interface ZoomParams {
   zoomIn: boolean;
@@ -59,6 +62,7 @@ export class MapController {
           console.log('mapview is loaded');
           this.setMeasureWidget(); // instantiates measure widgets
           this.initializeAndSetSketch(); // instantiates sketch widget
+
           store.dispatch({ type: 'MAP_READY', payload: true });
         },
         (error: Error) => {
@@ -119,15 +123,26 @@ export class MapController {
       // * NOTE: _measureByDistance OR _measureByArea must have a type of any for this reassignment (above) to work
 
       selectedWidget?.viewModel.newMeasurement();
+
       selectedWidget?.watch('viewModel.measurement', function(
         measurement: any
       ) {
-        // double-check
-
-        /**
-         * TODO [ ] dispatch to redux store so measurement renders in measureContent.tsx
-         */
-        console.log(measurement);
+        // * NOTE: we're watching the area/length generated
+        // * when the user double-clicks, we're dispatching
+        // * the updated measurement to the store
+        mapController._mapview?.on('double-click', () => {
+          store.dispatch(
+            setMeasureWidgetContent({
+              measurementResults: measurement,
+              selectedButton: 'TBD',
+              selectedButtonActive: true
+            })
+          );
+          console.log(measurement);
+          /**
+           * TODO [ ] dispatch to redux store so measurement renders in measureContent.tsx
+           */
+        });
       });
     }
 

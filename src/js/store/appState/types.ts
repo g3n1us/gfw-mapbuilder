@@ -1,10 +1,13 @@
+import DistanceMeasurement2D from 'esri/widgets/DistanceMeasurement2D';
+import AreaMeasurement2D from 'esri/widgets/AreaMeasurement2D';
+
 export interface LeftPanel {
   tabViewVisible: boolean;
   activeTab: string;
 }
 
 export interface MeasureWidgetContent {
-  measurementResults: object;
+  measurementResults: DistanceMeasurement2D | AreaMeasurement2D | object | any;
   selectedButton: string;
   selectedButtonActive: boolean;
 }
