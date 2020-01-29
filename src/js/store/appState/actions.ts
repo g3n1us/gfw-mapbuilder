@@ -4,7 +4,8 @@ import {
   SELECT_ACTIVE_TAB,
   SET_LANGUAGE,
   AppState,
-  LeftPanel
+  LeftPanel,
+  SET_MEASURE_WIDGET_CONTENT
 } from './types';
 
 export function toggleTabviewPanel(payload: LeftPanel['tabViewVisible']) {
@@ -31,6 +32,15 @@ export function selectActiveTab(payload: LeftPanel['activeTab']) {
 export function setLanguage(payload: AppState['selectedLanguage']) {
   return {
     type: SET_LANGUAGE,
+    payload: payload
+  };
+}
+
+export function setMeasureWidgetContent(
+  payload: AppState['measurementContent']
+) {
+  return {
+    type: SET_MEASURE_WIDGET_CONTENT,
     payload: payload
   };
 }

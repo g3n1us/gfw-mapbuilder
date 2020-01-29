@@ -1,4 +1,4 @@
-// TODO confirm id (Indonesian?) translations are correct
+// TODO find translations!
 
 export const printContent = {
   en: {
@@ -32,8 +32,6 @@ export const printContent = {
 };
 
 export const shareContent = {
-  // TODO find proper translations for this content!
-
   en: {
     title: 'Share',
     instructions:
@@ -251,6 +249,10 @@ export const measureContent = {
       { text: 'Meters', esriUnit: 'meters' },
       { text: 'Yards', esriUnit: 'yards' },
       { text: 'Nautical Miles', esriUnit: 'nautical-miles' }
+    ],
+    latitudeLongitudeUnits: [
+      { text: 'Degree', esriUnit: 'degree' },
+      { text: 'DMS', esriUnit: 'dms' }
     ]
   },
   ka: {
@@ -271,6 +273,10 @@ export const measureContent = {
       { text: 'Meters', esriUnit: 'meters' },
       { text: 'Yards', esriUnit: 'yards' },
       { text: 'Nautical Miles', esriUnit: 'nautical-miles' }
+    ],
+    latitudeLongitudeUnits: [
+      { text: 'Degree', esriUnit: 'degree' },
+      { text: 'DMS', esriUnit: 'dms' }
     ]
   },
   fr: {
@@ -291,6 +297,10 @@ export const measureContent = {
       { text: 'Meters', esriUnit: 'meters' },
       { text: 'Yards', esriUnit: 'yards' },
       { text: 'Nautical Miles', esriUnit: 'nautical-miles' }
+    ],
+    latitudeLongitudeUnits: [
+      { text: 'Degree', esriUnit: 'degree' },
+      { text: 'DMS', esriUnit: 'dms' }
     ]
   },
   es: {
@@ -311,6 +321,10 @@ export const measureContent = {
       { text: 'Meters', esriUnit: 'meters' },
       { text: 'Yards', esriUnit: 'yards' },
       { text: 'Nautical Miles', esriUnit: 'nautical-miles' }
+    ],
+    latitudeLongitudeUnits: [
+      { text: 'Degree', esriUnit: 'degree' },
+      { text: 'DMS', esriUnit: 'dms' }
     ]
   },
   pt: {
@@ -331,6 +345,10 @@ export const measureContent = {
       { text: 'Meters', esriUnit: 'meters' },
       { text: 'Yards', esriUnit: 'yards' },
       { text: 'Nautical Miles', esriUnit: 'nautical-miles' }
+    ],
+    latitudeLongitudeUnits: [
+      { text: 'Degree', esriUnit: 'degree' },
+      { text: 'DMS', esriUnit: 'dms' }
     ]
   },
   id: {
@@ -351,6 +369,10 @@ export const measureContent = {
       { text: 'Meters', esriUnit: 'meters' },
       { text: 'Yards', esriUnit: 'yards' },
       { text: 'Nautical Miles', esriUnit: 'nautical-miles' }
+    ],
+    latitudeLongitudeUnits: [
+      { text: 'Degree', esriUnit: 'degree' },
+      { text: 'DMS', esriUnit: 'dms' }
     ]
   },
   zh: {
@@ -371,6 +393,10 @@ export const measureContent = {
       { text: 'Meters', esriUnit: 'meters' },
       { text: 'Yards', esriUnit: 'yards' },
       { text: 'Nautical Miles', esriUnit: 'nautical-miles' }
+    ],
+    latitudeLongitudeUnits: [
+      { text: 'Degree', esriUnit: 'degree' },
+      { text: 'DMS', esriUnit: 'dms' }
     ]
   }
 };

@@ -4,7 +4,8 @@ import {
   TOGGLE_TABVIEW_PANEL,
   SELECT_ACTIVE_TAB,
   SET_LANGUAGE,
-  RENDER_MODAL
+  RENDER_MODAL,
+  SET_MEASURE_WIDGET_CONTENT
 } from './types';
 
 const initialState: AppState = {
@@ -13,6 +14,10 @@ const initialState: AppState = {
   leftPanel: {
     tabViewVisible: true,
     activeTab: 'layers'
+  },
+  measurementContent: {
+    measurementResults: {},
+    activeButton: ''
   }
 };
 
@@ -41,6 +46,8 @@ export function appStateReducer(
       };
     case SET_LANGUAGE:
       return { ...state, selectedLanguage: action.payload };
+    case SET_MEASURE_WIDGET_CONTENT:
+      return { ...state, measurementContent: action.payload };
     default:
       return state;
   }

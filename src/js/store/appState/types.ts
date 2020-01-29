@@ -3,10 +3,16 @@ export interface LeftPanel {
   activeTab: string;
 }
 
+export interface MeasureWidgetContent {
+  measurementResults: object;
+  activeButton: string;
+}
+
 export interface AppState {
   leftPanel: LeftPanel;
   renderModal: string;
   selectedLanguage: string;
+  measurementContent: MeasureWidgetContent;
 }
 
 //Action names available
@@ -14,6 +20,12 @@ export const RENDER_MODAL = 'RENDER_MODAL';
 export const SELECT_ACTIVE_TAB = 'SELECT_ACTIVE_TAB';
 export const SET_LANGUAGE = 'SET_LANGUAGE';
 export const TOGGLE_TABVIEW_PANEL = 'TOGGLE_TABVIEW_PANEL';
+export const SET_MEASURE_WIDGET_CONTENT = 'SET_MEASURE_WIDGET_CONTENT';
+
+interface MeasureWidgetAction {
+  type: typeof SET_MEASURE_WIDGET_CONTENT;
+  payload: MeasureWidgetContent;
+}
 
 interface ToggleTabviewPanelAction {
   type: typeof TOGGLE_TABVIEW_PANEL;
@@ -39,4 +51,5 @@ export type AppStateTypes =
   | ToggleTabviewPanelAction
   | RenderModalAction
   | SelectActiveTab
-  | SetLanguageAction;
+  | SetLanguageAction
+  | MeasureWidgetAction;

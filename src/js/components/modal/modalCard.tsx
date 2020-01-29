@@ -30,6 +30,7 @@ const ModalCard: FunctionComponent<{}> = () => {
       case 'ShareWidget':
         return <ShareContent />;
       case 'PenWidget':
+        // className = 'pen-widget';
         return <PenContent />;
       case 'SearchWidget':
         return <SearchContent />;
@@ -41,23 +42,35 @@ const ModalCard: FunctionComponent<{}> = () => {
     }
   };
 
-  switch (modalType) {
-    case 'MeasureWidget':
-      className = 'measure-widget';
-    case 'PenWidget':
-      className = 'pen-widget';
-      break;
-    default:
-      break;
-  }
+  const setClassName = () => {
+    switch (modalType) {
+      case 'MeasureWidget':
+        return 'measure-widget';
+      case 'PenWidget':
+        return 'pen-widget';
+      default:
+        break;
+    }
+  };
+
+  // switch (modalType) {
+  //   case 'MeasureWidget':
+  //     className = 'measure-widget';
+  //   case 'PenWidget':
+  //     className = 'pen-widget';
+  //   default:
+  //     break;
+  // }
 
   return (
     <>
       <div
-        className={`dim-container ${className}`}
+        // className={`dim-container ${className}`}
+        className={`dim-container ${setClassName()}`}
         onClick={() => dispatch(renderModal(''))}
       ></div>
-      <div className={`modal-card-container ${className}`}>
+      {/* <div className={`modal-card-container ${className}`}> */}
+      <div className={`modal-card-container ${setClassName()}`}>
         <button
           className="exit-button"
           onClick={() => dispatch(renderModal(''))}

@@ -1,4 +1,5 @@
 @import 'variables.scss';
+@import 'measureContent.scss';
 
 .modal-card-container {
   display: flex;
@@ -32,74 +33,19 @@
     }
   }
 
+  &.pen-widget {
+    height: 30rem;
+    top: 30%;
+  }
+
   &.measure-widget {
     top: 25%;
     left: 75%;
     height: 7.5rem;
     width: 17rem;
 
-    .measure-options-container {
-      display: flex;
-      width: inherit;
-      justify-content: center;
-      margin: 1rem 0.5rem;
-      flex-wrap: wrap;
-      flex-direction: column;
-      align-items: center;
-
-      .buttons-select-wrapper {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-
-        span {
-          margin-left: 0.5rem;
-          margin-right: 0.5rem;
-        }
-
-        .esri-icon-measure-line,
-        .esri-icon-measure-area {
-          width: 2rem;
-          height: 1.85rem; //TODO - make a SASS variable
-          margin: 0 0.25rem 0 0.25rem;
-        }
-
-        select {
-          height: 1.85rem; //TODO - make a SASS variable
-        }
-      }
-
-      p {
-        font-size: 0.75rem;
-        margin: 1rem 0 0 0;
-        font-weight: bold;
-      }
-
-      hr {
-        width: inherit;
-        margin-top: 0;
-      }
-    }
-    &.pen-widget {
-      height: 30rem;
-      top: 30%;
-    }
+    @include measure-content-style;
   }
-
-  .dim-container {
-    position: absolute;
-    z-index: 3;
-    opacity: 0.5;
-    width: 100%;
-    background-color: $black;
-    top: 0;
-    height: 100%;
-
-    &.measure-widget {
-      display: none;
-    }
-  }
-
   .orange-button {
     display: flex;
     align-items: center;
@@ -131,5 +77,19 @@
       // TODO style to be mobile responsive/centered
       // }
     }
+  }
+}
+
+.dim-container {
+  position: absolute;
+  z-index: 3;
+  opacity: 0.5;
+  width: 100%;
+  background-color: $black;
+  top: 0;
+  height: 100%;
+
+  &.measure-widget {
+    display: none;
   }
 }

@@ -20,16 +20,16 @@ interface ZoomParams {
 export class MapController {
   _map: Map | undefined;
   _mapview: MapView | undefined;
-  _measureByDistance: DistanceMeasurement2D | any; //TODO; test & resolve types!
-  _measureByArea: AreaMeasurement2D | any; //TODO; test & resolve types!
+  _measureByDistance: DistanceMeasurement2D | any;
+  _measureByArea: AreaMeasurement2D | undefined;
   _sketchVM: SketchViewModel | undefined;
   _previousSketchGraphic: any;
 
   constructor() {
     this._map = undefined;
     this._mapview = undefined;
-    this._measureByDistance = undefined; //TODO; test & resolve types!
-    this._measureByArea = undefined; //TODO; test & resolve types!
+    this._measureByDistance = undefined;
+    this._measureByArea = undefined;
     this._sketchVM = undefined;
     this._previousSketchGraphic = undefined;
   }
@@ -57,11 +57,9 @@ export class MapController {
       .when(
         () => {
           console.log('mapview is loaded');
-          this.setMeasureWidget();
-
+          this.setMeasureWidget(); // instantiates measure widgets
+          this.initializeAndSetSketch(); // instantiates sketch widget
           store.dispatch({ type: 'MAP_READY', payload: true });
-
-          this.initializeAndSetSketch();
         },
         (error: Error) => {
           console.log('error in initializeMap()', error);
@@ -115,17 +113,21 @@ export class MapController {
       : this._measureByArea;
 
     if (setNewMeasure) {
-      const newUnit = unitOfLength.length ? unitOfLength : selectedWidget.unit;
+      const newUnit = unitOfLength.length ? unitOfLength : selectedWidget?.unit;
 
       selectedWidget.unit = newUnit;
-      selectedWidget.viewModel.newMeasurement();
-      selectedWidget.watch('viewModel.measurement', function(measurement: any) {
+      // * NOTE: _measureByDistance OR _measureByArea must have a type of any for this reassignment (above) to work
+
+      selectedWidget?.viewModel.newMeasurement();
+      selectedWidget?.watch('viewModel.measurement', function(
+        measurement: any
+      ) {
+        // double-check
+
         /**
-         * TODO [ ] create helper function that converts the area to a
-        value via newUnit constant! Then dispatch to redux store
-        so it renders in measureContent.tsx
-        */
-        console.log('measurement', measurement);
+         * TODO [ ] dispatch to redux store so measurement renders in measureContent.tsx
+         */
+        console.log(measurement);
       });
     }
 
@@ -133,6 +135,7 @@ export class MapController {
       selectedWidget.viewModel.clearMeasurement();
     }
   }
+
   initializeAndSetSketch(): void {
     const tempGL = new GraphicsLayer({
       id: 'sketchGraphics'
@@ -165,6 +168,23 @@ export class MapController {
   createPolygonSketch = () => {
     this._mapview?.graphics.remove(this._previousSketchGraphic);
     this._sketchVM?.create('polygon', { mode: 'freehand' });
+  };
+
+  getCoordinatesLocation = () => {
+    this._mapview?.on('click', event => {
+      if (store.getState().appState.renderModal === 'MeasureWidget') {
+        // console.log('Clicked map', event.mapPoint)
+        // TODO dispatch to Redux store to render latitude & longitude in measure content component
+      }
+    });
+
+    this._mapview?.on('pointer-move', event => {
+      // when user mouse moves along app
+      if (store.getState().appState.renderModal === 'MeasureWidget') {
+        // console.log('mouse moving along map', event)
+        // TODO dispatch to Redux store to render latitude & longitude in measure content component
+      }
+    });
   };
 }
 
