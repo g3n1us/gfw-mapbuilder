@@ -127,7 +127,9 @@ const MeasureContent: FunctionComponent = () => {
           onChange={e => setSelectedDropDownOption(e.target.value)}
           disabled={dropDownOptions.length ? false : true}
         >
-          {dropDownOptions.length === 0 && <option selected>Unit</option>}
+          {dropDownOptions.length === 0 && (
+            <option defaultValue="Unit">Unit</option>
+          )}
           {returnDropdownOptions()}
         </select>
       </div>
