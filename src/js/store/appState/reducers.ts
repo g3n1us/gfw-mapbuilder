@@ -5,7 +5,7 @@ import {
   SELECT_ACTIVE_TAB,
   SET_LANGUAGE,
   RENDER_MODAL,
-  SET_MEASURE_WIDGET_CONTENT
+  SET_MEASURE_WIDGET_RESULTS
 } from './types';
 
 const initialState: AppState = {
@@ -15,11 +15,7 @@ const initialState: AppState = {
     tabViewVisible: true,
     activeTab: 'layers'
   },
-  measurementContent: {
-    measurementResults: {},
-    selectedButton: '',
-    selectedButtonActive: false
-  }
+  measurementResults: {}
 };
 
 export function appStateReducer(
@@ -47,8 +43,8 @@ export function appStateReducer(
       };
     case SET_LANGUAGE:
       return { ...state, selectedLanguage: action.payload };
-    case SET_MEASURE_WIDGET_CONTENT:
-      return { ...state, measurementContent: action.payload };
+    case SET_MEASURE_WIDGET_RESULTS:
+      return { ...state, measurementResults: action.payload };
     default:
       return state;
   }

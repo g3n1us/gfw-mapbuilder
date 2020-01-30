@@ -17,77 +17,93 @@ const MeasureContent: FunctionComponent = () => {
   const selectedLanguage = useSelector(
     (state: any) => state.appState.selectedLanguage
   );
-  const selectedContent = useSelector(
-    (state: any) => state.appState.measurementContent
+  const measurementResults = useSelector(
+    (state: any) => state.appState.measurementResults
   );
+
   const {
     areaUnitsOfLength,
     distanceUnitsOfLength,
     latitudeLongitudeUnits
   } = measureContent[selectedLanguage];
-  const {
-    measurementResults,
-    selectedButton,
-    selectedButtonActive
-  } = selectedContent;
 
   const [renderDistanceOption, setDistanceOption] = useState(false);
   const [renderAreaOption, setAreaOption] = useState(false);
   const [renderLatLongOption, setLatLongOption] = useState(false);
   const [dropDownOptions, setDropDownOptions] = useState([]);
   const [selectedDropDownOption, setSelectedDropDownOption] = useState('');
+  const [coordinates, setCoordinates] = useState({
+    latitude: 0,
+    longitude: 0
+  });
 
   useEffect(() => {
-    setSelectedWidget(selectedButton);
-  }, [selectedButton]);
+    if (renderLatLongOption && measurementResults?.mapClicked) {
+      setCoordinates({
+        latitude: measurementResults?.latitude,
+        longitude: measurementResults?.longitude
+      });
+    }
+  }, [measurementResults?.mapClicked, renderLatLongOption]);
+
+  useEffect(() => {
+    toggleMeasureByAreaOption();
+    resetDropDownOptions();
+  }, [renderAreaOption]);
+
+  useEffect(() => {
+    toggleMeasureByDistance();
+    resetDropDownOptions();
+  }, [renderDistanceOption]);
 
   useEffect(() => {
     setUnitOfLength();
   }, [selectedDropDownOption]);
 
   useEffect(() => {
-    setMeasureByArea();
-  }, [renderAreaOption]);
-
-  useEffect(() => {
-    setMeasureByDistance();
-  }, [renderDistanceOption]);
-
-  useEffect(() => {
-    setFindCoordinates();
+    toggleLatLong();
+    resetDropDownOptions();
   }, [renderLatLongOption]);
 
-  const setSelectedWidget = (selectedButton: string) => {
-    mapController.setSpecificMeasureWidget({ measureByDistance: true });
-    mapController.setSpecificMeasureWidget({ measureByDistance: false });
-
-    if (selectedButtonActive) {
-      switch (selectedButton) {
-        case 'area':
-          mapController.setSpecificMeasureWidget({
-            measureByDistance: false,
-            setNewMeasure: true,
-            unitOfLength: ''
-          });
-          setDropDownOptions(areaUnitsOfLength);
-          break;
-        case 'distance':
-          mapController.setSpecificMeasureWidget({
-            measureByDistance: true,
-            setNewMeasure: true,
-            unitOfLength: ''
-          });
-          setDropDownOptions(distanceUnitsOfLength);
-          break;
-        case 'coordinates':
-          setDropDownOptions(latitudeLongitudeUnits);
-          break;
-        default:
-          break;
-      }
+  const toggleMeasureByAreaOption = () => {
+    dispatch(setMeasureWidgetContent({}));
+    if (renderAreaOption) {
+      setDistanceOption(false);
+      setLatLongOption(false);
+      setDropDownOptions(areaUnitsOfLength);
+      mapController.setSpecificMeasureWidget({
+        measureByDistance: false,
+        setNewMeasure: true,
+        unitOfLength: ''
+      });
     } else {
-      setDropDownOptions([]);
-      setSelectedDropDownOption('');
+      mapController.setSpecificMeasureWidget({ measureByDistance: false });
+    }
+  };
+
+  const toggleMeasureByDistance = () => {
+    dispatch(setMeasureWidgetContent({}));
+    if (renderDistanceOption) {
+      setAreaOption(false);
+      setLatLongOption(false);
+      setDropDownOptions(distanceUnitsOfLength);
+      mapController.setSpecificMeasureWidget({
+        measureByDistance: true,
+        setNewMeasure: true,
+        unitOfLength: ''
+      });
+    } else {
+      mapController.setSpecificMeasureWidget({ measureByDistance: true });
+    }
+  };
+
+  const toggleLatLong = () => {
+    dispatch(setMeasureWidgetContent({}));
+    if (renderLatLongOption) {
+      setAreaOption(false);
+      setDistanceOption(false);
+      setDropDownOptions(latitudeLongitudeUnits);
+      mapController.getCoordinatesLocation(renderLatLongOption);
     }
   };
 
@@ -109,6 +125,17 @@ const MeasureContent: FunctionComponent = () => {
     }
   };
 
+  const resetDropDownOptions = () => {
+    if (
+      renderAreaOption === false &&
+      renderDistanceOption === false &&
+      renderLatLongOption === false
+    ) {
+      setDropDownOptions([]);
+      setSelectedDropDownOption('');
+    }
+  };
+
   const returnDropdownOptions = () => {
     return dropDownOptions.map(
       (lengthUnit: SpecificDropDownOption, index: number) => {
@@ -125,62 +152,37 @@ const MeasureContent: FunctionComponent = () => {
     );
   };
 
-  const setMeasureByArea = () => {
-    if (renderAreaOption) {
-      dispatch(
-        setMeasureWidgetContent({
-          measurementResults: {},
-          selectedButton: 'area',
-          selectedButtonActive: renderAreaOption
-        })
-      );
-    } else {
-      dispatch(
-        setMeasureWidgetContent({
-          measurementResults: {},
-          selectedButton: '',
-          selectedButtonActive: renderAreaOption
-        })
-      );
-    }
-  };
-
-  const setMeasureByDistance = () => {
-    if (renderDistanceOption) {
-      dispatch(
-        setMeasureWidgetContent({
-          measurementResults: {},
-          selectedButton: 'distance',
-          selectedButtonActive: renderDistanceOption
-        })
-      );
-    } else {
-      dispatch(
-        setMeasureWidgetContent({
-          measurementResults: {},
-          selectedButton: '',
-          selectedButtonActive: renderDistanceOption
-        })
-      );
-    }
-  };
-
-  const setFindCoordinates = () => {
+  const returnCoordinateResults = () => {
     if (renderLatLongOption) {
-      dispatch(
-        setMeasureWidgetContent({
-          measurementResults: {},
-          selectedButton: 'coordinates',
-          selectedButtonActive: renderLatLongOption
-        })
+      return (
+        <>
+          <p>Mouse click results:</p>
+          <p>latitude: {coordinates.latitude}</p>
+          <p>longitude: {coordinates.longitude}</p>
+          <br />
+          <p>Mouse move results;</p>
+          <p>Latitude: {measurementResults?.latitude}</p>
+          <p>Latitude: {measurementResults?.longitude}</p>
+        </>
       );
-    } else {
-      dispatch(
-        setMeasureWidgetContent({
-          measurementResults: {},
-          selectedButton: '',
-          selectedButtonActive: renderLatLongOption
-        })
+    }
+  };
+
+  const returnDistanceResults = () => {
+    if (renderDistanceOption) {
+      console.log('distance', measurementResults);
+      return <p> Distance: {measurementResults?.length}</p>;
+    }
+  };
+
+  const returnAreaResults = () => {
+    if (renderAreaOption) {
+      console.log('area', measurementResults);
+      return (
+        <>
+          <p> Perimeter: {measurementResults?.perimeter}</p>
+          <p>Area: {measurementResults?.area}</p>
+        </>
       );
     }
   };
@@ -191,24 +193,18 @@ const MeasureContent: FunctionComponent = () => {
         <button
           onClick={() => setAreaOption(!renderAreaOption)}
           className={`esri-icon-measure-area ${
-            selectedButton === 'area' && selectedButtonActive ? 'selected' : ''
+            renderAreaOption ? 'selected' : ''
           }`}
         />
         <button
           onClick={() => setDistanceOption(!renderDistanceOption)}
           className={`esri-icon-measure ${
-            selectedButton === 'distance' && selectedButtonActive
-              ? 'selected'
-              : ''
+            renderDistanceOption ? 'selected' : ''
           }`}
         />
         <button
           onClick={() => setLatLongOption(!renderLatLongOption)}
-          className={`esri-icon-maps ${
-            selectedButton === 'coordinates' && selectedButtonActive
-              ? 'selected'
-              : ''
-          }`}
+          className={`esri-icon-maps ${renderLatLongOption ? 'selected' : ''}`}
         />
         <span>|</span>
         <select
@@ -223,6 +219,9 @@ const MeasureContent: FunctionComponent = () => {
       </div>
       <p>Measurement Result</p>
       <hr />
+      {returnDistanceResults()}
+      {returnAreaResults()}
+      {returnCoordinateResults()}
     </div>
   );
 };

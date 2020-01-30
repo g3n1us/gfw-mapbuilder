@@ -6,17 +6,18 @@ export interface LeftPanel {
   activeTab: string;
 }
 
-export interface MeasureWidgetContent {
-  measurementResults: DistanceMeasurement2D | AreaMeasurement2D | object | any;
-  selectedButton: string;
-  selectedButtonActive: boolean;
+export interface MeasurementResults {
+  geometry?: any;
+  area?: number;
+  permeter?: number;
+  distance?: number;
 }
 
 export interface AppState {
   leftPanel: LeftPanel;
   renderModal: string;
   selectedLanguage: string;
-  measurementContent: MeasureWidgetContent;
+  measurementResults: MeasurementResults;
 }
 
 //Action names available
@@ -24,11 +25,11 @@ export const RENDER_MODAL = 'RENDER_MODAL';
 export const SELECT_ACTIVE_TAB = 'SELECT_ACTIVE_TAB';
 export const SET_LANGUAGE = 'SET_LANGUAGE';
 export const TOGGLE_TABVIEW_PANEL = 'TOGGLE_TABVIEW_PANEL';
-export const SET_MEASURE_WIDGET_CONTENT = 'SET_MEASURE_WIDGET_CONTENT';
+export const SET_MEASURE_WIDGET_RESULTS = 'SET_MEASURE_WIDGET_RESULTS';
 
 interface MeasureWidgetAction {
-  type: typeof SET_MEASURE_WIDGET_CONTENT;
-  payload: MeasureWidgetContent;
+  type: typeof SET_MEASURE_WIDGET_RESULTS;
+  payload: AppState['measurementResults'];
 }
 
 interface ToggleTabviewPanelAction {

@@ -124,24 +124,10 @@ export class MapController {
 
       selectedWidget?.viewModel.newMeasurement();
 
-      selectedWidget?.watch('viewModel.measurement', function(
-        measurement: any
-      ) {
-        // * NOTE: we're watching the area/length generated
-        // * when the user double-clicks, we're dispatching
-        // * the updated measurement to the store
-        mapController._mapview?.on('double-click', () => {
-          store.dispatch(
-            setMeasureWidgetContent({
-              measurementResults: measurement,
-              selectedButton: 'TBD',
-              selectedButtonActive: true
-            })
-          );
-          console.log(measurement);
-          /**
-           * TODO [ ] dispatch to redux store so measurement renders in measureContent.tsx
-           */
+      selectedWidget?.watch('viewModel.measurement', (measurement: any) => {
+        store.dispatch({
+          type: 'SET_MEASURE_WIDGET_RESULTS',
+          payload: measurement
         });
       });
     }
@@ -150,6 +136,26 @@ export class MapController {
       selectedWidget.viewModel.clearMeasurement();
     }
   }
+
+  getCoordinatesLocation = (renderLatLongOption: boolean) => {
+    this._mapview?.on('click', event => {
+      if (store.getState().appState.renderModal === 'MeasureWidget') {
+        // * NOTE: to persist lat/long in measureContent.tsx
+        console.log('MOUSE CLICK', event);
+        // store.dispatch({ type: 'SET_MEASURE_WIDGET_RESULTS', payload: { mapClicked: true, latitude: event.mapPoint.latitude, longitude: event.mapPoint.longitude} });
+      }
+    });
+
+    this._mapview?.on('pointer-move', event => {
+      if (store.getState().appState.renderModal === 'MeasureWidget') {
+        // * NOTE: for coordinates measurement widget
+
+        const coordinates = this._mapview?.toMap({ x: event.x, y: event.y }); // * NOTE: to show mouse's lat/long in measureContent.tsx
+        console.log('MOUSE MOVE', coordinates);
+        // store.dispatch({ type: 'SET_MEASURE_WIDGET_RESULTS', payload: { mapClicked: false, latitude: coordinates?.latitude, longitude: coordinates?.longitude} });
+      }
+    });
+  };
 
   initializeAndSetSketch(): void {
     const tempGL = new GraphicsLayer({
@@ -183,23 +189,6 @@ export class MapController {
   createPolygonSketch = () => {
     this._mapview?.graphics.remove(this._previousSketchGraphic);
     this._sketchVM?.create('polygon', { mode: 'freehand' });
-  };
-
-  getCoordinatesLocation = () => {
-    this._mapview?.on('click', event => {
-      if (store.getState().appState.renderModal === 'MeasureWidget') {
-        // console.log('Clicked map', event.mapPoint)
-        // TODO dispatch to Redux store to render latitude & longitude in measure content component
-      }
-    });
-
-    this._mapview?.on('pointer-move', event => {
-      // when user mouse moves along app
-      if (store.getState().appState.renderModal === 'MeasureWidget') {
-        // console.log('mouse moving along map', event)
-        // TODO dispatch to Redux store to render latitude & longitude in measure content component
-      }
-    });
   };
 }
 
