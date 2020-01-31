@@ -45,7 +45,7 @@ const PenContent: FunctionComponent = () => {
             <h4>{drawTitle}</h4>
           </figcaption>
           <ol>
-            {drawInstructions.map((direction: String, i: number) => (
+            {drawInstructions.map((direction: string, i: number) => (
               <li key={i}>{direction}</li>
             ))}
           </ol>
@@ -66,7 +66,7 @@ const PenContent: FunctionComponent = () => {
             <h4>{coordinatesTitle}</h4>
           </figcaption>
           <ol>
-            {coordinatesInstructions.map((direction: String, i: number) => (
+            {coordinatesInstructions.map((direction: string, i: number) => (
               <li key={i}>{direction}</li>
             ))}
           </ol>

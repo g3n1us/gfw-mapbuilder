@@ -194,10 +194,8 @@ const CoordinatesForm: FunctionComponent = () => {
           <h4 className="title">{title}</h4>
           <p>{dropdownTitle}</p>
         </div>
-        <select
-          onChange={(e): void => setSelectedFormat(Number(e.target.value))}
-        >
-          {decimalOptions.map((option: String, index: number) => (
+        <select onBlur={(e): void => setSelectedFormat(Number(e.target.value))}>
+          {decimalOptions.map((option: string, index: number) => (
             <option value={index} key={index}>
               {option}
             </option>

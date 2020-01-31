@@ -2,7 +2,7 @@ import React from 'react';
 
 import 'css/CoordinatesForm';
 
-interface coordinateProps {
+interface CoordinateProps {
   degree: number;
   minutes: number;
   seconds: number;
@@ -20,8 +20,8 @@ interface DMSFormValues {
 interface DMSSectionProps {
   dmsSection: {
     rowNum: number;
-    latitude: coordinateProps;
-    longitude: coordinateProps;
+    latitude: CoordinateProps;
+    longitude: CoordinateProps;
   };
   setDMSFormValues: (formValues: DMSFormValues) => void;
   setDMSCardinalType: (cardinalValue: DMSFormValues) => void;
@@ -91,7 +91,7 @@ export default function DMSSection(props: DMSSectionProps): JSX.Element {
           <span className="degree">{secondsSymbol}</span>
           <select
             value={latitude.cardinalPoint}
-            onChange={(e): void =>
+            onBlur={(e): void =>
               setDMSCardinalType({
                 specificPoint: e.target.value,
                 rowNum,
@@ -151,7 +151,7 @@ export default function DMSSection(props: DMSSectionProps): JSX.Element {
           <span className="degree">{secondsSymbol}</span>
           <select
             value={longitude.cardinalPoint}
-            onChange={(e): void =>
+            onBlur={(e): void =>
               setDMSCardinalType({
                 specificPoint: e.target.value,
                 rowNum,
