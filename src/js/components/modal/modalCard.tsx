@@ -9,14 +9,18 @@ import CoordinatesForm from 'js/components/mapWidgets/widgetContent/coordinatesF
 
 import { renderModal } from 'js/store/appState/actions';
 
+import { RootState } from 'js/store/index';
+
 import 'css/modalCard.scss';
 
 const ModalCard: FunctionComponent<{}> = () => {
-  const modalType = useSelector((state: any) => state.appState.renderModal);
+  const modalType = useSelector(
+    (state: RootState) => state.appState.renderModal
+  );
   const dispatch = useDispatch();
   let className = '';
 
-  const handleEscapeKey = (e: React.KeyboardEvent) => {
+  const handleEscapeKey = (e: React.KeyboardEvent): void => {
     if (e.keyCode === 27) {
       // * NOTE ESC button has a keyCode of 27
       dispatch(renderModal(''));
@@ -52,13 +56,13 @@ const ModalCard: FunctionComponent<{}> = () => {
     <>
       <div
         className="dim-container"
-        onClick={() => dispatch(renderModal(''))}
+        onClick={(): object => dispatch(renderModal(''))}
       ></div>
       <div className={`modal-card-container ${className}`}>
         <button
           className="exit-button"
-          onClick={() => dispatch(renderModal(''))}
-          onKeyDown={e => handleEscapeKey(e)}
+          onClick={(): object => dispatch(renderModal(''))}
+          onKeyDown={(e): void => handleEscapeKey(e)}
         >
           <svg className="svg-icon">
             <svg id="shape-close" viewBox="0 0 25 25">

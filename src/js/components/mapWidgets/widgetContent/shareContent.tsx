@@ -1,11 +1,13 @@
 import React, { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 
+import { RootState } from 'js/store/index';
+
 import { shareContent } from '../../../../../configs/modal.config';
 
 const ShareContent: FunctionComponent = () => {
   const selectedLanguage = useSelector(
-    (state: any) => state.appState.selectedLanguage
+    (state: RootState) => state.appState.selectedLanguage
   );
   const { title, instructions } = shareContent[selectedLanguage];
 

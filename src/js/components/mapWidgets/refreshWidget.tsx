@@ -8,7 +8,7 @@ const RefreshWidget: FunctionComponent = () => {
       <div className="widget-container">
         <button
           className="image-wrapper"
-          onClick={() => window.location.reload()}
+          onClick={(): void => window.location.reload()}
         >
           <RefreshIcon height={25} width={25} fill={'#555'} />
         </button>

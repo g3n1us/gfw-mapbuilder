@@ -15,11 +15,11 @@ interface TabViewRender {
 
 //TODO: We need to figure out how to integrate Typescript, Component Props and Redux
 interface TabViewContainerProps {
-  tabViewsToRender: any[];
+  tabViewsToRender: Array<TabViewRender>;
 }
 
 class TabViewContainer extends React.Component<TabViewContainerProps, {}> {
-  render() {
+  render(): JSX.Element[] {
     const TabViews = this.props.tabViewsToRender.map(
       (tabView: TabViewRender) => {
         switch (tabView.label) {

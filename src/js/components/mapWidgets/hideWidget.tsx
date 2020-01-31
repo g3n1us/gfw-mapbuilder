@@ -10,7 +10,7 @@ const HideWidget: FunctionComponent = () => {
       <div className="widget-container">
         <button
           className="image-wrapper"
-          onClick={() => console.log('hide legend and left panel!')}
+          onClick={(): void => console.log('hide legend and left panel!')}
         >
           <HideIcon height={25} width={25} fill={'#555'} />
         </button>

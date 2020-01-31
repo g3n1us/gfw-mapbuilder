@@ -93,6 +93,7 @@ export class MapController {
       }
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     this._sketchVM?.on('create', (event: any) => {
       if (event.state === 'complete') {
         this._previousSketchGraphic = event.graphic;
@@ -107,7 +108,7 @@ export class MapController {
     });
   }
 
-  createPolygonSketch = () => {
+  createPolygonSketch = (): void => {
     this._mapview?.graphics.remove(this._previousSketchGraphic);
     this._sketchVM?.create('polygon', { mode: 'freehand' });
   };

@@ -45,7 +45,9 @@ const App = (): JSX.Element => {
   // const loadError = useSelector(
   //   (store: RootState) => store.mapviewState.loadError
   // );
-  const modalType = useSelector((state: any) => state.appState.renderModal);
+  const modalType = useSelector(
+    (state: RootState) => state.appState.renderModal
+  );
 
   return (
     <>

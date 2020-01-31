@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux';
 
 import DMSSection from 'js/components/mapWidgets/widgetContent/coordinatesDMSSection';
 
+import { RootState } from 'js/store/index';
+
 import { coordinatesContent } from 'configs/modal.config';
 
 import 'css/CoordinatesForm';
@@ -86,7 +88,7 @@ const CoordinatesForm: FunctionComponent = () => {
     }
   ]);
   const selectedLanguage = useSelector(
-    (state: any) => state.appState.selectedLanguage
+    (state: RootState) => state.appState.selectedLanguage
   );
 
   const { degree, minutes, seconds } = coordinatesContent;
@@ -99,7 +101,7 @@ const CoordinatesForm: FunctionComponent = () => {
     rowNum,
     coordinateType,
     degreeType
-  }: DMSFormValues) => {
+  }: DMSFormValues): void => {
     const sections = [...dmsSections];
     const sectionNum = sections.findIndex(section => section.rowNum === rowNum);
 
@@ -112,7 +114,7 @@ const CoordinatesForm: FunctionComponent = () => {
     specificPoint,
     rowNum,
     coordinateType
-  }: DMSCardinalPoint) => {
+  }: DMSCardinalPoint): void => {
     const sections = [...dmsSections];
     const sectionNum = sections.findIndex(section => section.rowNum === rowNum);
 
@@ -121,7 +123,7 @@ const CoordinatesForm: FunctionComponent = () => {
     setDMSForm(sections);
   };
 
-  const setShape = () => {
+  const setShape = (): void => {
     console.log('setShape()', dmsSections);
     // TODO create polygon from formvalues!
   };
@@ -192,7 +194,9 @@ const CoordinatesForm: FunctionComponent = () => {
           <h4 className="title">{title}</h4>
           <p>{dropdownTitle}</p>
         </div>
-        <select onChange={e => setSelectedFormat(Number(e.target.value))}>
+        <select
+          onChange={(e): void => setSelectedFormat(Number(e.target.value))}
+        >
           {decimalOptions.map((option: String, index: number) => (
             <option value={index} key={index}>
               {option}
@@ -216,7 +220,7 @@ const CoordinatesForm: FunctionComponent = () => {
           })}
         <div className="buttons-wrapper">
           <button>Add more</button>
-          <button className="orange-button" onClick={() => setShape()}>
+          <button className="orange-button" onClick={(): void => setShape()}>
             Make shape
           </button>
         </div>

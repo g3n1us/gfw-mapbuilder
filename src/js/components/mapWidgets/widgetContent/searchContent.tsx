@@ -1,11 +1,13 @@
 import React, { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 
+import { RootState } from 'js/store/index';
+
 import { searchContent } from '../../../../../configs/modal.config';
 
 const SearchContent: FunctionComponent = () => {
   const selectedLanguage = useSelector(
-    (state: any) => state.appState.selectedLanguage
+    (state: RootState) => state.appState.selectedLanguage
   );
 
   const { title, buttonTitle, latitude, longitude } = searchContent[

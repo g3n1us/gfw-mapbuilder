@@ -7,7 +7,7 @@ interface Props {
   label: string;
 }
 
-const InfoTabView = (props: Props) => {
+const InfoTabView = (props: Props): JSX.Element => {
   const { activeTab, tabViewVisible } = useSelector(
     (store: RootState) => store.appState.leftPanel
   );

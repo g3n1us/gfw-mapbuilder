@@ -5,6 +5,8 @@ import { renderModal } from 'js/store/appState/actions';
 
 import { mapController } from 'js/controllers/mapController';
 
+import { RootState } from 'js/store';
+
 import { penContent } from 'configs/modal.config';
 
 import { ReactComponent as PolygonIcon } from 'images/polygonIcon.svg';
@@ -17,7 +19,7 @@ const PenContent: FunctionComponent = () => {
   const dispatch = useDispatch();
 
   const selectedLanguage = useSelector(
-    (state: any) => state.appState.selectedLanguage
+    (state: RootState) => state.appState.selectedLanguage
   );
   const {
     drawTitle,
@@ -30,7 +32,7 @@ const PenContent: FunctionComponent = () => {
     shapefileInstructions
   } = penContent[selectedLanguage];
 
-  const setDrawTool = () => {
+  const setDrawTool = (): void => {
     dispatch(renderModal(''));
     mapController.createPolygonSketch();
   };
@@ -54,7 +56,7 @@ const PenContent: FunctionComponent = () => {
           height={75}
           width={100}
         />
-        <button className="orange-button" onClick={() => setDrawTool()}>
+        <button className="orange-button" onClick={(): void => setDrawTool()}>
           <PenIcon fill={'#000'} height={25} width={25} />
           {drawButton}
         </button>
@@ -71,7 +73,9 @@ const PenContent: FunctionComponent = () => {
         </figure>
         <button
           className="orange-button"
-          onClick={() => dispatch(renderModal('PenWidget-CoordinatesForm'))}
+          onClick={(): object =>
+            dispatch(renderModal('PenWidget-CoordinatesForm'))
+          }
         >
           <PlusIcon fill={'#fff'} height={25} width={25} />
           {coordinatesButton}

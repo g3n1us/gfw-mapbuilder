@@ -13,7 +13,7 @@ const ShareWidget: FunctionComponent = () => {
       <div className="widget-container">
         <button
           className="image-wrapper"
-          onClick={() => dispatch(renderModal('ShareWidget'))}
+          onClick={(): object => dispatch(renderModal('ShareWidget'))}
         >
           <ShareIcon height={25} width={25} fill={'#555'} />
         </button>

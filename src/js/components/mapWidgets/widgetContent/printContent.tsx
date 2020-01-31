@@ -1,11 +1,13 @@
 import React, { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 
+import { RootState } from 'js/store/index';
+
 import { printContent } from '../../../../../configs/modal.config';
 
 const PrintContent: FunctionComponent = () => {
   const selectedLanguage = useSelector(
-    (state: any) => state.appState.selectedLanguage
+    (state: RootState) => state.appState.selectedLanguage
   );
   const { buttonLabel } = printContent[selectedLanguage];
 
