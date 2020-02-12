@@ -1,4 +1,4 @@
-import Point from 'esri/geometry/Point';
+// import Point from 'esri/geometry/Point';
 
 export interface LeftPanel {
   tabViewVisible: boolean;
@@ -7,12 +7,12 @@ export interface LeftPanel {
 }
 
 interface SpecificAreaResults {
-  area?: number;
-  perimeter?: number;
+  area?: string;
+  perimeter?: string;
 }
 
 interface SpecificDistanceResults {
-  length?: number;
+  length?: string;
 }
 
 interface ClickResults {
@@ -21,18 +21,11 @@ interface ClickResults {
 }
 
 export interface MeasureContent {
-  toggleButton: {
-    activeButton?: string;
-    // areaButtonActive: boolean;
-    // distanceButtonActive: boolean;
-    // coordinatesButtonActive: boolean;
-  };
-  results: {
-    areaResults?: SpecificAreaResults;
-    distanceResults?: SpecificDistanceResults;
-    coordinateMouseClickResults?: any; // ClickResults | undefined | Point;
-    coordinatePointerMoveResults?: any; // ClickResults | undefined | Point;
-  };
+  activeButton?: string;
+  areaResults?: SpecificAreaResults;
+  distanceResults?: SpecificDistanceResults;
+  coordinateMouseClickResults?: any; // ClickResults | undefined | Point;
+  coordinatePointerMoveResults?: any; // ClickResults | undefined | Point;
 }
 
 export interface AppState {
@@ -49,7 +42,6 @@ export const SELECT_ACTIVE_TAB = 'SELECT_ACTIVE_TAB';
 export const SET_LANGUAGE = 'SET_LANGUAGE';
 export const TOGGLE_TABVIEW_PANEL = 'TOGGLE_TABVIEW_PANEL';
 export const SET_OPEN_LAYER_GROUP = 'SET_OPEN_LAYER_GROUP';
-export const SET_MEASURE_BUTTON = 'SET_MEASURE_BUTTON';
 export const SET_MEASURE_RESULTS = 'SET_MEASURE_RESULTS';
 export const SET_ACTIVE_MEASURE_BUTTON = 'SET_ACTIVE_MEASURE_BUTTON';
 export const SET_HIDE_WIDGET = 'SET_HIDE_WIDGET';
@@ -84,19 +76,14 @@ interface SetLanguageAction {
   payload: AppState['selectedLanguage'];
 }
 
-interface SetMeasureButton {
-  type: typeof SET_MEASURE_BUTTON;
-  payload: AppState['measureContent']['toggleButton'];
-}
-
 interface SetMeasureResults {
   type: typeof SET_MEASURE_RESULTS;
-  payload: AppState['measureContent']['results'];
+  payload: AppState['measureContent'];
 }
 
 interface SetActiveMeasureButton {
   type: typeof SET_ACTIVE_MEASURE_BUTTON;
-  payload: AppState['measureContent']['toggleButton']['activeButton'];
+  payload: AppState['measureContent']['activeButton'];
 }
 
 export type AppStateTypes =
@@ -105,7 +92,6 @@ export type AppStateTypes =
   | SelectActiveTab
   | SetLanguageAction
   | SetOpenLayerGroup
-  | SetMeasureButton
   | SetMeasureResults
   | SetActiveMeasureButton
   | SetHideWidget;
