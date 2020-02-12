@@ -566,7 +566,7 @@ export class MapController {
         this._selectedWidget?.viewModel.clearMeasurement();
         this._selectedWidget = undefined;
         // this.updateOnClickCoordinates(selectedDropdownOption);
-        this.setOnClickCoordinates(selectedDropdownOption);
+        this.setOnClickCoordinates();
         // this.setPointerMoveCoordinates(selectedDropdownOption);
         break;
       }
@@ -622,37 +622,46 @@ export class MapController {
     }
   }
 
-  // updateOnClickCoordinates(selectedDropdownOption: string): void {
-  //   const {
-  //     coordinateMouseClickResults
-  //   } = store.getState().appState.measureContent;
-  //   const isDMS = selectedDropdownOption === 'dms';
-  //   const isDecimal = selectedDropdownOption === 'decimal';
+  updateOnClickCoordinates(selectedDropdownOption: string): void {
+    const {
+      coordinateMouseClickResults
+    } = store.getState().appState.measureContent;
 
-  //   if (
-  //     coordinateMouseClickResults?.latitude &&
-  //     coordinateMouseClickResults?.longitude &&
-  //     isDMS
-  //   ) {
-  //     // TODO - convert decimal to DMS
-  //     // * NOTE - Will need to revisit this logic
-  //     // * NOTE - Will need to explicitly update other ...Results property of Redux state
+    if (selectedDropdownOption === 'dms') {
+      debugger;
+      CoordinateFormatter.load().then(function() {
+        console.log('CoordinateFormatter', CoordinateFormatter);
+        debugger;
+      });
+    }
 
-  //     store.dispatch(
-  //       setMeasureResults({
-  //         areaResults: {},
-  //         distanceResults: {},
-  //         coordinateMouseClickResults: {}
-  //       })
-  //     );
-  //   } else if (
-  //     coordinateMouseClickResults?.latitude &&
-  //     coordinateMouseClickResults?.longitude &&
-  //     isDecimal
-  //   ) {
-  //     // TODO - convert DMS to decimal
-  //   }
-  // }
+    // const isDMS = selectedDropdownOption === 'dms';
+    // const isDecimal = selectedDropdownOption === 'decimal';
+
+    // if (
+    //   coordinateMouseClickResults?.latitude &&
+    //   coordinateMouseClickResults?.longitude &&
+    //   isDMS
+    // ) {
+    //   // TODO - convert decimal to DMS
+    //   // * NOTE - Will need to revisit this logic
+    //   // * NOTE - Will need to explicitly update other ...Results property of Redux state
+
+    //   store.dispatch(
+    //     setMeasureResults({
+    //       areaResults: {},
+    //       distanceResults: {},
+    //       coordinateMouseClickResults: {}
+    //     })
+    //   );
+    // } else if (
+    //   coordinateMouseClickResults?.latitude &&
+    //   coordinateMouseClickResults?.longitude &&
+    //   isDecimal
+    // ) {
+    //   // TODO - convert DMS to decimal
+    // }
+  }
 
   updateMeasureWidgetOnClick(): void {
     const mapviewOnClick = this._mapview?.on('click', event => {
@@ -662,31 +671,25 @@ export class MapController {
     });
   }
 
-  setOnClickCoordinates(selectedDropdownOption: string): void {
+  setOnClickCoordinates(): void {
     this._mouseClickEventListener = this._mapview?.on('click', event => {
       event.stopPropagation();
-      let coordinateMouseClickResults = {};
       const coordinatesInDegrees = this._mapview?.toMap({
         x: event.x,
         y: event.y
-      });
-
-      if (selectedDropdownOption === 'degree') {
-        coordinateMouseClickResults = {
-          latitude: coordinatesInDegrees?.latitude,
-          longitude: coordinatesInDegrees?.longitude
-        };
-      } else if (selectedDropdownOption === 'dms') {
-        // TODO - convert to dms
-      }
+      }); // * NOTE: by default it's in degrees :)
 
       store.dispatch(
         setMeasureResults({
           areaResults: {},
           distanceResults: {},
-          coordinateMouseClickResults
+          coordinateMouseClickResults: {
+            latitude: coordinatesInDegrees?.latitude,
+            longitude: coordinatesInDegrees?.longitude
+          }
         })
       );
+      this._mouseClickEventListener.remove();
     });
   }
 

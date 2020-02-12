@@ -71,7 +71,7 @@ const MeasureContent: FunctionComponent = () => {
       );
     } else if (activeButton === 'coordinates') {
       setSelectedCoordinatesUnit(selectedUnit);
-      // mapController.setActiveMeasureWidget(activeButton);
+      mapController.updateOnClickCoordinates(selectedUnit);
       // TODO - convert area/perimeters
       // TODO - reset widget
       // TODO - update results in Redux
@@ -156,14 +156,15 @@ const MeasureContent: FunctionComponent = () => {
     );
   };
 
-  const setSelectedWidget = (optionType: string): void => {
-    if (optionType === 'coordinates') {
-      // do something
-      // mapController.setActiveMeasureWidget(optionType);
-    } else {
-      mapController.setActiveMeasureWidget(optionType);
-    }
-  };
+  // ? Do I still need this?
+  // const setSelectedWidget = (optionType: string): void => {
+  //   if (optionType === 'coordinates') {
+  //     // do something
+  //     // mapController.setActiveMeasureWidget(optionType);
+  //   } else {
+  //     mapController.setActiveMeasureWidget(optionType);
+  //   }
+  // };
 
   const setOption = (optionType: string): void => {
     mapController.clearAllWidgets();
@@ -179,7 +180,8 @@ const MeasureContent: FunctionComponent = () => {
       );
     } else {
       dispatch(setActiveMeasureButton(optionType));
-      setSelectedWidget(optionType);
+      mapController.setActiveMeasureWidget(optionType);
+      //setSelectedWidget(optionType)
     }
   };
 
@@ -211,12 +213,12 @@ const MeasureContent: FunctionComponent = () => {
             activeButton === 'distance' ? 'selected' : ''
           }`}
         />
-        {/* <button
+        <button
           onClick={(): void => setOption('coordinates')}
           className={`esri-icon-maps ${
             activeButton === 'coordinates' ? 'selected' : ''
           }`}
-        /> */}
+        />
         <span>|</span>
         <select
           value={returnSelectedUnit()}
