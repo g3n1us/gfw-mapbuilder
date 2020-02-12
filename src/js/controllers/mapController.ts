@@ -6,6 +6,7 @@ import GraphicsLayer from 'esri/layers/GraphicsLayer';
 import SketchViewModel from 'esri/widgets/Sketch/SketchViewModel';
 import DistanceMeasurement2D from 'esri/widgets/DistanceMeasurement2D';
 import AreaMeasurement2D from 'esri/widgets/AreaMeasurement2D';
+import CoordinateFormatter from 'esri/geometry/coordinateFormatter';
 
 import PrintTask from 'esri/tasks/PrintTask';
 import PrintTemplate from 'esri/tasks/support/PrintTemplate';
@@ -506,7 +507,7 @@ export class MapController {
         break;
       case 'coordinates': {
         // this.updateOnClickCoordinates(selectedDropdownOption);
-        // this.setOnClickCoordinates(selectedDropdownOption);
+        this.setOnClickCoordinates(selectedDropdownOption);
         // this.setPointerMoveCoordinates(selectedDropdownOption);
         break;
       }
@@ -605,13 +606,16 @@ export class MapController {
     this._mouseClickEventListener = this._mapview?.on('click', event => {
       event.stopPropagation();
       let coordinateMouseClickResults = {};
-      const coordinatesInDecimals = this._mapview?.toMap({
+      const coordinatesInDegrees = this._mapview?.toMap({
         x: event.x,
         y: event.y
       });
 
       if (selectedDropdownOption === 'degree') {
-        // TODO - convert to degree
+        coordinateMouseClickResults = {
+          latitude: coordinatesInDegrees?.latitude,
+          longitude: coordinatesInDegrees?.longitude
+        };
       } else if (selectedDropdownOption === 'dms') {
         // TODO - convert to dms
       }
