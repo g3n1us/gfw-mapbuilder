@@ -553,10 +553,7 @@ export class MapController {
     this._pointerMoveEventListener = undefined;
   }
 
-  setActiveMeasureWidget(
-    optionType: OptionType,
-    coordinateUnit?: string
-  ): void {
+  setActiveMeasureWidget(optionType: OptionType): void {
     switch (optionType) {
       case 'area':
         this._selectedWidget = new AreaMeasurement2D({
@@ -573,10 +570,8 @@ export class MapController {
       case 'coordinates': {
         this._selectedWidget?.viewModel.clearMeasurement();
         this._selectedWidget = undefined;
-        if (coordinateUnit) {
-          this.setOnClickCoordinates(optionType);
-          this.setPointerMoveCoordinates(optionType);
-        }
+        this.setOnClickCoordinates(optionType);
+        this.setPointerMoveCoordinates(optionType);
         break;
       }
       default:
