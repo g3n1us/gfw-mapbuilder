@@ -15,17 +15,19 @@ interface SpecificDistanceResults {
   length?: string;
 }
 
-interface ClickResults {
-  latitude?: number;
-  longitude?: number;
+interface MouseResults {
+  decimalLatitude?: number;
+  decimalLongitude?: number;
+  dmsLatitude?: number;
+  dmsLongitude?: number;
 }
 
 export interface MeasureContent {
   activeButton?: string;
   areaResults?: SpecificAreaResults;
   distanceResults?: SpecificDistanceResults;
-  coordinateMouseClickResults?: any; // ClickResults | undefined | Point;
-  coordinatePointerMoveResults?: any; // ClickResults | undefined | Point;
+  coordinateMouseClickResults?: MouseResults;
+  coordinatePointerMoveResults?: MouseResults;
 }
 
 export interface AppState {

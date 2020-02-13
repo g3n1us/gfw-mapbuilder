@@ -7,7 +7,7 @@ import GraphicsLayer from 'esri/layers/GraphicsLayer';
 import SketchViewModel from 'esri/widgets/Sketch/SketchViewModel';
 import DistanceMeasurement2D from 'esri/widgets/DistanceMeasurement2D';
 import AreaMeasurement2D from 'esri/widgets/AreaMeasurement2D';
-import CoordinateFormatter from 'esri/geometry/coordinateFormatter';
+import CoordinateConversion from 'esri/widgets/CoordinateConversion';
 import PrintTask from 'esri/tasks/PrintTask';
 import PrintTemplate from 'esri/tasks/support/PrintTemplate';
 import PrintParameters from 'esri/tasks/support/PrintParameters';
@@ -75,6 +75,8 @@ export class MapController {
   _pointerMoveEventListener: EventListener | any;
   _printTask: PrintTask | undefined;
   _legend: Legend | undefined;
+  _onClickCoordinateConversion: CoordinateConversion | any;
+  _pointerMoveCoordinateConversion: CoordinateConversion | any;
   _selectedWidget: any; // DistanceMeasurement2D | AreaMeasurement2D | undefined;
   // * NOTE - _selectedWidget is typed as any
   // * because ESRI's TS types measurementLabel as a string
@@ -88,6 +90,8 @@ export class MapController {
     this._printTask = undefined;
     this._legend = undefined;
     this._selectedWidget = undefined;
+    this._onClickCoordinateConversion = undefined;
+    this._pointerMoveCoordinateConversion = undefined;
   }
 
   initializeMap(domRef: RefObject<any>): void {
@@ -549,7 +553,10 @@ export class MapController {
     this._pointerMoveEventListener = undefined;
   }
 
-  setActiveMeasureWidget(optionType: OptionType): void {
+  setActiveMeasureWidget(
+    optionType: OptionType,
+    coordinateUnit?: string
+  ): void {
     switch (optionType) {
       case 'area':
         this._selectedWidget = new AreaMeasurement2D({
@@ -566,9 +573,10 @@ export class MapController {
       case 'coordinates': {
         this._selectedWidget?.viewModel.clearMeasurement();
         this._selectedWidget = undefined;
-        // this.updateOnClickCoordinates(selectedDropdownOption);
-        this.setOnClickCoordinates();
-        // this.setPointerMoveCoordinates(selectedDropdownOption);
+        if (coordinateUnit) {
+          this.setOnClickCoordinates(optionType);
+          this.setPointerMoveCoordinates(optionType);
+        }
         break;
       }
       default:
@@ -623,45 +631,24 @@ export class MapController {
     }
   }
 
-  updateOnClickCoordinates(selectedDropdownOption: string): void {
-    const {
-      coordinateMouseClickResults
-    } = store.getState().appState.measureContent;
+  formatDMSResults(coordinate: string): any {
+    let northSouth = '';
+    let eastWest = '';
+    const northIndex = coordinate.indexOf('N') + 1;
+    const southIndex = coordinate.indexOf('S') + 1;
 
-    if (selectedDropdownOption === 'dms') {
-      debugger;
-      CoordinateFormatter.load().then(function() {
-        console.log('CoordinateFormatter', CoordinateFormatter);
-        debugger;
-      });
+    if (coordinate.includes('N')) {
+      northSouth = coordinate.substring(0, northIndex);
+      eastWest = coordinate.substring(northIndex, coordinate.length);
+    } else if (coordinate.includes('S')) {
+      northSouth = coordinate.substring(0, southIndex);
+      eastWest = coordinate.substring(southIndex, coordinate.length);
     }
 
-    // const isDMS = selectedDropdownOption === 'dms';
-    // const isDecimal = selectedDropdownOption === 'decimal';
-
-    // if (
-    //   coordinateMouseClickResults?.latitude &&
-    //   coordinateMouseClickResults?.longitude &&
-    //   isDMS
-    // ) {
-    //   // TODO - convert decimal to DMS
-    //   // * NOTE - Will need to revisit this logic
-    //   // * NOTE - Will need to explicitly update other ...Results property of Redux state
-
-    //   store.dispatch(
-    //     setMeasureResults({
-    //       areaResults: {},
-    //       distanceResults: {},
-    //       coordinateMouseClickResults: {}
-    //     })
-    //   );
-    // } else if (
-    //   coordinateMouseClickResults?.latitude &&
-    //   coordinateMouseClickResults?.longitude &&
-    //   isDecimal
-    // ) {
-    //   // TODO - convert DMS to decimal
-    // }
+    return {
+      latitude: northSouth,
+      longitude: eastWest
+    };
   }
 
   updateMeasureWidgetOnClick(): void {
@@ -672,80 +659,101 @@ export class MapController {
     });
   }
 
-  setOnClickCoordinates(): void {
-    this._mouseClickEventListener = this._mapview?.on('click', event => {
+  setPointerMoveCoordinates(optionType: OptionType): void {
+    this._pointerMoveCoordinateConversion = new CoordinateConversion({
+      view: this._mapview,
+      mode: 'capture'
+    });
+
+    this._pointerMoveEventListener = this._mapview?.on(
+      'pointer-move',
+      async event => {
+        event.stopPropagation();
+        const {
+          coordinateMouseClickResults
+        } = store.getState().appState.measureContent;
+        const coordinatesInDegrees = this._mapview?.toMap({
+          x: event.x,
+          y: event.y
+        });
+
+        this._pointerMoveCoordinateConversion.currentLocation = coordinatesInDegrees;
+
+        // const dmsFormat = this._pointerMoveCoordinateConversion.formats.find(
+        //   (item: any) => item.name === 'dms'
+        // );
+
+        // const dmsConversion = await this._pointerMoveCoordinateConversion.viewModel.convert(
+        //   dmsFormat,
+        //   this._pointerMoveCoordinateConversion.currentLocation
+        // );
+
+        // const { latitude, longitude } = this.formatDMSResults(
+        //   dmsConversion.coordinate
+        // );
+
+        store.dispatch(
+          setMeasureResults({
+            activeButton: optionType,
+            areaResults: {},
+            distanceResults: {},
+            coordinatePointerMoveResults: {
+              decimalLatitude: coordinatesInDegrees?.latitude,
+              decimalLongitude: coordinatesInDegrees?.longitude
+              // dmsLatitude: latitude,
+              // dmsLongitude: longitude
+            },
+            coordinateMouseClickResults
+          })
+        );
+      }
+    );
+  }
+
+  setOnClickCoordinates(optionType: OptionType): void {
+    this._onClickCoordinateConversion = new CoordinateConversion({
+      view: this._mapview,
+      mode: 'capture'
+    });
+    this._mouseClickEventListener = this._mapview?.on('click', async event => {
       event.stopPropagation();
+      const {
+        coordinatePointerMoveResults
+      } = store.getState().appState.measureContent;
       const coordinatesInDegrees = this._mapview?.toMap({
         x: event.x,
         y: event.y
-      }); // * NOTE: by default it's in degrees :)
+      });
+      this._onClickCoordinateConversion.currentLocation = coordinatesInDegrees;
+
+      const dmsFormat = this._onClickCoordinateConversion.formats.find(
+        (item: any) => item.name === 'dms'
+      );
+      const dmsConversion = await this._onClickCoordinateConversion.viewModel.convert(
+        dmsFormat,
+        this._onClickCoordinateConversion.currentLocation
+      );
+
+      const { latitude, longitude } = this.formatDMSResults(
+        dmsConversion.coordinate
+      );
 
       store.dispatch(
         setMeasureResults({
+          activeButton: optionType,
           areaResults: {},
           distanceResults: {},
           coordinateMouseClickResults: {
-            latitude: coordinatesInDegrees?.latitude,
-            longitude: coordinatesInDegrees?.longitude
-          }
+            decimalLatitude: event.mapPoint.latitude,
+            decimalLongitude: event.mapPoint.longitude,
+            dmsLatitude: latitude,
+            dmsLongitude: longitude
+          },
+          coordinatePointerMoveResults
         })
       );
-      this._mouseClickEventListener.remove();
     });
   }
-
-  // setOnClickCoordinates(selectedDropdownOption: string): void {
-  //   this._mouseClickEventListener = this._mapview?.on('click', event => {
-  //     event.stopPropagation();
-  //     let coordinateMouseClickResults = {};
-  //     const coordinatesInDecimals = this._mapview?.toMap({
-  //       x: event.x,
-  //       y: event.y
-  //     });
-
-  //     if (selectedDropdownOption === 'degree') {
-  //       // TODO - convert to degree
-  //     } else if (selectedDropdownOption === 'dms') {
-  //       // TODO - convert to dms
-  //     }
-
-  //     store.dispatch(
-  //       setMeasureResults({
-  //         areaResults: {},
-  //         distanceResults: {},
-  //         coordinateMouseClickResults
-  //       })
-  //     );
-  //   });
-  // }
-
-  // setPointerMoveCoordinates(selectedDropdownOption: string): void {
-  //   this._pointerMoveEventListener = this._mapview?.on(
-  //     'pointer-move',
-  //     event => {
-  //       event.stopPropagation();
-  //       let coordinatePointerMoveResults = {};
-  //       const coordinatesInDecimals = this._mapview?.toMap({
-  //         x: event.x,
-  //         y: event.y
-  //       });
-
-  //       if (selectedDropdownOption === 'Degree') {
-  //         // TODO - convert to degree
-  //       } else if (selectedDropdownOption === 'DMS') {
-  //         // TODO - convert to DMS
-  //       }
-
-  //       store.dispatch(
-  //         setMeasureResults({
-  //           areaResults: {},
-  //           distanceResults: {},
-  //           coordinatePointerMoveResults
-  //         })
-  //       );
-  //     }
-  //   );
-  // }
 
   generateMapPDF = async (layoutType: string): Promise<any> => {
     const printServiceURL = store.getState().appSettings.printServiceUrl;

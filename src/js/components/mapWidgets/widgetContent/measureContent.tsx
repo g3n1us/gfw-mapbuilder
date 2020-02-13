@@ -73,10 +73,8 @@ const MeasureContent: FunctionComponent = () => {
       );
     } else if (activeButton === 'coordinates') {
       setSelectedCoordinatesUnit(selectedUnit);
-      mapController.updateOnClickCoordinates(selectedUnit);
-      // TODO - convert area/perimeters
-      // TODO - reset widget
-      // TODO - update results in Redux
+      mapController.setOnClickCoordinates('coordinates');
+      mapController.setPointerMoveCoordinates('coordinates');
     }
   };
 
@@ -114,14 +112,34 @@ const MeasureContent: FunctionComponent = () => {
           <p>
             <strong>Mouse click</strong>
           </p>
-          <p>Latitude: {coordinateMouseClickResults?.latitude}</p>
-          <p>Longitude: {coordinateMouseClickResults?.longitude}</p>
+          <p>
+            Latitude:
+            {selectedCoordinatesUnit === 'degree'
+              ? coordinateMouseClickResults?.decimalLatitude
+              : coordinateMouseClickResults?.dmsLatitude}
+          </p>
+          <p>
+            Longitude:
+            {selectedCoordinatesUnit === 'degree'
+              ? coordinateMouseClickResults?.decimalLongitude
+              : coordinateMouseClickResults?.dmsLongitude}
+          </p>
           <br />
           <p>
             <strong>Pointer move</strong>
           </p>
-          <p>Latitude: {coordinatePointerMoveResults?.latitude}</p>
-          <p>Longitude: {coordinatePointerMoveResults?.longitude}</p>
+          <p>
+            Latitude:
+            {selectedCoordinatesUnit === 'degree'
+              ? coordinatePointerMoveResults?.decimalLatitude
+              : coordinatePointerMoveResults?.dmsLatitude}
+          </p>
+          <p>
+            Longitude:
+            {selectedCoordinatesUnit === 'degree'
+              ? coordinatePointerMoveResults?.decimalLongitude
+              : coordinatePointerMoveResults?.dmsLongitude}
+          </p>
         </>
       );
     }
@@ -158,15 +176,13 @@ const MeasureContent: FunctionComponent = () => {
     );
   };
 
-  // ? Do I still need this?
-  // const setSelectedWidget = (optionType: string): void => {
-  //   if (optionType === 'coordinates') {
-  //     // do something
-  //     // mapController.setActiveMeasureWidget(optionType);
-  //   } else {
-  //     mapController.setActiveMeasureWidget(optionType);
-  //   }
-  // };
+  const setSelectedWidget = (optionType: string): void => {
+    if (optionType === 'coordinates') {
+      mapController.setActiveMeasureWidget(optionType, selectedCoordinatesUnit);
+    } else {
+      mapController.setActiveMeasureWidget(optionType as OptionType);
+    }
+  };
 
   const setOption = (optionType: OptionType): void => {
     mapController.clearAllWidgets();
@@ -177,13 +193,13 @@ const MeasureContent: FunctionComponent = () => {
           areaResults: {},
           distanceResults: {},
           coordinateMouseClickResults: {},
-          coordinatePointerMoveResults: {}
+          coordinatePointerMoveResults: {},
+          activeButton: ''
         })
       );
     } else {
       dispatch(setActiveMeasureButton(optionType));
-      mapController.setActiveMeasureWidget(optionType);
-      //setSelectedWidget(optionType)
+      setSelectedWidget(optionType);
     }
   };
 
