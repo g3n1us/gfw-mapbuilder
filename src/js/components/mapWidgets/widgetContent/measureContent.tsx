@@ -1,4 +1,10 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, {
+  FunctionComponent,
+  useState,
+  useRef,
+  MutableRefObject,
+  useEffect
+} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import AreaMeasurement2D from 'esri/widgets/AreaMeasurement2D';
 import DistanceMeasurement2D from 'esri/widgets/DistanceMeasurement2D';
@@ -24,10 +30,9 @@ interface SpecificDropDownOption {
 }
 
 const MeasureContent: FunctionComponent = () => {
-  const { activeButton } = useSelector(
-    (state: RootState) => state.appState.measureContent
-  );
+  const coordinateConversionRef = useRef(null) as MutableRefObject<null>;
   const {
+    activeButton,
     areaResults,
     distanceResults,
     coordinateMouseClickResults,
@@ -56,25 +61,30 @@ const MeasureContent: FunctionComponent = () => {
   );
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    if (activeButton === 'coordinates' && coordinateConversionRef.current) {
+      mapController.setActiveMeasureWidget(
+        activeButton,
+        coordinateConversionRef.current
+      );
+    }
+  }, [activeButton, coordinateConversionRef]);
+
   const setMeasurementUnit = (
     selectedUnit: AreaMeasurement2D['unit'] | DistanceMeasurement2D['unit']
   ): void => {
     if (activeButton === 'area') {
       setSelectedAreaUnit(selectedUnit);
       mapController.updateSelectedMeasureWidget(
-        'area',
+        activeButton,
         selectedUnit as AreaMeasurement2D['unit']
       );
     } else if (activeButton === 'distance') {
       setSelectedDistanceUnit(selectedUnit);
       mapController.updateSelectedMeasureWidget(
-        'distance',
+        activeButton,
         selectedUnit as AreaMeasurement2D['unit']
       );
-    } else if (activeButton === 'coordinates') {
-      setSelectedCoordinatesUnit(selectedUnit);
-      mapController.setOnClickCoordinates('coordinates');
-      mapController.setPointerMoveCoordinates('coordinates');
     }
   };
 
@@ -85,6 +95,8 @@ const MeasureContent: FunctionComponent = () => {
     if (activeButton === 'area') {
       return (
         <>
+          <p>Measurement Result</p>
+          <hr />
           <p>
             <strong>Area: </strong> {areaResults?.area}
           </p>
@@ -97,6 +109,8 @@ const MeasureContent: FunctionComponent = () => {
     } else if (activeButton === 'distance') {
       return (
         <>
+          <p>Measurement Result</p>
+          <hr />
           <p>
             <strong>Distance Results: </strong>
             {distanceResults?.length}
@@ -105,47 +119,26 @@ const MeasureContent: FunctionComponent = () => {
       );
     } else if (activeButton === 'coordinates') {
       return (
-        <>
-          <p>
-            <strong>Coordinate results</strong>
-          </p>
-          <p>
-            <strong>Mouse click</strong>
-          </p>
-          <p>
-            Latitude:
-            {selectedCoordinatesUnit === 'degree'
-              ? coordinateMouseClickResults?.decimalLatitude
-              : coordinateMouseClickResults?.dmsLatitude}
-          </p>
-          <p>
-            Longitude:
-            {selectedCoordinatesUnit === 'degree'
-              ? coordinateMouseClickResults?.decimalLongitude
-              : coordinateMouseClickResults?.dmsLongitude}
-          </p>
-          <br />
-          <p>
-            <strong>Pointer move</strong>
-          </p>
-          <p>
-            Latitude:
-            {selectedCoordinatesUnit === 'degree'
-              ? coordinatePointerMoveResults?.decimalLatitude
-              : coordinatePointerMoveResults?.dmsLatitude}
-          </p>
-          <p>
-            Longitude:
-            {selectedCoordinatesUnit === 'degree'
-              ? coordinatePointerMoveResults?.decimalLongitude
-              : coordinatePointerMoveResults?.dmsLongitude}
-          </p>
-        </>
+        <div
+          className="coordinate-conversion-widget"
+          ref={coordinateConversionRef}
+        ></div>
       );
     }
   };
 
-  const returnDropdown = (): Array<[]> | Array<JSX.Element> => {
+  const returnSelectedUnit = (): string => {
+    switch (activeButton) {
+      case 'area':
+        return selectedAreaUnit;
+      case 'distance':
+        return selectedDistanceUnit;
+      default:
+        return '';
+    }
+  };
+
+  const returnDropdown = (): JSX.Element | undefined => {
     let selectedDropdown = [];
 
     switch (activeButton) {
@@ -155,33 +148,50 @@ const MeasureContent: FunctionComponent = () => {
       case 'distance':
         selectedDropdown = distanceUnitsOfLength;
         break;
-      case 'coordinates':
-        selectedDropdown = latitudeLongitudeUnits;
-        break;
       default:
         selectedDropdown = defaultOption;
         break;
     }
 
-    return selectedDropdown.map(
-      (lengthUnit: SpecificDropDownOption, index: number) => {
-        const { text, esriUnit } = lengthUnit;
+    if (activeButton === 'area' || activeButton === 'distance') {
+      return (
+        <>
+          <span>|</span>
+          <select
+            value={returnSelectedUnit()}
+            onChange={(e): void =>
+              setMeasurementUnit(
+                e.target.value as
+                  | AreaMeasurement2D['unit']
+                  | DistanceMeasurement2D['unit']
+              )
+            }
+            onBlur={(): void => console.log('Bonjour, onBlur!')}
+            // disabled={activeButton === '' ? true : false}
+          >
+            {selectedDropdown.map(
+              (lengthUnit: SpecificDropDownOption, index: number) => {
+                const { text, esriUnit } = lengthUnit;
 
-        return (
-          <option value={esriUnit} key={index}>
-            {text}
-          </option>
-        );
-      }
-    );
+                return (
+                  <option value={esriUnit} key={index}>
+                    {text}
+                  </option>
+                );
+              }
+            )}
+          </select>
+        </>
+      );
+    }
   };
 
   const setSelectedWidget = (optionType: OptionType): void => {
-    if (optionType === 'coordinates') {
-      mapController.setActiveMeasureWidget(optionType, selectedCoordinatesUnit);
-    } else {
+    if (optionType === 'area' || optionType === 'distance') {
       mapController.setActiveMeasureWidget(optionType as OptionType);
     }
+    // * NOTE - we're maintaining coordinates widget via useEffect
+    // * since that involves mounting/unmounting to the dom!
   };
 
   const setOption = (optionType: OptionType): void => {
@@ -200,19 +210,6 @@ const MeasureContent: FunctionComponent = () => {
     } else {
       dispatch(setActiveMeasureButton(optionType));
       setSelectedWidget(optionType);
-    }
-  };
-
-  const returnSelectedUnit = (): string => {
-    switch (activeButton) {
-      case 'area':
-        return selectedAreaUnit;
-      case 'distance':
-        return selectedDistanceUnit;
-      case 'coordinates':
-        return selectedCoordinatesUnit;
-      default:
-        return '';
     }
   };
 
@@ -237,24 +234,8 @@ const MeasureContent: FunctionComponent = () => {
             activeButton === 'coordinates' ? 'selected' : ''
           }`}
         />
-        <span>|</span>
-        <select
-          value={returnSelectedUnit()}
-          onChange={(e): void =>
-            setMeasurementUnit(
-              e.target.value as
-                | AreaMeasurement2D['unit']
-                | DistanceMeasurement2D['unit']
-            )
-          }
-          onBlur={(): void => console.log('Bonjour, onBlur!')}
-          disabled={activeButton === '' ? true : false}
-        >
-          {returnDropdown()}
-        </select>
+        {returnDropdown()}
       </div>
-      <p>Measurement Result</p>
-      <hr />
       {returnMeasurementResults()}
     </div>
   );

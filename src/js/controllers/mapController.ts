@@ -12,8 +12,9 @@ import PrintTask from 'esri/tasks/PrintTask';
 import PrintTemplate from 'esri/tasks/support/PrintTemplate';
 import PrintParameters from 'esri/tasks/support/PrintParameters';
 import { once } from 'esri/core/watchUtils';
+import promiseUtils from 'esri/core/promiseUtils';
 
-import { RefObject } from 'react';
+import { RefObject, MutableRefObject } from 'react';
 
 import store from '../store/index';
 import { LayerFactory } from 'js/helpers/LayerFactory';
@@ -75,9 +76,9 @@ export class MapController {
   _pointerMoveEventListener: EventListener | any;
   _printTask: PrintTask | undefined;
   _legend: Legend | undefined;
-  _onClickCoordinateConversion: CoordinateConversion | any;
-  _pointerMoveCoordinateConversion: CoordinateConversion | any;
+  _coordinateConversion: CoordinateConversion | undefined;
   _selectedWidget: any; // DistanceMeasurement2D | AreaMeasurement2D | undefined;
+  _promiseUtils: any;
   // * NOTE - _selectedWidget is typed as any
   // * because ESRI's TS types measurementLabel as a string
   // * when AreaMeasurement2D.viewModel.measurementLabel is an object
@@ -90,8 +91,8 @@ export class MapController {
     this._printTask = undefined;
     this._legend = undefined;
     this._selectedWidget = undefined;
-    this._onClickCoordinateConversion = undefined;
-    this._pointerMoveCoordinateConversion = undefined;
+    this._coordinateConversion = undefined;
+    this._promiseUtils = undefined;
   }
 
   initializeMap(domRef: RefObject<any>): void {
@@ -113,6 +114,8 @@ export class MapController {
 
     this._mapview.ui.add(this._legend, 'bottom-right');
     this._mapview.ui.remove('zoom');
+
+    this._promiseUtils = promiseUtils;
 
     this._mapview
       .when(
@@ -545,15 +548,12 @@ export class MapController {
   clearAllWidgets(): void {
     this._selectedWidget?.viewModel.clearMeasurement();
     this._selectedWidget = undefined;
-
-    this._mouseClickEventListener?.remove();
-    this._mouseClickEventListener = undefined;
-
-    this._pointerMoveEventListener?.remove();
-    this._pointerMoveEventListener = undefined;
   }
 
-  setActiveMeasureWidget(optionType: OptionType): void {
+  setActiveMeasureWidget(
+    optionType: OptionType,
+    coordinateRef?: any //MutableRefObject<null>
+  ): void {
     switch (optionType) {
       case 'area':
         this._selectedWidget = new AreaMeasurement2D({
@@ -567,13 +567,17 @@ export class MapController {
           unit: 'miles'
         });
         break;
-      case 'coordinates': {
-        this._selectedWidget?.viewModel.clearMeasurement();
-        this._selectedWidget = undefined;
-        this.setOnClickCoordinates(optionType);
-        this.setPointerMoveCoordinates(optionType);
+      case 'coordinates':
+        {
+          this._selectedWidget?.viewModel.clearMeasurement();
+          this._selectedWidget = undefined;
+
+          // this._coordinateConversion = new CoordinateConversion({
+          //   view: this._mapview,
+          //   container: coordinateRef
+          // });
+        }
         break;
-      }
       default:
         break;
     }
@@ -651,102 +655,6 @@ export class MapController {
       event.stopPropagation();
       this._selectedWidget?.viewModel.newMeasurement();
       mapviewOnClick?.remove();
-    });
-  }
-
-  setPointerMoveCoordinates(optionType: OptionType): void {
-    this._pointerMoveCoordinateConversion = new CoordinateConversion({
-      view: this._mapview,
-      mode: 'capture'
-    });
-
-    this._pointerMoveEventListener = this._mapview?.on(
-      'pointer-move',
-      async event => {
-        event.stopPropagation();
-        const {
-          coordinateMouseClickResults
-        } = store.getState().appState.measureContent;
-        const coordinatesInDegrees = this._mapview?.toMap({
-          x: event.x,
-          y: event.y
-        });
-
-        this._pointerMoveCoordinateConversion.currentLocation = coordinatesInDegrees;
-
-        // const dmsFormat = this._pointerMoveCoordinateConversion.formats.find(
-        //   (item: any) => item.name === 'dms'
-        // );
-
-        // const dmsConversion = await this._pointerMoveCoordinateConversion.viewModel.convert(
-        //   dmsFormat,
-        //   this._pointerMoveCoordinateConversion.currentLocation
-        // );
-
-        // const { latitude, longitude } = this.formatDMSResults(
-        //   dmsConversion.coordinate
-        // );
-
-        store.dispatch(
-          setMeasureResults({
-            activeButton: optionType,
-            areaResults: {},
-            distanceResults: {},
-            coordinatePointerMoveResults: {
-              decimalLatitude: coordinatesInDegrees?.latitude,
-              decimalLongitude: coordinatesInDegrees?.longitude
-              // dmsLatitude: latitude,
-              // dmsLongitude: longitude
-            },
-            coordinateMouseClickResults
-          })
-        );
-      }
-    );
-  }
-
-  setOnClickCoordinates(optionType: OptionType): void {
-    this._onClickCoordinateConversion = new CoordinateConversion({
-      view: this._mapview,
-      mode: 'capture'
-    });
-    this._mouseClickEventListener = this._mapview?.on('click', async event => {
-      event.stopPropagation();
-      const {
-        coordinatePointerMoveResults
-      } = store.getState().appState.measureContent;
-      const coordinatesInDegrees = this._mapview?.toMap({
-        x: event.x,
-        y: event.y
-      });
-      this._onClickCoordinateConversion.currentLocation = coordinatesInDegrees;
-
-      const dmsFormat = this._onClickCoordinateConversion.formats.find(
-        (item: any) => item.name === 'dms'
-      );
-      const dmsConversion = await this._onClickCoordinateConversion.viewModel.convert(
-        dmsFormat,
-        this._onClickCoordinateConversion.currentLocation
-      );
-
-      const { latitude, longitude } = this.formatDMSResults(
-        dmsConversion.coordinate
-      );
-
-      store.dispatch(
-        setMeasureResults({
-          activeButton: optionType,
-          areaResults: {},
-          distanceResults: {},
-          coordinateMouseClickResults: {
-            decimalLatitude: event.mapPoint.latitude,
-            decimalLongitude: event.mapPoint.longitude,
-            dmsLatitude: latitude,
-            dmsLongitude: longitude
-          },
-          coordinatePointerMoveResults
-        })
-      );
     });
   }
 
