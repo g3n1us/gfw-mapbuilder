@@ -15,8 +15,8 @@ const ShareContent: FunctionComponent = () => {
   const { allAvailableLayers } = useSelector(
     (state: RootState) => state.mapviewState
   );
-  const selectedLanguage = useSelector(
-    (state: RootState) => state.appState.selectedLanguage
+  const { selectedLanguage, leftPanel } = useSelector(
+    (state: RootState) => state.appState
   );
   const { title, instructions } = shareContent[selectedLanguage];
   const popupDimensions = 'toolbar=0,status=0,height=650,width=450';
@@ -66,7 +66,7 @@ const ShareContent: FunctionComponent = () => {
       .map(layer => layer.id)
       .join('%2C');
 
-    return `${window.location.href}&lat=${latitude}&lon=${latitude}&l=${selectedLanguage}&b=${baseMapID}&z=${zoom}&activeLayers=${visibleLayersURL}`;
+    return `${window.location.href}&lat=${latitude}&lon=${latitude}&l=${selectedLanguage}&b=${baseMapID}&t=${leftPanel.activeTab}&z=${zoom}&activeLayers=${visibleLayersURL}`;
   };
 
   return (
