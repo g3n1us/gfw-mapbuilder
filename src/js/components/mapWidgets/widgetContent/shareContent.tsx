@@ -55,13 +55,18 @@ const ShareContent: FunctionComponent = () => {
   };
 
   const returnURL = (): string => {
-    const { latitude, longitude, zoom } = mapController.getMapviewCoordinates();
+    const {
+      latitude,
+      longitude,
+      zoom,
+      baseMapID
+    } = mapController.getMapviewCoordinates();
     const visibleLayersURL = allAvailableLayers
       .filter(layer => layer.visible)
       .map(layer => layer.id)
       .join('%2C');
 
-    return `${window.location.href}&lat=${latitude}&lon=${latitude}&z=${zoom}&activeLayers=${visibleLayersURL}`;
+    return `${window.location.href}&lat=${latitude}&lon=${latitude}&l=${selectedLanguage}&b=${baseMapID}&z=${zoom}&activeLayers=${visibleLayersURL}`;
   };
 
   return (

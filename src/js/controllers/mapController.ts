@@ -49,6 +49,7 @@ interface URLCoordinates {
   zoom: number;
   latitude: string;
   longitude: string;
+  baseMapID: string;
 }
 
 interface ZoomParams {
@@ -872,11 +873,17 @@ export class MapController {
 
     const subStringLatitude = latitude.toString().substring(0, 7);
     const subStringLongitude = longitude.toString().substring(0, 7);
+    let baseMapID = '';
+
+    if (this._map && this._map.basemap.id) {
+      baseMapID = this._map.basemap.id;
+    }
 
     return {
       latitude: subStringLatitude,
       longitude: subStringLongitude,
-      zoom
+      zoom,
+      baseMapID
     };
   }
 }
