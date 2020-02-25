@@ -1,12 +1,19 @@
 import * as React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
+import { mapController } from 'js/controllers/mapController';
+
 import { RootState } from 'js/store';
+
 import { setOpenLayerGroup } from 'js/store/appState/actions';
 
 const BaseLayerControl = (props: any) => {
   const { id, thumbnailUrl, templateUrl, title, years } = props.layerInfo;
   return (
-    <div className="layer-basemap">
+    <div
+      className="layer-basemap"
+      onClick={(): void => mapController.setBaseMap(id)}
+    >
       <img src={thumbnailUrl} alt="basemap" />
       <span>{title[props.selectedLanguage]}</span>
       {years && <div>year dropdown</div>}

@@ -846,6 +846,7 @@ module.exports = {
       layers: [
         {
           id: 'landsat',
+          portalItem: '"413fd05bbd7342f5991d5ec96f4f8b18"',
           thumbnailUrl:
             'https://my.gfw-mapbuilder.org/img/basemaps-sdd18a411a3-5bf18f445e58b8766f773184b7741c67.png',
           templateUrl:

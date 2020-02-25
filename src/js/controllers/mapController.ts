@@ -14,6 +14,9 @@ import Point from 'esri/geometry/Point';
 import PrintTask from 'esri/tasks/PrintTask';
 import PrintTemplate from 'esri/tasks/support/PrintTemplate';
 import PrintParameters from 'esri/tasks/support/PrintParameters';
+import ImageryLayer from 'esri/layers/ImageryLayer';
+import LocalBasemapsSource from 'esri/widgets/BasemapGallery/support/LocalBasemapsSource';
+import Basemap from 'esri/Basemap';
 import { once } from 'esri/core/watchUtils';
 
 import { RefObject } from 'react';
@@ -884,6 +887,25 @@ export class MapController {
       longitude: subStringLongitude,
       zoom
     };
+  }
+
+  setBaseMap(id: string): any {
+    // generate basemap by ID
+    console.log('id', id);
+    if (this._map) {
+      const streetsBasemap = Basemap.fromId('streets');
+
+      const test = new Basemap({
+        portalItem: {
+          // id: '413fd05bbd7342f5991d5ec96f4f8b18'
+          // id: '86de95d4e0244cba80f0fa2c9403a7b2'
+          // id: '5d2bfa736f8448b3a1708e1f6be23eed'
+        }
+      });
+
+      // this._map.basemap = streetsBasemap;
+      this._map.basemap = test;
+    }
   }
 }
 
