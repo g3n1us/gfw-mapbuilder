@@ -10,6 +10,7 @@ import { once } from 'esri/core/watchUtils';
 import { setActiveFeatures } from 'js/store/mapview/actions';
 import { LayerFeatureResult } from 'js/store/mapview/types';
 import { selectActiveTab } from 'js/store/appState/actions';
+import { mapController } from 'js/controllers/mapController';
 
 function extractLayerInfo(
   featureObject: any
@@ -168,6 +169,7 @@ export function addPopupWatchUtils(
         );
         layerFeatureResults = layerFeatureResults.concat(serverResponse);
         store.dispatch(setActiveFeatures(layerFeatureResults));
+        mapController.getDocuments(layerFeatureResults);
         const { appState } = store.getState();
         if (appState.leftPanel.activeTab !== 'data') {
           store.dispatch(selectActiveTab('data'));

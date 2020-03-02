@@ -981,6 +981,21 @@ export class MapController {
     // }
     // this.setState({ isUploading: false });
   }
+
+  getDocuments(activeFeatures: any): any {
+    // TODO [ ] - query each URL for documents
+    console.log(this._map);
+    console.log(this._mapview);
+    const { appSettings } = store.getState();
+    activeFeatures.forEach((feature: any) => {
+      const URL = `https://gis.forest-atlas.org/server/rest/services/${appSettings.iso.toLowerCase()}/${
+        feature.layerID
+      }/MapServer/${feature.sublayerID}`;
+      debugger;
+    });
+    // activeFeatures.map(feature => feature.layerID)
+    debugger;
+  }
 }
 
 export const mapController = new MapController();
