@@ -233,7 +233,7 @@ const SubscriptionContent: FunctionComponent = () => {
           {endDateString}
         </p>
         <div className="other-row">
-          Data sets:
+          <p>Data sets:</p>
           <div className="subscribe-datasets">
             {datasetMap.map((dataset, i) => (
               <DatasetAlerts
@@ -250,7 +250,7 @@ const SubscriptionContent: FunctionComponent = () => {
   };
 
   return (
-    <div>
+    <div className="subscription-container-wrapper">
       <h3>Subscriptions</h3>
       <p>
         To add new subscriptions select a feature on the map and click on

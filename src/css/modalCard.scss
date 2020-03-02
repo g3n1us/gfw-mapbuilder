@@ -181,6 +181,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0.75rem 0.5rem;
   }
   .delete-row-label {
     padding-top: 3px;
@@ -229,6 +230,12 @@
     float: right;
     margin-left: 10px;
     margin-top: 4px;
+  }
+
+  .subscription-container-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
   }
 
   .subscription-unconfirmed {
@@ -320,8 +327,10 @@
     margin-left: 0;
   }
   .source-row {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
     border-bottom: 1px solid gray;
-    display: table;
     width: 100%;
     margin: 0;
   }
@@ -336,10 +345,12 @@
   }
   .source-row .other-row.date-created {
     font-style: italic;
+    padding: 0rem 0.5rem;
   }
   .source-row .other-row p {
     margin-top: 8px;
     margin-bottom: 8px;
+    padding: 0rem 0.5rem;
   }
 
   .source-row .btn-delete-subscription {
