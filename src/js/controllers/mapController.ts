@@ -15,6 +15,8 @@ import PrintTask from 'esri/tasks/PrintTask';
 import PrintTemplate from 'esri/tasks/support/PrintTemplate';
 import PrintParameters from 'esri/tasks/support/PrintParameters';
 import Basemap from 'esri/Basemap';
+import QueryTask from 'esri/tasks/QueryTask';
+import Query from 'esri/tasks/support/Query';
 import { once } from 'esri/core/watchUtils';
 import { RefObject } from 'react';
 
@@ -982,19 +984,42 @@ export class MapController {
     // this.setState({ isUploading: false });
   }
 
-  getDocuments(activeFeatures: any): any {
+  async getDocuments(activeFeatures: any): Promise<any> {
     // TODO [ ] - query each URL for documents
     console.log(this._map);
     console.log(this._mapview);
     const { appSettings } = store.getState();
-    activeFeatures.forEach((feature: any) => {
+    activeFeatures.forEach(async (featureCollection: any) => {
+      // https://gis.forest-atlas.org/server/rest/services/cmr/atlas_forestier_en/MapServer/37/13/attachments?f=json
       const URL = `https://gis.forest-atlas.org/server/rest/services/${appSettings.iso.toLowerCase()}/${
-        feature.layerID
-      }/MapServer/${feature.sublayerID}`;
+        featureCollection.layerID
+      }/MapServer/${featureCollection.sublayerID}`;
+
+      const queryTask = new QueryTask({ url: URL });
+
+      const query = new Query();
+      query.returnGeometry = true;
+      query.outFields = ['*'];
+
+      const allDescriptionTypes = featureCollection.features
+        .map((feature: any) => `desc_type = '${feature.attributes.desc_type}'`)
+        .join(' OR ');
+
+      query.where = allDescriptionTypes;
+
+      // TODO [ ] - determine where ID of 13 is coming from
+      const objectIDs = await queryTask
+        .execute(query)
+        .then((results: any) => {
+          return results.features.map(
+            (feature: any) => feature.attributes.objectid
+          );
+        })
+        .catch(e => console.log('e', e));
+
       debugger;
     });
     // activeFeatures.map(feature => feature.layerID)
-    debugger;
   }
 }
 
