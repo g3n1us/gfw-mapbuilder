@@ -93,6 +93,7 @@ export class MapController {
   _printTask: PrintTask | undefined;
   _legend: Legend | undefined;
   _selectedWidget: DistanceMeasurement2D | AreaMeasurement2D | undefined;
+  _sketchVMGraphicsLayer: any;
 
   constructor() {
     this._map = undefined;
@@ -101,6 +102,7 @@ export class MapController {
     this._printTask = undefined;
     this._legend = undefined;
     this._selectedWidget = undefined;
+    this._sketchVMGraphicsLayer = undefined;
   }
 
   initializeMap(domRef: RefObject<any>): void {
@@ -523,13 +525,43 @@ export class MapController {
     }
   }
 
+  listenToSketchUpdate(event: any): void {
+    console.log('event', event);
+    if (
+      this._sketchVM &&
+      event.toolEventInfo &&
+      (event.toolEventInfo.type === 'reshape-stop' ||
+        event.toolEventInfo.type === 'move-stop')
+    ) {
+      // this._mapview.graphics.removeMany(this._previousSketchGraphic);
+      // this._mapview.graphics.removeMany(this._sketchVM.layer.graphics);
+      // this._mapview.graphics.removeAll();
+
+      event.graphics.forEach((graphic: any) => {
+        graphic.symbol.outline.color = [115, 252, 253];
+        graphic.symbol.color = [0, 0, 0, 0];
+      });
+      console.log('this._sketchVM', this._sketchVM);
+
+      this._previousSketchGraphic = event.graphics;
+      this._mapview.graphics.addMany(this._previousSketchGraphic);
+
+      // this._sketchVM.layer.graphics.addMany(event.graphics);
+      this._sketchVM?.update(event.graphics, {
+        tool: 'reshape',
+        enableRotation: false,
+        toggleToolOnClick: false
+      });
+    }
+  }
+
   initializeAndSetSketch(): void {
-    const tempGL = new GraphicsLayer({
+    this._sketchVMGraphicsLayer = new GraphicsLayer({
       id: 'sketchGraphics'
     });
 
     this._sketchVM = new SketchViewModel({
-      layer: tempGL,
+      layer: this._sketchVMGraphicsLayer,
       view: this._mapview,
       polylineSymbol: {
         type: 'simple-line',
@@ -542,17 +574,23 @@ export class MapController {
       }
     });
 
+    this._sketchVM.on('update', (event: any) =>
+      this.listenToSketchUpdate(event)
+    );
+
     this._sketchVM?.on('create', (event: any) => {
       if (event.state === 'complete') {
-        event.graphic.attributes = {
-          OBJECTID: event.graphic.uid
+        const eventGraphic = event.graphic.clone();
+
+        eventGraphic.attributes = {
+          OBJECTID: eventGraphic.uid
         };
 
-        event.graphic.symbol.outline.color = [115, 252, 253];
-        event.graphic.symbol.color = [0, 0, 0, 0];
+        eventGraphic.symbol.outline.color = [115, 252, 253];
+        eventGraphic.symbol.color = [0, 0, 0, 0];
 
-        this._previousSketchGraphic = event.graphic;
-        this._mapview.graphics.add(event.graphic);
+        this._previousSketchGraphic = eventGraphic;
+        this._mapview.graphics.add(eventGraphic);
 
         //Replace all active features with our drawn feature, assigning custom layerID and Title
         const drawnFeatures: LayerFeatureResult = {
@@ -560,7 +598,7 @@ export class MapController {
           layerTitle: 'User Features',
           sublayerID: null,
           sublayerTitle: null,
-          features: [event.graphic]
+          features: [eventGraphic]
         };
 
         store.dispatch(setActiveFeatures([drawnFeatures]));
@@ -570,7 +608,7 @@ export class MapController {
   }
 
   updateSketchVM(): any {
-    if (this._sketchVM) {
+    if (this._sketchVM && this._map) {
       this._sketchVM.layer.graphics = this._previousSketchGraphic;
 
       this._sketchVM?.update(this._previousSketchGraphic, {
@@ -579,36 +617,6 @@ export class MapController {
         toggleToolOnClick: false,
         enableScaling: false,
         preserveAspectRatio: false
-      });
-
-      this._sketchVM.on('update', (event: any) => {
-        console.log('event', event);
-        if (
-          this._sketchVM &&
-          event.toolEventInfo &&
-          (event.toolEventInfo.type === 'reshape-stop' ||
-            event.toolEventInfo.type === 'move-stop')
-        ) {
-          // this._mapview.graphics.removeMany(this._previousSketchGraphic);
-          // this._mapview.graphics.removeMany(this._sketchVM.layer.graphics);
-          // this._mapview.graphics.removeAll();
-
-          event.graphics.forEach((graphic: any) => {
-            graphic.symbol.outline.color = [115, 252, 253];
-            graphic.symbol.color = [0, 0, 0, 0];
-          });
-          console.log(' this._sketchVM', this._sketchVM);
-
-          this._previousSketchGraphic = event.graphics;
-          this._mapview.graphics.addMany(this._previousSketchGraphic);
-
-          // this._sketchVM.layer.graphics = this._previousSketchGraphic;
-          this._sketchVM?.update(event.graphics, {
-            tool: 'reshape',
-            enableRotation: false,
-            toggleToolOnClick: false
-          });
-        }
       });
     }
   }
