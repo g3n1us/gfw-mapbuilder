@@ -535,6 +535,10 @@ export class MapController {
         type: 'simple-line',
         color: 'red',
         width: 3
+      },
+      updateOnGraphicClick: false,
+      defaultUpdateOptions: {
+        toggleToolOnClick: false
       }
     });
 
@@ -562,11 +566,63 @@ export class MapController {
         store.dispatch(selectActiveTab('analysis'));
       }
     });
+
+    this._sketchVM.on('update', (event: any) => {
+      console.log('EVENT', event);
+
+      if (
+        this._sketchVM &&
+        event.toolEventInfo &&
+        (event.toolEventInfo.type === 'reshape-stop' ||
+          event.toolEventInfo.type === 'move-stop')
+      ) {
+        event.graphics[0].symbol.outline.color = [115, 252, 253];
+        event.graphics[0].symbol.color = [0, 0, 0, 0];
+
+        this._mapview.graphics.remove(this._previousSketchGraphic);
+        this._previousSketchGraphic = event.graphics[0];
+        this._mapview.graphics.add(this._previousSketchGraphic);
+
+        this._sketchVM.update(event.graphics, {
+          tool: 'reshape'
+        });
+        // this._sketchVM.complete();
+        /**
+         * * NOTES
+         * state = start
+         * type = update
+         * tool = reshape
+         * toolEventInfo.type = reshape-start
+         *
+         * state = active
+         * type = update
+         * tool = reshape
+         * toolEventInfo.type = reshape-stop
+         */
+      }
+    });
+  }
+
+  updateSketchVM(): any {
+    if (this._sketchVM) {
+      this._sketchVM.layer.graphics = this._previousSketchGraphic;
+      this._sketchVM?.update(this._previousSketchGraphic, {
+        tool: 'reshape'
+      });
+    }
+  }
+
+  saveNewSketchVM(): any {
+    if (this._sketchVM) {
+      console.log('saveNewSketchVM()');
+      // this._sketchVM.layer.graphics = this._previousSketchGraphic;
+      // this._sketchVM?.complete();
+    }
   }
 
   createPolygonSketch = (): void => {
     this._mapview.graphics.remove(this._previousSketchGraphic);
-    this._sketchVM?.create('polygon', { mode: 'freehand' });
+    this._sketchVM?.create('polygon', { mode: 'click' });
   };
 
   getAndDispatchMeasureResults(optionType: OptionType): void {

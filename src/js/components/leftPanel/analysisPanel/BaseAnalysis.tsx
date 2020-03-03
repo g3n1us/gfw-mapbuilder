@@ -1,10 +1,15 @@
 /* eslint-disable no-prototype-builtins */
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import { RootState } from 'js/store';
 import { useSelector, useDispatch } from 'react-redux';
+
+import { mapController } from 'js/controllers/mapController';
+
+import { RootState } from 'js/store';
 import { setActiveFeatures } from 'js/store/mapview/actions';
+
 import { registerGeometry } from 'js/helpers/geometryRegistration';
+
 import VegaChart from './VegaChartContainer';
 
 const AnalysisSpinner = (): React.ReactElement => (
@@ -14,6 +19,7 @@ const AnalysisSpinner = (): React.ReactElement => (
 const BaseAnalysis = (): JSX.Element => {
   const dispatch = useDispatch();
   const [vegaSpec, setVegaSpec] = useState(null);
+  const [updatingSketchVM, setUpdatingSketchVM] = useState(false);
   const { analysisModules } = useSelector(
     (store: RootState) => store.appSettings
   );
@@ -92,10 +98,25 @@ const BaseAnalysis = (): JSX.Element => {
     </select>
   );
 
+  const setUpdateSketchVM = (): any => {
+    mapController.updateSketchVM();
+    setUpdatingSketchVM(true);
+  };
+
+  const setSaveSketchVM = (): any => {
+    mapController.saveNewSketchVM();
+    setUpdatingSketchVM(false);
+  };
+
   return (
     <>
       {geostoreReady ? (
         <div>
+          {updatingSketchVM ? (
+            <button onClick={(): void => setSaveSketchVM()}>Save</button>
+          ) : (
+            <button onClick={(): void => setUpdateSketchVM()}>Edit</button>
+          )}
           <AnalysisOptions />
           {vegaSpec && <VegaChart spec={vegaSpec} />}
           <button onClick={runAnalysis}>RUN ANALYSIS</button>
