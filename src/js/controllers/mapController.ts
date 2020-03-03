@@ -547,10 +547,11 @@ export class MapController {
         event.graphic.attributes = {
           OBJECTID: event.graphic.uid
         };
-        this._previousSketchGraphic = event.graphic;
 
         event.graphic.symbol.outline.color = [115, 252, 253];
         event.graphic.symbol.color = [0, 0, 0, 0];
+
+        this._previousSketchGraphic = event.graphic;
         this._mapview.graphics.add(event.graphic);
 
         //Replace all active features with our drawn feature, assigning custom layerID and Title
@@ -566,48 +567,48 @@ export class MapController {
         store.dispatch(selectActiveTab('analysis'));
       }
     });
-
-    this._sketchVM.on('update', (event: any) => {
-      console.log('EVENT', event);
-
-      if (
-        this._sketchVM &&
-        event.toolEventInfo &&
-        (event.toolEventInfo.type === 'reshape-stop' ||
-          event.toolEventInfo.type === 'move-stop')
-      ) {
-        event.graphics[0].symbol.outline.color = [115, 252, 253];
-        event.graphics[0].symbol.color = [0, 0, 0, 0];
-
-        this._mapview.graphics.remove(this._previousSketchGraphic);
-        this._previousSketchGraphic = event.graphics[0];
-        this._mapview.graphics.add(this._previousSketchGraphic);
-
-        this._sketchVM.update(event.graphics, {
-          tool: 'reshape'
-        });
-        // this._sketchVM.complete();
-        /**
-         * * NOTES
-         * state = start
-         * type = update
-         * tool = reshape
-         * toolEventInfo.type = reshape-start
-         *
-         * state = active
-         * type = update
-         * tool = reshape
-         * toolEventInfo.type = reshape-stop
-         */
-      }
-    });
   }
 
   updateSketchVM(): any {
     if (this._sketchVM) {
       this._sketchVM.layer.graphics = this._previousSketchGraphic;
+
       this._sketchVM?.update(this._previousSketchGraphic, {
-        tool: 'reshape'
+        tool: 'reshape',
+        enableRotation: false,
+        toggleToolOnClick: false,
+        enableScaling: false,
+        preserveAspectRatio: false
+      });
+
+      this._sketchVM.on('update', (event: any) => {
+        console.log('event', event);
+        if (
+          this._sketchVM &&
+          event.toolEventInfo &&
+          (event.toolEventInfo.type === 'reshape-stop' ||
+            event.toolEventInfo.type === 'move-stop')
+        ) {
+          // this._mapview.graphics.removeMany(this._previousSketchGraphic);
+          // this._mapview.graphics.removeMany(this._sketchVM.layer.graphics);
+          // this._mapview.graphics.removeAll();
+
+          event.graphics.forEach((graphic: any) => {
+            graphic.symbol.outline.color = [115, 252, 253];
+            graphic.symbol.color = [0, 0, 0, 0];
+          });
+          console.log(' this._sketchVM', this._sketchVM);
+
+          this._previousSketchGraphic = event.graphics;
+          this._mapview.graphics.addMany(this._previousSketchGraphic);
+
+          // this._sketchVM.layer.graphics = this._previousSketchGraphic;
+          this._sketchVM?.update(event.graphics, {
+            tool: 'reshape',
+            enableRotation: false,
+            toggleToolOnClick: false
+          });
+        }
       });
     }
   }
@@ -615,8 +616,7 @@ export class MapController {
   saveNewSketchVM(): any {
     if (this._sketchVM) {
       console.log('saveNewSketchVM()');
-      // this._sketchVM.layer.graphics = this._previousSketchGraphic;
-      // this._sketchVM?.complete();
+      this._sketchVM.complete();
     }
   }
 
