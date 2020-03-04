@@ -933,6 +933,11 @@ export class MapController {
       'pk.eyJ1Ijoid3JpIiwiYSI6IjU3NWNiNGI4Njc4ODk4MmIyODFkYmJmM2NhNDgxMWJjIn0.v1tciCeBElMdpnrikGDrPg';
 
     if (id === 'landsat' && this._map) {
+      /**
+       * ! NOTE - workflow triggers errors;
+       * !   CORS error
+       * !   "Unable to load"
+       */
       const customWebTile = new WebTileLayer({
         id,
         urlTemplate: templateUrl,
@@ -949,6 +954,11 @@ export class MapController {
       this._map.add(customWebTile);
       // this._map.basemap = basemap;
     } else if (id === 'wri_mono' && this._map) {
+      /**
+       * ! NOTE - workflow triggers errors;
+       * !   Unauthorized, 401
+       * !   "Unable to load"
+       */
       const url = `${mapBoxURL}/${monoMapboxID}/${genericURL}/${mapboxToken}`;
       const wriMono = new WebTileLayer({
         urlTemplate: url
@@ -956,6 +966,11 @@ export class MapController {
 
       this._map.add(wriMono);
     } else if (id === 'wri_contextual' && this._map) {
+      /**
+       * ! NOTE - workflow triggers errors;
+       * !   Unauthorized, 401
+       * !   "Unable to load"
+       */
       const url = `${mapBoxURL}/${contextualMapboxID}/${genericURL}/${mapboxToken}`;
       const wriMono = new WebTileLayer({
         urlTemplate: url
