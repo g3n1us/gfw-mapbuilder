@@ -943,6 +943,7 @@ export class MapController {
         urlTemplate: templateUrl,
         title
       });
+      console.log('landsat templateUrl', templateUrl);
 
       // const basemap = new Basemap({
       //   baseLayers: [customWebTile],
@@ -964,6 +965,8 @@ export class MapController {
         urlTemplate: url
       });
 
+      console.log('wri_mono templateUrl', url);
+
       this._map.add(wriMono);
     } else if (id === 'wri_contextual' && this._map) {
       /**
@@ -975,6 +978,7 @@ export class MapController {
       const wriMono = new WebTileLayer({
         urlTemplate: url
       });
+      console.log('wri_contextual templateUrl', url);
 
       this._map.add(wriMono);
     } else {
