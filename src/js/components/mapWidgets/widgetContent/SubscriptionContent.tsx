@@ -278,7 +278,7 @@ const SubscriptionContent: FunctionComponent = () => {
   };
 
   return (
-    <div>
+    <div className="subscriptions-wrapper">
       <h3>Subscriptions</h3>
       <p>
         To add new subscriptions select a feature on the map and click on

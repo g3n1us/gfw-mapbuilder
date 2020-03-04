@@ -235,6 +235,12 @@
     }
   }
 
+  .subscriptions-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1rem;
+  }
+
   .subscription-unconfirmed {
     display: flex;
     align-items: center;
