@@ -15,6 +15,7 @@ import PrintTask from 'esri/tasks/PrintTask';
 import PrintTemplate from 'esri/tasks/support/PrintTemplate';
 import PrintParameters from 'esri/tasks/support/PrintParameters';
 import Basemap from 'esri/Basemap';
+import WebTileLayer from 'esri/layers/WebTileLayer';
 import { once } from 'esri/core/watchUtils';
 import { RefObject } from 'react';
 
@@ -919,6 +920,50 @@ export class MapController {
       const basemap = Basemap.fromId(id);
       this._map.basemap = basemap;
       store.dispatch(setSelectedBasemap(id));
+    }
+  }
+
+  setCustomBasemap(layerInfo: any): any {
+    const { id, thumbnailUrl, templateUrl, title, years } = layerInfo;
+    const monoMapboxID = 'wri.c974eefc';
+    const contextualMapboxID = 'wri.b71b0f45';
+    const mapBoxURL = 'https://api.tiles.mapbox.com/v4/';
+    const genericURL = '${level}/${col}/${row}.png?access_token=';
+    const mapboxToken =
+      'pk.eyJ1Ijoid3JpIiwiYSI6IjU3NWNiNGI4Njc4ODk4MmIyODFkYmJmM2NhNDgxMWJjIn0.v1tciCeBElMdpnrikGDrPg';
+
+    if (id === 'landsat' && this._map) {
+      const customWebTile = new WebTileLayer({
+        id,
+        urlTemplate: templateUrl,
+        title
+      });
+
+      // const basemap = new Basemap({
+      //   baseLayers: [customWebTile],
+      //   title,
+      //   id,
+      //   thumbnailUrl
+      // });
+
+      this._map.add(customWebTile);
+      // this._map.basemap = basemap;
+    } else if (id === 'wri_mono' && this._map) {
+      const url = `${mapBoxURL}/${monoMapboxID}/${genericURL}/${mapboxToken}`;
+      const wriMono = new WebTileLayer({
+        urlTemplate: url
+      });
+
+      this._map.add(wriMono);
+    } else if (id === 'wri_contextual' && this._map) {
+      const url = `${mapBoxURL}/${contextualMapboxID}/${genericURL}/${mapboxToken}`;
+      const wriMono = new WebTileLayer({
+        urlTemplate: url
+      });
+
+      this._map.add(wriMono);
+    } else {
+      console.error(`ID ${id} is not recognized`);
     }
   }
 

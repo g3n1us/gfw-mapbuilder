@@ -19,7 +19,10 @@ interface DefaultBasemapProps {
 const BaseLayerControl = (props: any) => {
   const { id, thumbnailUrl, templateUrl, title, years } = props.layerInfo;
   return (
-    <div className="layer-basemap">
+    <div
+      className="layer-basemap"
+      onClick={(): void => mapController.setCustomBasemap(props.layerInfo)}
+    >
       <img src={thumbnailUrl} alt="basemap" />
       <span>{title[props.selectedLanguage]}</span>
       {years && <div>year dropdown</div>}
@@ -66,6 +69,7 @@ const BasemapLayersGroup = (props: LayerGroupProps): React.ReactElement => {
     const openGroupKey = groupOpen ? '' : layerGroupKey;
     dispatch(setOpenLayerGroup(openGroupKey));
   };
+  console.log('layerGroupConfig', layerGroupConfig);
 
   const basemapsToRender = layerGroupConfig.layers.map((baselayer: any) => (
     // * NOTE: these are custom Basemap layers that are set via resources.js
