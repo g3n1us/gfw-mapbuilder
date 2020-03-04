@@ -993,7 +993,61 @@ export class MapController {
     console.log(this._mapview);
     const { appSettings } = store.getState();
     const allDocInfo = [];
-    activeFeatures.forEach(async (featureCollection: any) => {
+
+    const results = activeFeatures.map(async (featureCollection: any) => {
+      // ------------ approach 3
+      const URL = `https://gis.forest-atlas.org/server/rest/services/${appSettings.iso.toLowerCase()}/${
+        featureCollection.layerTitle
+      }/MapServer/${featureCollection.sublayerID}`;
+      const allAttachments: Array<any> = [];
+
+      featureCollection.features.map(async (feature: any) => {
+        const queryTask = new QueryTask({ url: URL });
+        const query = new Query();
+        query.returnGeometry = true;
+        query.outFields = ['*'];
+        query.where = `desc_type = '${feature.attributes.desc_type}'`;
+        query.geometry = feature.geometry;
+
+        const features = await queryTask
+          .execute(query)
+          .then((results: any) => {
+            return results.features.map((feature: any) => {
+              return {
+                attributes: feature.attributes,
+                geometry: feature.geometry
+              };
+            });
+          })
+          .catch(e => console.log('error', e));
+
+        const promises = features.map(async (feature: any) => {
+          const attachmentURL = `${URL}/${feature.attributes.objectid}/attachments?f=pjson`;
+          const { attachmentInfos } = await fetch(attachmentURL)
+            .then(response => response.json())
+            .catch(e => console.log('error', e));
+
+          const info = {
+            feature,
+            attachmentIDs: attachmentInfos.map(
+              (attachment: any) => attachment.id
+            )
+          };
+          return info;
+        });
+
+        // return promises;
+
+        const attachmentInfo = await Promise.all(promises)
+          .then((results: any) => results)
+          .catch((e: any) => console.log('error', e));
+
+        console.log('attachmentInfo', attachmentInfo);
+
+        allAttachments.push(attachmentInfo);
+      });
+
+      console.log('allAttachments', allAttachments);
       // ------------ approach 1
 
       const allGeoStoreIDs = featureCollection.features.map(
@@ -1004,57 +1058,7 @@ export class MapController {
           return geoStore;
         }
       );
-
-      // ------------ approach 2
-      const URL = `https://gis.forest-atlas.org/server/rest/services/${appSettings.iso.toLowerCase()}/${
-        featureCollection.layerTitle
-      }/MapServer/${featureCollection.sublayerID}`;
-
-      const allDescriptionTypes = featureCollection.features
-        .map((feature: any) => `desc_type = '${feature.attributes.desc_type}'`)
-        .join(' OR ');
-
-      const queryTask = new QueryTask({ url: URL });
-      const query = new Query();
-      query.returnGeometry = true;
-      query.outFields = ['*'];
-      query.where = allDescriptionTypes;
-
-      const features = await queryTask
-        .execute(query)
-        .then((results: any) => {
-          return results.features.map((feature: any) => {
-            return {
-              attributes: feature.attributes,
-              geometry: feature.geometry
-            };
-          });
-        })
-        .catch(e => console.log('error', e));
-
-      const promises = features.map(async (feature: any) => {
-        const attachmentURL = `${URL}/${feature.attributes.objectid}/attachments?f=pjson`;
-        const { attachmentInfos } = await fetch(attachmentURL)
-          .then(response => response.json())
-          .catch(e => console.log('error', e));
-
-        const info = {
-          feature,
-          attachmentIDs: attachmentInfos.map((attachment: any) => attachment.id)
-        };
-        return info;
-      });
-
-      const attachmentInfo = await Promise.all(promises)
-        .then((results: any) => results)
-        .catch((e: any) => console.log('error', e));
     });
-    // const test = featureCollection.features.map(feature => feature.geometry)
-    // activeFeatures.forEach((featureCollection: any) => {
-    // https://gis.forest-atlas.org/server/rest/services/cmr/atlas_forestier_en/MapServer/37/13/attachments?f=json
-    // const URL = `https://gis.forest-atlas.org/server/rest/services/${appSettings.iso.toLowerCase()}/${
-    //   featureCollection.layerTitle
-    // }/MapServer/${featureCollection.sublayerID}`;
   }
 
   fetchDocuments(mapPoint: any): any {
