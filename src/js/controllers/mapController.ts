@@ -29,6 +29,7 @@ import {
   setActiveFeatureIndex,
   setActiveFeatures
 } from 'js/store/mapview/actions';
+import { registerGeometry } from 'js/helpers/geometryRegistration';
 
 import { setSelectedBasemap } from 'js/store/mapview/actions';
 import {
@@ -137,6 +138,8 @@ export class MapController {
             store.dispatch(setActiveFeatures([]));
             store.dispatch(setActiveFeatureIndex([0, 0]));
             store.dispatch(selectActiveTab('data'));
+            // this.fetchDocuments(event);
+
             addPopupWatchUtils(this._mapview, this._map, event.mapPoint);
           });
 
@@ -989,37 +992,80 @@ export class MapController {
     console.log(this._map);
     console.log(this._mapview);
     const { appSettings } = store.getState();
+    const allDocInfo = [];
     activeFeatures.forEach(async (featureCollection: any) => {
-      // https://gis.forest-atlas.org/server/rest/services/cmr/atlas_forestier_en/MapServer/37/13/attachments?f=json
+      // ------------ approach 1
+
+      const allGeoStoreIDs = featureCollection.features.map(
+        async (feature: any) => {
+          const geoStore = await registerGeometry(feature)
+            .then(response => response.json())
+            .catch((e: any) => console.log('error', e));
+          return geoStore;
+        }
+      );
+
+      // ------------ approach 2
       const URL = `https://gis.forest-atlas.org/server/rest/services/${appSettings.iso.toLowerCase()}/${
-        featureCollection.layerID
+        featureCollection.layerTitle
       }/MapServer/${featureCollection.sublayerID}`;
-
-      const queryTask = new QueryTask({ url: URL });
-
-      const query = new Query();
-      query.returnGeometry = true;
-      query.outFields = ['*'];
 
       const allDescriptionTypes = featureCollection.features
         .map((feature: any) => `desc_type = '${feature.attributes.desc_type}'`)
         .join(' OR ');
 
+      const queryTask = new QueryTask({ url: URL });
+      const query = new Query();
+      query.returnGeometry = true;
+      query.outFields = ['*'];
       query.where = allDescriptionTypes;
 
-      // TODO [ ] - determine where ID of 13 is coming from
-      const objectIDs = await queryTask
+      const features = await queryTask
         .execute(query)
         .then((results: any) => {
-          return results.features.map(
-            (feature: any) => feature.attributes.objectid
-          );
+          return results.features.map((feature: any) => {
+            return {
+              attributes: feature.attributes,
+              geometry: feature.geometry
+            };
+          });
         })
-        .catch(e => console.log('e', e));
+        .catch(e => console.log('error', e));
 
-      debugger;
+      const promises = features.map(async (feature: any) => {
+        const attachmentURL = `${URL}/${feature.attributes.objectid}/attachments?f=pjson`;
+        const { attachmentInfos } = await fetch(attachmentURL)
+          .then(response => response.json())
+          .catch(e => console.log('error', e));
+
+        const info = {
+          feature,
+          attachmentIDs: attachmentInfos.map((attachment: any) => attachment.id)
+        };
+        return info;
+      });
+
+      const attachmentInfo = await Promise.all(promises)
+        .then((results: any) => results)
+        .catch((e: any) => console.log('error', e));
     });
-    // activeFeatures.map(feature => feature.layerID)
+    // const test = featureCollection.features.map(feature => feature.geometry)
+    // activeFeatures.forEach((featureCollection: any) => {
+    // https://gis.forest-atlas.org/server/rest/services/cmr/atlas_forestier_en/MapServer/37/13/attachments?f=json
+    // const URL = `https://gis.forest-atlas.org/server/rest/services/${appSettings.iso.toLowerCase()}/${
+    //   featureCollection.layerTitle
+    // }/MapServer/${featureCollection.sublayerID}`;
+  }
+
+  fetchDocuments(mapPoint: any): any {
+    // TODO [ ] generate a geometry
+    debugger;
+    const point = new Point({
+      x: mapPoint.latitude,
+      y: mapPoint.longitude
+    });
+    debugger;
+    // const test = registerGeometry(point);
   }
 }
 
