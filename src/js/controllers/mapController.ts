@@ -541,12 +541,14 @@ export class MapController {
         graphic.symbol.outline.color = [115, 252, 253];
         graphic.symbol.color = [0, 0, 0, 0];
       });
-      console.log('this._sketchVM', this._sketchVM);
 
       this._previousSketchGraphic = event.graphics;
+      this._sketchVMGraphicsLayer.graphics = event.graphics; // * NEW!
       this._mapview.graphics.addMany(this._previousSketchGraphic);
+      this._sketchVM.layer.graphics.add(event.graphics); // * NEW!
 
-      // this._sketchVM.layer.graphics.addMany(event.graphics);
+      console.log('this._sketchVM', this._sketchVM);
+
       this._sketchVM?.update(event.graphics, {
         tool: 'reshape',
         enableRotation: false,
@@ -574,9 +576,9 @@ export class MapController {
       }
     });
 
-    this._sketchVM.on('update', (event: any) =>
-      this.listenToSketchUpdate(event)
-    );
+    this._sketchVM.on('update', (event: any) => {
+      this.listenToSketchUpdate(event);
+    });
 
     this._sketchVM?.on('create', (event: any) => {
       if (event.state === 'complete') {
@@ -590,6 +592,8 @@ export class MapController {
         eventGraphic.symbol.color = [0, 0, 0, 0];
 
         this._previousSketchGraphic = eventGraphic;
+        eventGraphic.attributes.isSketch = true; // * NEW!
+
         this._mapview.graphics.add(eventGraphic);
 
         //Replace all active features with our drawn feature, assigning custom layerID and Title
